@@ -45,7 +45,16 @@ extern "C" {
 #define TRC_CFG_HARDWARE_PORT TRC_HARDWARE_PORT_ARM_Cortex_M
 
 #define TRC_CFG_SCHEDULING_ONLY             0
-#define TRC_CFG_INCLUDE_MEMMANG_EVENTS      0
+/**
+ * @def TRC_CFG_INCLUDE_MEMMANG_EVENTS
+ * @brief Macro which should be defined as either zero (0) or one (1).
+ *
+ * This controls if malloc and free calls should be traced. Set this to zero (0)
+ * to exclude malloc/free calls, or one (1) to include such events in the trace.
+ *
+ * Default value is 1.
+ */
+#define TRC_CFG_INCLUDE_MEMMANG_EVENTS		1
 #define TRC_CFG_INCLUDE_USER_EVENTS         0
 #define TRC_CFG_INCLUDE_ISR_TRACING         0
 #define TRC_CFG_INCLUDE_READY_EVENTS        1

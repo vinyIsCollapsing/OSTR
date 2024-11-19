@@ -21,6 +21,7 @@
 ../TraceRecorder/trcSnapshotRecorder.c:1777:6:prvTraceSetReadyEventsEnabled	16	static
 ../TraceRecorder/trcSnapshotRecorder.c:1787:6:prvTraceStoreTaskReady	48	static,ignoring_inline_asm
 ../TraceRecorder/trcSnapshotRecorder.c:1851:6:prvTraceStoreLowPower	48	static,ignoring_inline_asm
+../TraceRecorder/trcSnapshotRecorder.c:1901:6:vTraceStoreMemMangEvent	72	static,ignoring_inline_asm
 ../TraceRecorder/trcSnapshotRecorder.c:1986:6:prvTraceStoreKernelCall	56	static,ignoring_inline_asm
 ../TraceRecorder/trcSnapshotRecorder.c:2047:6:prvTraceStoreKernelCallWithParam	64	static,ignoring_inline_asm
 ../TraceRecorder/trcSnapshotRecorder.c:2110:17:prvTraceGetParam	24	static

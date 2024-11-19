@@ -124,10 +124,15 @@ static void SystemClock_Config()
  */
 void vTask1 (void *pvParameters)
 {
+	uint32_t	i;
+
 	while(1)
 	{
 		BSP_LED_Toggle();
-		vTaskDelay(30);		// <-- Change here
+
+		// Let us try the stupid delay here, now.
+		//vTaskDelay(30);
+		for(i=0; i<100000; i++);	// <-- Stupid loop now here
 	}
 }
 
@@ -136,13 +141,14 @@ void vTask1 (void *pvParameters)
  */
 void vTask2 (void *pvParameters)
 {
-	uint16_t count;
+	uint16_t 	count;
+
 	count = 0;
 
 	while(1)
 	{
 		my_printf("Hello %2d from task2\r\n", count);
 		count++;
-		vTaskDelay(100);	// <-- Change here
+		vTaskDelay(100);
 	}
 }
