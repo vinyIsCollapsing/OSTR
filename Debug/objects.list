@@ -1,4 +1,5 @@
 "./app/src/main.o"
 "./app/src/stm32f0xx_it.o"
+"./bsp/src/bsp.o"
 "./cmsis/device/src/startup_stm32f072xb.o"
 "./cmsis/device/src/system_stm32f0xx.o"

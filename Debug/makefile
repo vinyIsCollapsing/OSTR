@@ -10,6 +10,7 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include cmsis/device/src/subdir.mk
+-include bsp/src/subdir.mk
 -include app/src/subdir.mk
 -include objects.mk
 
