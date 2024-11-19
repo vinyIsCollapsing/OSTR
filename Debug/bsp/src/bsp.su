@@ -4,3 +4,4 @@
 ../bsp/src/bsp.c:65:6:BSP_LED_Toggle	8	static
 ../bsp/src/bsp.c:70:6:BSP_PB_Init	8	static
 ../bsp/src/bsp.c:88:9:BSP_PB_GetState	16	static
+../bsp/src/bsp.c:102:6:BSP_Console_Init	8	static

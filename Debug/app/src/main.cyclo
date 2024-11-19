@@ -1,2 +1,2 @@
-../app/src/main.c:8:5:main	2
-../app/src/main.c:47:13:SystemClock_Config	7
+../app/src/main.c:8:5:main	4
+../app/src/main.c:54:13:SystemClock_Config	7
