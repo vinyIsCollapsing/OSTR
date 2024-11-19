@@ -8,43 +8,27 @@ static void SystemClock_Config (void);
 // Main function
 int main()
 {
-	uint8_t	i, sent;
-
-	// Configure System Clock
+	uint32_t	i;
+	// Configure clock for 48MHz operation
 	SystemClock_Config();
-
-	// Initialize LED & Button pin
+	// Initialize LED and User button
 	BSP_LED_Init();
 	BSP_PB_Init();
-
-	// Initialize Debug Console
+	// Initialize Console
 	BSP_Console_Init();
-
-	my_printf("Console ready!\r\n");
-	sent = 0;
-	i = 0;
-
-	// Main loop
+	my_printf("Console Ready!\r\n");
+	my_printf("SYSCLK = %d\r\n", SystemCoreClock);
 	while(1)
 	{
-		// If User-Button is pushed down
-		if (BSP_PB_GetState() == 1)
+		// LED toggle
+		BSP_LED_Toggle();
+		// User-Button test
+		if(BSP_PB_GetState() == 1)
 		{
-			BSP_LED_On();	// Keep LED On
-			// Send '#i' only once
-			if (sent == 0)
-			{
-				my_printf("#%d\r\n", i);
-				sent = 1;
-				i++;
-			}
+			my_printf("#");
 		}
-		// If User-Button is released
-		else
-		{
-			BSP_LED_Off();	// Keep LED Off
-			sent = 0;
-		}
+		// Wait
+		for(i=0; i<1000000; i++);
 	}
 }
 
