@@ -8,3 +8,5 @@
 ../FreeRTOS/event_groups.c:677:6:vEventGroupSetBitsCallback	16	static
 ../FreeRTOS/event_groups.c:686:6:vEventGroupClearBitsCallback	16	static
 ../FreeRTOS/event_groups.c:693:19:prvTestWaitCondition	32	static
+../FreeRTOS/event_groups.c:749:17:uxEventGroupGetNumber	24	static
+../FreeRTOS/event_groups.c:771:10:vEventGroupSetNumber	16	static

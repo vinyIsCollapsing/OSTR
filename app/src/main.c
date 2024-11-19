@@ -21,15 +21,26 @@ int main()
 {
 	// Configure System Clock
 	SystemClock_Config();
-	// Initialize LED pin
+
+	// Initialize LED & Button pin
 	BSP_LED_Init();
+	BSP_PB_Init();
+
 	// Initialize Debug Console
 	BSP_Console_Init();
+	my_printf("Console ready!\r\n");
+
+	// Start Trace Recording
+	xTraceEnable(TRC_START);		// <- Recorder starts now
+
 	// Create Tasks
 	xTaskCreate(vTask1, "Task_1", 256, NULL, 1, NULL);
 	xTaskCreate(vTask2, "Task_2", 256, NULL, 2, NULL);
+
 	// Start the Scheduler
 	vTaskStartScheduler();
+
+
 	while(1)
 	{
 		// The program should never be here...
@@ -109,27 +120,29 @@ static void SystemClock_Config()
 }
 
 /*
- *	Task1 toggles LED every 300ms
+ *	Task1 toggles LED every 30ms
  */
 void vTask1 (void *pvParameters)
 {
 	while(1)
 	{
 		BSP_LED_Toggle();
-		vTaskDelay(300);
+		vTaskDelay(30);		// <-- Change here
 	}
 }
+
 /*
- *	Task2 sends a message to console every 1s
+ *	Task2 sends a message to console every 100ms
  */
 void vTask2 (void *pvParameters)
 {
 	uint16_t count;
 	count = 0;
+
 	while(1)
 	{
 		my_printf("Hello %2d from task2\r\n", count);
 		count++;
-		vTaskDelay(1000);
+		vTaskDelay(100);	// <-- Change here
 	}
 }

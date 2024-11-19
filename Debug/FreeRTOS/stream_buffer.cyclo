@@ -19,3 +19,6 @@
 ../FreeRTOS/stream_buffer.c:1294:15:prvReadBytesFromBuffer	7
 ../FreeRTOS/stream_buffer.c:1338:15:prvBytesInBuffer	2
 ../FreeRTOS/stream_buffer.c:1359:13:prvInitialiseNewStreamBuffer	2
+../FreeRTOS/stream_buffer.c:1400:17:uxStreamBufferGetStreamBufferNumber	1
+../FreeRTOS/stream_buffer.c:1410:10:vStreamBufferSetStreamBufferNumber	1
+../FreeRTOS/stream_buffer.c:1421:13:ucStreamBufferGetStreamBufferType	1
