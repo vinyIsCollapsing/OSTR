@@ -22,6 +22,9 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+FreeRTOS \
+FreeRTOS/portable/GCC/ARM_CM0 \
+FreeRTOS/portable/MemMang \
 app/src \
 bsp/src \
 cmsis/device/src \

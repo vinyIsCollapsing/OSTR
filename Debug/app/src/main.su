@@ -1,2 +1,4 @@
-../app/src/main.c:9:5:main	16	static
-../app/src/main.c:42:13:SystemClock_Config	24	static
+../app/src/main.c:20:5:main	16	static
+../app/src/main.c:46:13:SystemClock_Config	24	static
+../app/src/main.c:114:6:vTask1	16	static
+../app/src/main.c:125:6:vTask2	32	static

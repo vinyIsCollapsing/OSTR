@@ -12,6 +12,9 @@ RM := rm -rf
 -include cmsis/device/src/subdir.mk
 -include bsp/src/subdir.mk
 -include app/src/subdir.mk
+-include FreeRTOS/portable/MemMang/subdir.mk
+-include FreeRTOS/portable/GCC/ARM_CM0/subdir.mk
+-include FreeRTOS/subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
