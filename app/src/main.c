@@ -1,5 +1,6 @@
 #include "stm32f0xx.h"
 #include "bsp.h"
+#include "main.h"
 
 // Static functions
 static void SystemClock_Config (void);
@@ -7,7 +8,7 @@ static void SystemClock_Config (void);
 // Main function
 int main()
 {
-	uint8_t	sent;
+	uint8_t	i, sent;
 
 	// Configure System Clock
 	SystemClock_Config();
@@ -19,6 +20,10 @@ int main()
 	// Initialize Debug Console
 	BSP_Console_Init();
 
+	my_printf("Console ready!\r\n");
+	sent = 0;
+	i = 0;
+
 	// Main loop
 	while(1)
 	{
@@ -26,13 +31,12 @@ int main()
 		if (BSP_PB_GetState() == 1)
 		{
 			BSP_LED_On();	// Keep LED On
-
-			// Send '#' only once
+			// Send '#i' only once
 			if (sent == 0)
 			{
-				while ((USART2->ISR & USART_ISR_TC) != USART_ISR_TC);
-				USART2->TDR = '#';
+				my_printf("#%d\r\n", i);
 				sent = 1;
+				i++;
 			}
 		}
 		// If User-Button is released

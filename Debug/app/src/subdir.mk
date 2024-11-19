@@ -6,14 +6,17 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../app/src/main.c \
+../app/src/printf-stdarg.c \
 ../app/src/stm32f0xx_it.c 
 
 OBJS += \
 ./app/src/main.o \
+./app/src/printf-stdarg.o \
 ./app/src/stm32f0xx_it.o 
 
 C_DEPS += \
 ./app/src/main.d \
+./app/src/printf-stdarg.d \
 ./app/src/stm32f0xx_it.d 
 
 
@@ -24,7 +27,7 @@ app/src/%.o app/src/%.su app/src/%.cyclo: ../app/src/%.c app/src/subdir.mk
 clean: clean-app-2f-src
 
 clean-app-2f-src:
-	-$(RM) ./app/src/main.cyclo ./app/src/main.d ./app/src/main.o ./app/src/main.su ./app/src/stm32f0xx_it.cyclo ./app/src/stm32f0xx_it.d ./app/src/stm32f0xx_it.o ./app/src/stm32f0xx_it.su
+	-$(RM) ./app/src/main.cyclo ./app/src/main.d ./app/src/main.o ./app/src/main.su ./app/src/printf-stdarg.cyclo ./app/src/printf-stdarg.d ./app/src/printf-stdarg.o ./app/src/printf-stdarg.su ./app/src/stm32f0xx_it.cyclo ./app/src/stm32f0xx_it.d ./app/src/stm32f0xx_it.o ./app/src/stm32f0xx_it.su
 
 .PHONY: clean-app-2f-src
 
