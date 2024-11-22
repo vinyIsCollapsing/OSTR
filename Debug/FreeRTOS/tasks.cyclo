@@ -36,7 +36,11 @@
 ../FreeRTOS/tasks.c:3999:13:prvResetNextTaskUnblockTime	2
 ../FreeRTOS/tasks.c:4022:18:xTaskGetCurrentTaskHandle	1
 ../FreeRTOS/tasks.c:4039:16:xTaskGetSchedulerState	3
+../FreeRTOS/tasks.c:4067:16:xTaskPriorityInherit	9
+../FreeRTOS/tasks.c:4157:16:xTaskPriorityDisinherit	9
+../FreeRTOS/tasks.c:4237:10:vTaskPriorityDisinheritAfterTimeout	12
 ../FreeRTOS/tasks.c:4658:12:uxTaskResetEventItemValue	1
+../FreeRTOS/tasks.c:4674:18:pvTaskIncrementMutexHeldCount	2
 ../FreeRTOS/tasks.c:4691:14:ulTaskGenericNotifyTake	14
 ../FreeRTOS/tasks.c:4763:16:xTaskGenericNotifyWait	10
 ../FreeRTOS/tasks.c:4849:16:xTaskGenericNotify	19

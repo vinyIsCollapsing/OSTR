@@ -1,12 +1,14 @@
 ../FreeRTOS/queue.c:296:12:xQueueGenericReset	32	static,ignoring_inline_asm
 ../FreeRTOS/queue.c:428:19:xQueueGenericCreate	64	static,ignoring_inline_asm
 ../FreeRTOS/queue.c:494:13:prvInitialiseNewQueue	32	static
+../FreeRTOS/queue.c:542:17:prvInitialiseMutex	16	static
+../FreeRTOS/queue.c:572:19:xQueueCreateMutex	32	static
 ../FreeRTOS/queue.c:835:12:xQueueGenericSend	56	static,ignoring_inline_asm
 ../FreeRTOS/queue.c:1047:12:xQueueGenericSendFromISR	56	static,ignoring_inline_asm
 ../FreeRTOS/queue.c:1212:12:xQueueGiveFromISR	16	static
 ../FreeRTOS/queue.c:1212:12:MyWrapper_xQueueGiveFromISR	56	static,ignoring_inline_asm
 ../FreeRTOS/queue.c:1378:12:xQueueReceive	56	static,ignoring_inline_asm
-../FreeRTOS/queue.c:1521:12:xQueueSemaphoreTake	48	static,ignoring_inline_asm
+../FreeRTOS/queue.c:1521:12:xQueueSemaphoreTake	56	static,ignoring_inline_asm
 ../FreeRTOS/queue.c:1731:12:xQueuePeek	56	static,ignoring_inline_asm
 ../FreeRTOS/queue.c:1882:12:xQueueReceiveFromISR	56	static,ignoring_inline_asm
 ../FreeRTOS/queue.c:1975:12:xQueuePeekFromISR	32	static,ignoring_inline_asm
@@ -17,6 +19,7 @@
 ../FreeRTOS/queue.c:2119:17:uxQueueGetQueueNumber	16	static
 ../FreeRTOS/queue.c:2129:10:vQueueSetQueueNumber	16	static
 ../FreeRTOS/queue.c:2140:13:ucQueueGetQueueType	16	static
+../FreeRTOS/queue.c:2150:24:prvGetDisinheritPriorityAfterTimeout	24	static
 ../FreeRTOS/queue.c:2175:19:prvCopyDataToQueue	32	static
 ../FreeRTOS/queue.c:2258:13:prvCopyDataFromQueue	16	static
 ../FreeRTOS/queue.c:2279:13:prvUnlockQueue	24	static
