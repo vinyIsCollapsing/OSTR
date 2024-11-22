@@ -17,6 +17,15 @@
 ../TraceRecorder/trcSnapshotRecorder.c:625:13:xTraceTaskInstanceFinishedNow	8	static
 ../TraceRecorder/trcSnapshotRecorder.c:799:6:prvTraceIncreaseISRActive	8	static
 ../TraceRecorder/trcSnapshotRecorder.c:805:6:prvTraceDecreaseISRActive	8	static
+../TraceRecorder/trcSnapshotRecorder.c:820:16:writeInt8	16	static
+../TraceRecorder/trcSnapshotRecorder.c:841:16:writeInt16	16	static
+../TraceRecorder/trcSnapshotRecorder.c:869:16:writeInt32	24	static
+../TraceRecorder/trcSnapshotRecorder.c:965:16:prvTraceUserEventFormat	40	static
+../TraceRecorder/trcSnapshotRecorder.c:1406:13:xTracePrintF	28	static
+../TraceRecorder/trcSnapshotRecorder.c:1426:13:xTraceVPrintF	88	static,ignoring_inline_asm
+../TraceRecorder/trcSnapshotRecorder.c:1553:13:xTracePrint	48	static,ignoring_inline_asm
+../TraceRecorder/trcSnapshotRecorder.c:1611:13:xTraceStringRegister	16	static
+../TraceRecorder/trcSnapshotRecorder.c:1622:21:xTraceRegisterString	24	static
 ../TraceRecorder/trcSnapshotRecorder.c:1631:13:xTraceInitialize	8	static
 ../TraceRecorder/trcSnapshotRecorder.c:1777:6:prvTraceSetReadyEventsEnabled	16	static
 ../TraceRecorder/trcSnapshotRecorder.c:1787:6:prvTraceStoreTaskReady	48	static,ignoring_inline_asm

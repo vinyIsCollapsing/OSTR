@@ -55,7 +55,29 @@ extern "C" {
  * Default value is 1.
  */
 #define TRC_CFG_INCLUDE_MEMMANG_EVENTS		1
-#define TRC_CFG_INCLUDE_USER_EVENTS         0
+/**
+ * @def TRC_CFG_INCLUDE_USER_EVENTS
+ * @brief Macro which should be defined as either zero (0) or one (1).
+ *
+ * If this is zero (0), all code related to User Events is excluded in order
+ * to reduce code size. Any attempts of storing User Events are then silently
+ * ignored.
+ *
+ * User Events are application-generated events, like "printf" but for the
+ * trace log, generated using vTracePrint and vTracePrintF.
+ * The formatting is done on host-side, by Tracealyzer. User Events are
+ * therefore much faster than a console printf and can often be used
+ * in timing critical code without problems.
+ *
+ * Note: In streaming mode, User Events are used to provide error messages
+ * and warnings from the recorder (in case of incorrect configuration) for
+ * display in Tracealyzer. Disabling user events will also disable these
+ * warnings. You can however still catch them by calling xTraceErrorGetLast
+ * or by putting breakpoints in xTraceError and xTraceWarning.
+ *
+ * Default value is 1.
+ */
+#define TRC_CFG_INCLUDE_USER_EVENTS 1
 #define TRC_CFG_INCLUDE_ISR_TRACING         0
 #define TRC_CFG_INCLUDE_READY_EVENTS        1
 #define TRC_CFG_INCLUDE_OSTICK_EVENTS       0
