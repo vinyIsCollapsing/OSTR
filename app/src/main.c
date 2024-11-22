@@ -39,8 +39,8 @@ int main()
 	// Give a nice name to the Semaphore in the trace recorder
 	vTraceSetSemaphoreName(xSem, "xSEM");
 	// Create Tasks
-	xTaskCreate(vTask1, "Task_1", 256, NULL, 1, NULL);
-	xTaskCreate(vTask2, "Task_2", 256, NULL, 2, NULL);
+	xTaskCreate(vTask1, "Task_1", 256, NULL, 2, NULL);
+	xTaskCreate(vTask2, "Task_2", 256, NULL, 1, NULL);
 	// Start the Scheduler
 	vTaskStartScheduler();
 
@@ -123,20 +123,19 @@ static void SystemClock_Config()
 }
 
 /*
- *	Task_1 toggles LED every 10ms
+ *	Task1 toggles LED every 10ms
  */
 void vTask1 (void *pvParameters)
 {
+	portTickType	xLastWakeTime;
 	uint16_t	count;
 	count = 0;
+	// Initialize timing
+	xLastWakeTime = xTaskGetTickCount();
 	while(1)
 	{
-		// Toggle LED only if button released
-		if (BSP_PB_GetState()==0)
-		{
-			BSP_LED_Toggle();
-			count++;
-		}
+		BSP_LED_Toggle();
+		count++;
 		// Release semaphore every 10 count
 		if (count == 10)
 		{
@@ -144,7 +143,7 @@ void vTask1 (void *pvParameters)
 			count = 0;
 		}
 		// Wait here for 10ms since last wakeup
-		vTaskDelay(10);
+		vTaskDelayUntil (&xLastWakeTime, (10/portTICK_RATE_MS));
 	}
 }
 
