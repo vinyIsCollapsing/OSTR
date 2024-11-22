@@ -131,15 +131,19 @@ void vTask1 (void *pvParameters)
 	count = 0;
 	while(1)
 	{
-		BSP_LED_Toggle();
-		count++;
+		// Toggle LED only if button released
+		if (BSP_PB_GetState()==0)
+		{
+			BSP_LED_Toggle();
+			count++;
+		}
 		// Release semaphore every 10 count
 		if (count == 10)
 		{
-			xSemaphoreGive(xSem);    // <-- This is where the semaphore is given
+			xSemaphoreGive(xSem);
 			count = 0;
 		}
-		// Wait
+		// Wait here for 10ms since last wakeup
 		vTaskDelay(10);
 	}
 }
@@ -149,17 +153,28 @@ void vTask1 (void *pvParameters)
  */
 void vTask2 (void *pvParameters)
 {
-	uint16_t 	count;
+	portBASE_TYPE   xStatus;
+	uint16_t        count;
 	count = 0;
 	// Take the semaphore once to make sure it is empty
 	xSemaphoreTake(xSem, 0);
 	while(1)
 	{
-		// Wait for Semaphore endlessly
-		xSemaphoreTake(xSem, portMAX_DELAY);    //<-- This is where the semaphore is taken
-		// Reaching this point means that semaphore has been taken successfully
-        // Display console message
-        my_printf("Hello %2d from task2\r\n", count);
-		count++;
+		// Wait here for Semaphore with 2s timeout
+		xStatus = xSemaphoreTake(xSem, 2000);
+		// Test the result of the take attempt
+		if (xStatus == pdPASS)
+		{
+			// The semaphore was taken as expected
+			// Display console message
+			my_printf("Hello %2d from task2\r\n", count);
+			count++;
+		}
+		else
+		{
+			// The 2s timeout elapsed without Semaphore being taken
+			// Display another message
+			my_printf("Hey! Where is my semaphore?\r\n");
+		}
 	}
 }

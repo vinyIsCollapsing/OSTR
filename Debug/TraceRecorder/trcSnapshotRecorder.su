@@ -46,6 +46,7 @@
 ../TraceRecorder/trcSnapshotRecorder.c:2617:6:prvTraceError	16	static
 ../TraceRecorder/trcSnapshotRecorder.c:2637:6:vTraceSetFilterMask	16	static
 ../TraceRecorder/trcSnapshotRecorder.c:2642:6:vTraceSetFilterGroup	16	static
+../TraceRecorder/trcSnapshotRecorder.c:2663:6:prvCheckDataToBeOverwrittenForMultiEntryEvents	32	static
 ../TraceRecorder/trcSnapshotRecorder.c:2708:6:prvTraceUpdateCounters	8	static
 ../TraceRecorder/trcSnapshotRecorder.c:2744:10:prvTraceGetDTS	40	static
 ../TraceRecorder/trcSnapshotRecorder.c:2862:21:prvTraceLookupSymbolTableEntry	40	static
