@@ -100,6 +100,37 @@ void HardFault_Handler(void)
 /******************************************************************************/
 
 /**
+  * This function handles EXTI line 13 interrupt request.
+  */
+extern xSemaphoreHandle xSem;
+
+void EXTI4_15_IRQHandler()
+{
+	// Test for line 13 pending interrupt
+	if ((EXTI->PR & EXTI_PR_PR13_Msk) != 0)
+	{
+		// Clear pending bit 13 by writing a '1'
+		EXTI->PR = EXTI_PR_PR13;
+
+		// Release the semaphore
+		xSemaphoreGiveFromISR(xSem, NULL);
+	}
+}
+
+/*
+ * BSP_NVIC_Init()
+ * Setup NVIC controller for desired interrupts
+ */
+void BSP_NVIC_Init()
+{
+	// Set maximum priority for EXTI line 4 to 15 interrupts
+	NVIC_SetPriority(EXTI4_15_IRQn, configMAX_API_CALL_INTERRUPT_PRIORITY + 1);
+
+	// Enable EXTI line 4 to 15 (user button on line 13) interrupts
+	NVIC_EnableIRQ(EXTI4_15_IRQn);
+}
+
+/**
   * @brief  This function handles PPP interrupt request.
   * @param  None
   * @retval None

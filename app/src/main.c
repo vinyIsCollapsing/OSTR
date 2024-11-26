@@ -13,18 +13,12 @@ void vTaskConsole 	(void *pvParameters);
 xSemaphoreHandle xSem;
 // Trace User Events Channels
 traceString ue1, ue2;
-// Kernel Objects
-xSemaphoreHandle xConsoleMutex;
+// Kernel objects
+xSemaphoreHandle xSem;
 // Kernel Objects
 xQueueHandle	xConsoleQueue;
 // Define the message_t type as an array of 64 char
 typedef uint8_t msg_t[64];
-BaseType_t xTaskCreate ( TaskFunction_t               pxTaskCode,
-                         const char * const           pcName,
-                         const configSTACK_DEPTH_TYPE usStackDepth,
-                         void * const                 pvParameters,
-                         UBaseType_t                  uxPriority,
-                         TaskHandle_t * const         pxCreatedTask );
 
 // Main function
 int main()
@@ -32,29 +26,33 @@ int main()
 	// Configure System Clock
 	SystemClock_Config();
 
-	// Initialize LED & Button pin
+	// Initialize LED pin
 	BSP_LED_Init();
+
+	// Initialize the user Push-Button
 	BSP_PB_Init();
 
 	// Initialize Debug Console
 	BSP_Console_Init();
-	my_printf("Console ready!\r\n");
+
+	// Initialize NVIC
+	BSP_NVIC_Init();
 
 	// Start Trace Recording
 	xTraceEnable(TRC_START);
-	// Create Semaphore object (this is not a 'give')
+	// Create Semaphore object
 	xSem = xSemaphoreCreateBinary();
+
 	// Give a nice name to the Semaphore in the trace recorder
 	vTraceSetSemaphoreName(xSem, "xSEM");
 
 	// Create Tasks
-	xTaskCreate(vTask1, 		"Task_1",       256, NULL, 3, NULL);
-	xTaskCreate(vTask2, 		"Task_2",       256, NULL, 2, NULL);
-	xTaskCreate(vTaskConsole, 	"Task_Console", 256, NULL, 1, NULL);
+	xTaskCreate(vTask1, 		"Task_1", 		256, NULL, 1, NULL);
+	xTaskCreate(vTask2, 		"Task_2", 		256, NULL, 2, NULL);
 
 	// Register the Trace User Event Channels
-	 ue1 = xTraceRegisterString("count");
-	 ue2 = xTraceRegisterString("msg");
+	ue1 = xTraceRegisterString("count");
+	ue2 = xTraceRegisterString("msg");
 
 	 // Create Queue to hold console messages
 	xConsoleQueue = xQueueCreate(4, sizeof(msg_t *));
@@ -148,20 +146,13 @@ static void SystemClock_Config()
  */
 void vTask1 (void *pvParameters)
 {
-	msg_t 	msg;
-	msg_t	*pmsg = NULL;
-
 	while(1)
 	{
-		// Prepare message
-		my_sprintf((char *)msg, "With great power comes great responsibility\r\n");
-		pmsg = &msg;
+		// LED toggle
+		BSP_LED_Toggle();
 
-		// Send message to the Console Queue
-		xQueueSendToBack(xConsoleQueue, &pmsg, 0);
-
-		// Wait for 20ms
-		vTaskDelay(20);
+		// Wait for 200ms
+		vTaskDelay(200);
 	}
 }
 
@@ -170,25 +161,29 @@ void vTask1 (void *pvParameters)
  */
 void vTask2 (void *pvParameters)
 {
-	msg_t 	msg;
-	msg_t	*pmsg = NULL;
-
-	uint8_t	index = 0;
+	portBASE_TYPE	xStatus;
 
 	while(1)
 	{
-		// Prepare message
-		my_sprintf((char *)msg, "%d# ", index);
-		pmsg = &msg;
+		// Wait here for Semaphore with 100ms timeout
+		xStatus = xSemaphoreTake(xSem, 100);
 
-		// Send message to Console Queue
-		xQueueSendToBack(xConsoleQueue, &pmsg, 0);
+		// Test the result of the take attempt
+		if (xStatus == pdPASS)
+		{
+			// The semaphore was taken as expected
 
-		// Increment index
-		(index==9) ? index=0 : index++;
+			// Display console message
+			my_printf("#");
+		}
 
-		// Wait for 2ms
-		vTaskDelay(2);
+		else
+		{
+			// The 100ms timeout elapsed without Semaphore being taken
+
+			// Display another message
+			my_printf(".");
+		}
 	}
 }
 
