@@ -6,15 +6,19 @@
 static void SystemClock_Config (void);
 
 // FreeRTOS tasks
-void vTask1 	(void *pvParameters);
-void vTask2 	(void *pvParameters);
+void vTask1 		(void *pvParameters);
+void vTask2 		(void *pvParameters);
+void vTaskConsole 	(void *pvParameters);
 // Kernel objects
 xSemaphoreHandle xSem;
 // Trace User Events Channels
 traceString ue1, ue2;
 // Kernel Objects
 xSemaphoreHandle xConsoleMutex;
-
+// Kernel Objects
+xQueueHandle	xConsoleQueue;
+// Define the message_t type as an array of 64 char
+typedef uint8_t msg_t[64];
 BaseType_t xTaskCreate ( TaskFunction_t               pxTaskCode,
                          const char * const           pcName,
                          const configSTACK_DEPTH_TYPE usStackDepth,
@@ -44,18 +48,19 @@ int main()
 	vTraceSetSemaphoreName(xSem, "xSEM");
 
 	// Create Tasks
-	xTaskCreate(vTask1, "Task_1", 256, NULL, 2, NULL);
-	xTaskCreate(vTask2, "Task_2", 256, NULL, 1, NULL);
+	xTaskCreate(vTask1, 		"Task_1",       256, NULL, 3, NULL);
+	xTaskCreate(vTask2, 		"Task_2",       256, NULL, 2, NULL);
+	xTaskCreate(vTaskConsole, 	"Task_Console", 256, NULL, 1, NULL);
 
 	// Register the Trace User Event Channels
 	 ue1 = xTraceRegisterString("count");
 	 ue2 = xTraceRegisterString("msg");
 
-	// Create a Mutex for accessing the console
-	xConsoleMutex = xSemaphoreCreateMutex();
+     // Create Queue to hold console messages
+	xConsoleQueue = xQueueCreate(4, sizeof(msg_t));
 
-	// Give a nice name to the Mutex in the trace recorder
-	vTraceSetMutexName(xConsoleMutex, "Console Mutex");
+	// Give a nice name to the Queue in the trace recorder
+	vTraceSetQueueName(xConsoleQueue, "Console Queue");
 
 	 // Start the Scheduler
 	vTaskStartScheduler();
@@ -143,17 +148,17 @@ static void SystemClock_Config()
  */
 void vTask1 (void *pvParameters)
 {
+	msg_t 	msg;
+
 	while(1)
 	{
-		// Take Mutex
-		xSemaphoreTake(xConsoleMutex, portMAX_DELAY);
+		// Prepare message
+		my_sprintf((char *)msg, "With great power comes great responsibility\r\n");
 
-		// Send message to console
-		my_printf("With great power comes great responsibility\r\n");
+		// Send message to the Console Queue
+		xQueueSendToBack(xConsoleQueue, &msg, 0);
 
-		// Release Mutex
-		xSemaphoreGive(xConsoleMutex);
-
+		// Wait for 20ms
 		vTaskDelay(20);
 	}
 }
@@ -163,17 +168,38 @@ void vTask1 (void *pvParameters)
  */
 void vTask2 (void *pvParameters)
 {
+	msg_t 	msg;
+	uint8_t	index = 0;
+
 	while(1)
 	{
-		// Take Mutex
-		xSemaphoreTake(xConsoleMutex, portMAX_DELAY);
+		// Prepare message
+		my_sprintf((char *)msg, "%d# ", index);
+
+		// Send message to Console Queue
+		xQueueSendToBack(xConsoleQueue, &msg, 0);
+
+		// Increment index
+		(index==9) ? index=0 : index++;
+
+		// Wait for 2ms
+		vTaskDelay(2);
+	}
+}
+
+/*
+ * Task_Console
+ */
+void vTaskConsole (void *pvParameters)
+{
+	msg_t msg;
+
+	while(1)
+	{
+		// Wait for something in the message Queue
+		xQueueReceive(xConsoleQueue, &msg, portMAX_DELAY);
 
 		// Send message to console
-		my_printf("#");
-
-		// Release Mutex
-		xSemaphoreGive(xConsoleMutex);
-
-		vTaskDelay(1);
+		my_printf((char *)msg);
 	}
 }
