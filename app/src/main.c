@@ -36,10 +36,11 @@ int main()
 	BSP_Console_Init();
 
 	// Initialize NVIC
-	BSP_NVIC_Init();
+	//BSP_NVIC_Init();
 
 	// Start Trace Recording
-	xTraceEnable(TRC_START);
+	vTraceEnable(TRC_START);
+
 	// Create Semaphore object
 	xSem = xSemaphoreCreateBinary();
 
@@ -163,6 +164,14 @@ void vTask2 (void *pvParameters)
 {
 	portBASE_TYPE	xStatus;
 
+	// Initialize the user Push-Button
+	BSP_PB_Init();
+
+	// Set priority for EXTI line 4 to 15, and enable interrupt
+	NVIC_SetPriority(EXTI4_15_IRQn, configMAX_API_CALL_INTERRUPT_PRIORITY  + 1);
+	NVIC_EnableIRQ(EXTI4_15_IRQn);
+
+	// Now enter the task loop
 	while(1)
 	{
 		// Wait here for Semaphore with 100ms timeout
@@ -172,7 +181,6 @@ void vTask2 (void *pvParameters)
 		if (xStatus == pdPASS)
 		{
 			// The semaphore was taken as expected
-
 			// Display console message
 			my_printf("#");
 		}
@@ -180,7 +188,6 @@ void vTask2 (void *pvParameters)
 		else
 		{
 			// The 100ms timeout elapsed without Semaphore being taken
-
 			// Display another message
 			my_printf(".");
 		}
