@@ -56,8 +56,8 @@ int main()
 	 ue1 = xTraceRegisterString("count");
 	 ue2 = xTraceRegisterString("msg");
 
-     // Create Queue to hold console messages
-	xConsoleQueue = xQueueCreate(4, sizeof(msg_t));
+	 // Create Queue to hold console messages
+	xConsoleQueue = xQueueCreate(4, sizeof(msg_t *));
 
 	// Give a nice name to the Queue in the trace recorder
 	vTraceSetQueueName(xConsoleQueue, "Console Queue");
@@ -149,14 +149,16 @@ static void SystemClock_Config()
 void vTask1 (void *pvParameters)
 {
 	msg_t 	msg;
+	msg_t	*pmsg = NULL;
 
 	while(1)
 	{
 		// Prepare message
 		my_sprintf((char *)msg, "With great power comes great responsibility\r\n");
+		pmsg = &msg;
 
 		// Send message to the Console Queue
-		xQueueSendToBack(xConsoleQueue, &msg, 0);
+		xQueueSendToBack(xConsoleQueue, &pmsg, 0);
 
 		// Wait for 20ms
 		vTaskDelay(20);
@@ -169,15 +171,18 @@ void vTask1 (void *pvParameters)
 void vTask2 (void *pvParameters)
 {
 	msg_t 	msg;
+	msg_t	*pmsg = NULL;
+
 	uint8_t	index = 0;
 
 	while(1)
 	{
 		// Prepare message
 		my_sprintf((char *)msg, "%d# ", index);
+		pmsg = &msg;
 
 		// Send message to Console Queue
-		xQueueSendToBack(xConsoleQueue, &msg, 0);
+		xQueueSendToBack(xConsoleQueue, &pmsg, 0);
 
 		// Increment index
 		(index==9) ? index=0 : index++;
@@ -192,14 +197,14 @@ void vTask2 (void *pvParameters)
  */
 void vTaskConsole (void *pvParameters)
 {
-	msg_t msg;
+	msg_t *pmsg = NULL;
 
 	while(1)
 	{
 		// Wait for something in the message Queue
-		xQueueReceive(xConsoleQueue, &msg, portMAX_DELAY);
+		xQueueReceive(xConsoleQueue, &pmsg, portMAX_DELAY);
 
 		// Send message to console
-		my_printf((char *)msg);
+		my_printf((char *)pmsg);
 	}
 }

@@ -1,5 +1,5 @@
 ../app/src/main.c:30:5:main	16	static
 ../app/src/main.c:81:13:SystemClock_Config	24	static
-../app/src/main.c:149:6:vTask1	88	static
-../app/src/main.c:169:6:vTask2	96	static
-../app/src/main.c:193:6:vTaskConsole	88	static
+../app/src/main.c:149:6:vTask1	96	static
+../app/src/main.c:171:6:vTask2	96	static
+../app/src/main.c:198:6:vTaskConsole	24	static
