@@ -222,9 +222,9 @@ void vTask2 (void *pvParameters)
 	{
 		// Wait for myEventGroup :
 		// - bit #0
-		// - Clear on Exit
+		// - Do not Clear on Exit
 		// - Wait for All bits (AND)
-		xEventGroupWaitBits(myEventGroup, BIT0, pdTRUE, pdTRUE, portMAX_DELAY);
+		xEventGroupWaitBits(myEventGroup, BIT0, pdFALSE, pdTRUE, portMAX_DELAY);
 
 		// If the bit is set
 		my_printf("#");
@@ -240,9 +240,9 @@ void vTask3 (void *pvParameters)
 	{
 		// Wait for myEventGroup
 		// - bit #0
-		// - Clear on Exit
+		// - Do not Clear on Exit
 		// - Wait for All bits (AND)
-		xEventGroupWaitBits(myEventGroup, BIT0, pdTRUE, pdTRUE, portMAX_DELAY);
+		xEventGroupWaitBits(myEventGroup, BIT0, pdFALSE, pdTRUE, portMAX_DELAY);
 
 		// If the bit is set
 		my_printf("-");

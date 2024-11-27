@@ -16504,16 +16504,16 @@ void vTask2 (void *pvParameters)
 	{
 		// Wait for myEventGroup :
 		// - bit #0
-		// - Clear on Exit
+		// - Do not Clear on Exit
 		// - Wait for All bits (AND)
-		xEventGroupWaitBits(myEventGroup, BIT0, pdTRUE, pdTRUE, portMAX_DELAY);
+		xEventGroupWaitBits(myEventGroup, BIT0, pdFALSE, pdTRUE, portMAX_DELAY);
  80060ec:	4b07      	ldr	r3, [pc, #28]	@ (800610c <vTask2+0x28>)
  80060ee:	6818      	ldr	r0, [r3, #0]
  80060f0:	2301      	movs	r3, #1
  80060f2:	425b      	negs	r3, r3
  80060f4:	9300      	str	r3, [sp, #0]
  80060f6:	2301      	movs	r3, #1
- 80060f8:	2201      	movs	r2, #1
+ 80060f8:	2200      	movs	r2, #0
  80060fa:	2101      	movs	r1, #1
  80060fc:	f7fa fe88 	bl	8000e10 <xEventGroupWaitBits>
 
@@ -16522,7 +16522,7 @@ void vTask2 (void *pvParameters)
  8006100:	4b03      	ldr	r3, [pc, #12]	@ (8006110 <vTask2+0x2c>)
  8006102:	0018      	movs	r0, r3
  8006104:	f000 f9f8 	bl	80064f8 <my_printf>
-		xEventGroupWaitBits(myEventGroup, BIT0, pdTRUE, pdTRUE, portMAX_DELAY);
+		xEventGroupWaitBits(myEventGroup, BIT0, pdFALSE, pdTRUE, portMAX_DELAY);
  8006108:	46c0      	nop			@ (mov r8, r8)
  800610a:	e7ef      	b.n	80060ec <vTask2+0x8>
  800610c:	20002e18 	.word	0x20002e18
@@ -16542,16 +16542,16 @@ void vTask3 (void *pvParameters)
 	{
 		// Wait for myEventGroup
 		// - bit #0
-		// - Clear on Exit
+		// - Do not Clear on Exit
 		// - Wait for All bits (AND)
-		xEventGroupWaitBits(myEventGroup, BIT0, pdTRUE, pdTRUE, portMAX_DELAY);
+		xEventGroupWaitBits(myEventGroup, BIT0, pdFALSE, pdTRUE, portMAX_DELAY);
  800611c:	4b07      	ldr	r3, [pc, #28]	@ (800613c <vTask3+0x28>)
  800611e:	6818      	ldr	r0, [r3, #0]
  8006120:	2301      	movs	r3, #1
  8006122:	425b      	negs	r3, r3
  8006124:	9300      	str	r3, [sp, #0]
  8006126:	2301      	movs	r3, #1
- 8006128:	2201      	movs	r2, #1
+ 8006128:	2200      	movs	r2, #0
  800612a:	2101      	movs	r1, #1
  800612c:	f7fa fe70 	bl	8000e10 <xEventGroupWaitBits>
 
@@ -16560,7 +16560,7 @@ void vTask3 (void *pvParameters)
  8006130:	4b03      	ldr	r3, [pc, #12]	@ (8006140 <vTask3+0x2c>)
  8006132:	0018      	movs	r0, r3
  8006134:	f000 f9e0 	bl	80064f8 <my_printf>
-		xEventGroupWaitBits(myEventGroup, BIT0, pdTRUE, pdTRUE, portMAX_DELAY);
+		xEventGroupWaitBits(myEventGroup, BIT0, pdFALSE, pdTRUE, portMAX_DELAY);
  8006138:	46c0      	nop			@ (mov r8, r8)
  800613a:	e7ef      	b.n	800611c <vTask3+0x8>
  800613c:	20002e18 	.word	0x20002e18
