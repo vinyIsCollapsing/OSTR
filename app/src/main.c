@@ -11,11 +11,14 @@ static void SystemClock_Config (void);
 
 // FreeRTOS tasks
 void vTask1 		(void *pvParameters);
-xTaskHandle			vTask1_handle;
 void vTask2 		(void *pvParameters);
-xTaskHandle			vTask2_handle;
-void vTask3 		(void *pvParameters);
-xTaskHandle			vTask3_handle;
+// Timer callback function
+void vTaskTimer		(TimerHandle_t xTimer);
+// Declare Timer Object
+TimerHandle_t	my_timer;
+TickType_t	ticks;
+// Trace User Events Channels
+traceString ue1;
 
 // Kernel objects
 xSemaphoreHandle xSem;
@@ -24,7 +27,7 @@ xQueueHandle	xConsoleQueue;
 EventGroupHandle_t myEventGroup;
 
 // Trace User Events Channels
-traceString ue1, ue2;
+//traceString ue1, ue2;
 
 // Define the message_t type as an array of 64 char
 typedef uint8_t msg_t[64];
@@ -54,8 +57,13 @@ int main()
 	// Create Event Group                   // <-- Create Event Group here
 	myEventGroup = xEventGroupCreate();
 
+	// Create Timer object
+	my_timer = xTimerCreate("my_timer", 200, pdTRUE, NULL, vTaskTimer);
+	// Start Timer
+	xTimerStart(my_timer, 0);
+	ticks = xTimerGetExpiryTime(my_timer);
 	// Register the Trace User Event Channels
-	ue1 = xTraceRegisterString("state");
+	ue1 = xTraceRegisterString("ticks");
 
 	// Create Semaphore object
 	//xSem = xSemaphoreCreateBinary();
@@ -64,9 +72,8 @@ int main()
 	//vTraceSetSemaphoreName(xSem, "xSEM");
 
 	// Create Tasks
-	xTaskCreate(vTask1,	"Task_1", 128, NULL, 3, &vTask1_handle);
-	xTaskCreate(vTask2,	"Task_2", 128, NULL, 2, &vTask2_handle);
-	xTaskCreate(vTask3,	"Task_3", 128, NULL, 1, &vTask3_handle);
+	xTaskCreate(vTask1,		"Task_1", 		256, NULL, 1, NULL);
+	xTaskCreate(vTask2,		"Task_2", 		256, NULL, 2, NULL);
 
 	// Register the Trace User Event Channels
 	// ue1 = xTraceRegisterString("count");
@@ -161,32 +168,26 @@ static void SystemClock_Config()
 
 /*
  *	Task_1
- *	- Sends a notification to Task_3 every 500ms
  */
 void vTask1 (void *pvParameters)
 {
-	uint8_t		msg[] = "Hello from task #1\r\n";
 	while(1)
 	{
-		// Notify Task_3 on slot #0
-		xTaskNotifyIndexed(vTask3_handle, 0, (uint32_t)msg, eSetValueWithOverwrite );
-		// Wait
-		vTaskDelay(500);
+		my_printf("-");
+		// Wait for 1s
+		vTaskDelay(1000);
 	}
 }
 /*
  *	Task_2
- *	- Sends a notification to Task_3 every 1000ms
  */
 void vTask2 (void *pvParameters)
 {
-	uint8_t		msg[] = "Hello from task #2\r\n";
 	while(1)
 	{
-		// Notify Task_3 on slot #1
-		xTaskNotifyIndexed(vTask3_handle, 1, (uint32_t)msg, eSetValueWithOverwrite );
-		// Wait
-		vTaskDelay(1000);
+		my_printf("#");
+		// Wait for 500ms
+		vTaskDelay(500);
 	}
 }
 
@@ -215,6 +216,19 @@ void vTask3 (void *pvParameters)
 		// Polling period
 		vTaskDelay(100);
 	}
+}
+
+/*
+ * Timer Callback
+ */
+void vTaskTimer (TimerHandle_t xTimer)
+{
+	vTracePrintF(ue1, (char *)"%d", (uint32_t)ticks);
+
+	my_printf("\tTimer callback\r\n");
+
+	ticks = xTimerGetExpiryTime(my_timer);
+	BSP_LED_Toggle();
 }
 
 /*

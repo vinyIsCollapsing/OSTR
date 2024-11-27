@@ -10,6 +10,10 @@
 ../TraceRecorder/trcKernelPort.c:352:10:prvTraceGetQueueNumberHigh16	1
 ../TraceRecorder/trcKernelPort.c:357:6:prvTraceSetQueueNumberLow16	1
 ../TraceRecorder/trcKernelPort.c:362:6:prvTraceSetQueueNumberHigh16	1
+../TraceRecorder/trcKernelPort.c:369:10:prvTraceGetTimerNumberLow16	1
+../TraceRecorder/trcKernelPort.c:374:10:prvTraceGetTimerNumberHigh16	1
+../TraceRecorder/trcKernelPort.c:379:6:prvTraceSetTimerNumberLow16	1
+../TraceRecorder/trcKernelPort.c:384:6:prvTraceSetTimerNumberHigh16	1
 ../TraceRecorder/trcKernelPort.c:393:10:prvTraceGetEventGroupNumberLow16	1
 ../TraceRecorder/trcKernelPort.c:398:10:prvTraceGetEventGroupNumberHigh16	1
 ../TraceRecorder/trcKernelPort.c:403:6:prvTraceSetEventGroupNumberLow16	1

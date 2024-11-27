@@ -29,6 +29,7 @@ TraceRecorder/trcKernelPort.o: ../TraceRecorder/trcKernelPort.c \
  C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/list.h \
  C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/queue.h \
  C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/task.h \
+ C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/timers.h \
  C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/event_groups.h \
  C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/timers.h
 C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/FreeRTOS.h:
@@ -61,5 +62,6 @@ C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/task.h:
 C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/list.h:
 C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/queue.h:
 C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/task.h:
+C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/timers.h:
 C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/event_groups.h:
 C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/timers.h:
