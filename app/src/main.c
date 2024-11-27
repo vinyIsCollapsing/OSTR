@@ -11,11 +11,13 @@ static void SystemClock_Config (void);
 
 // FreeRTOS tasks
 void vTask1 		(void *pvParameters);
+xTaskHandle			vTask1_handle;
 void vTask2 		(void *pvParameters);
+xTaskHandle			vTask2_handle;
+void vTask3 		(void *pvParameters);
+xTaskHandle			vTask3_handle;
 
 // Kernel objects
-xTaskHandle			vTask1_handle;
-xTaskHandle			vTask2_handle;
 xSemaphoreHandle xSem;
 xSemaphoreHandle xSem;
 xQueueHandle	xConsoleQueue;
@@ -62,8 +64,9 @@ int main()
 	//vTraceSetSemaphoreName(xSem, "xSEM");
 
 	// Create Tasks
-	xTaskCreate(vTask1,	"Task_1", 128, NULL, 2, &vTask1_handle);
-	xTaskCreate(vTask2,	"Task_2", 128, NULL, 1, &vTask2_handle);
+	xTaskCreate(vTask1,	"Task_1", 128, NULL, 3, &vTask1_handle);
+	xTaskCreate(vTask2,	"Task_2", 128, NULL, 2, &vTask2_handle);
+	xTaskCreate(vTask3,	"Task_3", 128, NULL, 1, &vTask3_handle);
 
 	// Register the Trace User Event Channels
 	// ue1 = xTraceRegisterString("count");
@@ -158,81 +161,59 @@ static void SystemClock_Config()
 
 /*
  *	Task_1
- *
- *	- Toggles LED every 100ms
- *	- Sends a notification to Task_2 every 1s
+ *	- Sends a notification to Task_3 every 500ms
  */
 void vTask1 (void *pvParameters)
 {
-	uint16_t	count;
-	uint32_t    time;
-	count = 0;
-	time  = 0;
+	uint8_t		msg[] = "Hello from task #1\r\n";
 	while(1)
 	{
-		BSP_LED_Toggle();
-		count++;
-		time++;
-		// Notify Task_2 every 10 count
-		if (count == 10)
-		{
-			// Direct notification to Task_2
-			xTaskNotify(vTask2_handle, time, eSetValueWithOverwrite );
-			count = 0;
-		}
+		// Notify Task_3 on slot #0
+		xTaskNotifyIndexed(vTask3_handle, 0, (uint32_t)msg, eSetValueWithOverwrite );
 		// Wait
-		vTaskDelay(100);
+		vTaskDelay(500);
 	}
 }
-
 /*
  *	Task_2
- *
- *	- Sends a message to console when a notification is received
- *
+ *	- Sends a notification to Task_3 every 1000ms
  */
 void vTask2 (void *pvParameters)
 {
-	uint16_t 	count;
-	uint32_t    time;
-	count = 0;
+	uint8_t		msg[] = "Hello from task #2\r\n";
 	while(1)
 	{
-		// Wait here for a notification
-		time = ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-		// Reaching this point means that a notification has been received
-        // Display console message
-        my_printf("Hello %2d from task2 - Time @task1 = %d\r\n", count, time);
-		count++;
+		// Notify Task_3 on slot #1
+		xTaskNotifyIndexed(vTask3_handle, 1, (uint32_t)msg, eSetValueWithOverwrite );
+		// Wait
+		vTaskDelay(1000);
 	}
 }
 
 /*
- * Task 3
+ *	Task_3
+ *	- Sends a message to console when a notification is received
  */
 void vTask3 (void *pvParameters)
 {
-	EventBits_t		evb_result, evb_msk;
-
-	// Prepare a mask for testing event bits
-	evb_msk = BIT1|BIT0;
-
+	BaseType_t	notif_pending;
+	uint8_t		*pmsg;
+	uint8_t		slot_index;
 	while(1)
 	{
-		// Wait for myEventGroup
-		// - bit #0, bit #1
-		// - Clear on Exit
-		// - Do not Wait for All bits (OR)
-		evb_result = xEventGroupWaitBits(myEventGroup, (BIT0 | BIT1), pdTRUE, pdFALSE, portMAX_DELAY);
-
-		// If BIT0 is set
-		if ((evb_result & evb_msk) == BIT0) 	my_printf("[0]");
-
-		// If BIT1 is set
-		if ((evb_result & evb_msk) == BIT1) 	my_printf("[1]");
-
-		// If both BIT0 and BIT1 are set
-		if ((evb_result & evb_msk) == evb_msk)	my_printf("[A]\r\n");
+		BSP_LED_Toggle();
+		for(slot_index = 0; slot_index<2; slot_index++)
+		{
+			// Poll notification on slot #0 with no timeout
+			notif_pending = xTaskNotifyWaitIndexed(slot_index, 0, 0, (uint32_t *)&pmsg, 0);
+			// If a notification was received
+			if (notif_pending == pdPASS)
+			{
+		        my_printf("Notification received on slot[%d] : %s", slot_index, pmsg);
+			}
+		}
+		// Polling period
+		vTaskDelay(100);
 	}
 }
 

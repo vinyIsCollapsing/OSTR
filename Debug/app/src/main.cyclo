@@ -1,6 +1,6 @@
-../app/src/main.c:31:5:main	1
-../app/src/main.c:94:13:SystemClock_Config	7
-../app/src/main.c:165:6:vTask1	2
-../app/src/main.c:194:6:vTask2	1
-../app/src/main.c:213:6:vTask3	4
-../app/src/main.c:242:6:vTaskConsole	1
+../app/src/main.c:33:5:main	1
+../app/src/main.c:97:13:SystemClock_Config	7
+../app/src/main.c:166:6:vTask1	1
+../app/src/main.c:181:6:vTask2	1
+../app/src/main.c:197:6:vTask3	3
+../app/src/main.c:223:6:vTaskConsole	1
