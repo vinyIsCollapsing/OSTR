@@ -4,3 +4,5 @@
 ../app/src/main.c:237:6:vTask2	1
 ../app/src/main.c:254:6:vTaskHWM	1
 ../app/src/main.c:334:6:vTask3	3
+../app/src/main.c:390:6:vAssertCalled	1
+../app/src/main.c:404:6:vApplicationMallocFailedHook	1

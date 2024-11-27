@@ -38,7 +38,7 @@ extern uint32_t    SystemCoreClock;
 #define configSUPPORT_STATIC_ALLOCATION             0
 #define configSUPPORT_DYNAMIC_ALLOCATION            1
 #define configKERNEL_PROVIDED_STATIC_MEMORY         0
-#define configTOTAL_HEAP_SIZE                       ( ( size_t ) ( 7 * 1024 ) )
+#define configTOTAL_HEAP_SIZE                       ( ( size_t ) ( 3584 ) )
 #define configAPPLICATION_ALLOCATED_HEAP            0
 #define configSTACK_ALLOCATION_FROM_SEPARATE_HEAP   0
 #define configENABLE_HEAP_PROTECTOR                 0
@@ -46,7 +46,7 @@ extern uint32_t    SystemCoreClock;
 #define configUSE_IDLE_HOOK                         0
 #define configUSE_TICK_HOOK                         0
 #define configCHECK_FOR_STACK_OVERFLOW              0
-#define configUSE_MALLOC_FAILED_HOOK                0
+#define configUSE_MALLOC_FAILED_HOOK                1
 #define configUSE_DAEMON_TASK_STARTUP_HOOK          0
 #define configUSE_SB_COMPLETED_CALLBACK             0
 /* Run time and task stats gathering related definitions. */
@@ -64,8 +64,9 @@ extern uint32_t    SystemCoreClock;
 /* Interrupt nesting behavior configuration. */
 #define configMAX_API_CALL_INTERRUPT_PRIORITY       5
 /* Define to trap errors during development. */
-#define configASSERT(x) if( ( x ) == 0 ) { taskDISABLE_INTERRUPTS(); for( ;; ); }
-// #define configASSERT(x) if( ( x ) == 0 ) vAssertCalled( __FILE__, __LINE__ )
+void vAssertCalled(char *file, int  line);
+// #define configASSERT(x) if( ( x ) == 0 ) { taskDISABLE_INTERRUPTS(); for( ;; ); }
+#define configASSERT(x) if( ( x ) == 0 ) vAssertCalled( __FILE__, __LINE__ )
 /* Optional functions - most linkers will remove unused functions anyway. */
 #define INCLUDE_vTaskPrioritySet                    0
 #define INCLUDE_uxTaskPriorityGet                   0

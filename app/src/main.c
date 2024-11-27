@@ -383,3 +383,27 @@ void vTaskConsole (void *pvParameters)
 	}
 }
  */
+
+/*
+ * Assertion Handler
+ */
+void vAssertCalled( char *file, int line )
+{
+	taskDISABLE_INTERRUPTS();
+
+	my_printf("Assertion Failed\r\n");
+	my_printf("File %s\r\n", file);
+	my_printf("Line %d\r\n", line);
+
+	while(1);
+}
+
+/*
+ * Malloc failed Basic Hook
+ */
+void vApplicationMallocFailedHook()
+{
+	my_printf("Malloc Failed\r\n");
+
+	while(1);
+}
