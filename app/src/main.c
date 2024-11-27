@@ -10,31 +10,37 @@
 static void SystemClock_Config (void);
 
 // FreeRTOS tasks
-void vTask1 		(void *pvParameters);
-void vTask2 		(void *pvParameters);
+void vTask1 	(void *pvParameters);
+void vTask2 	(void *pvParameters);
+void vTaskHWM 	(void *pvParameters);
+
+xTaskHandle	vTask1_handle;
+xTaskHandle	vTask2_handle;
+xTaskHandle 	vTaskHWM_handle;
+
 // Timer callback function
-void vTaskTimer		(TimerHandle_t xTimer);
+// void vTaskTimer		(TimerHandle_t xTimer);
 // Declare Timer Object
-TimerHandle_t	my_timer;
-TickType_t	ticks;
-// Trace User Events Channels
-traceString ue1;
+// TimerHandle_t	my_timer;
+// TickType_t	ticks;
 
 // Kernel objects
 xSemaphoreHandle xSem;
-xSemaphoreHandle xSem;
-xQueueHandle	xConsoleQueue;
-EventGroupHandle_t myEventGroup;
+xSemaphoreHandle xConsoleMutex;
+xQueueHandle	 xConsoleQueue;
+// EventGroupHandle_t myEventGroup;
 
 // Trace User Events Channels
-//traceString ue1, ue2;
+traceString ue1, ue2, ue3;
 
-// Define the message_t type as an array of 64 char
-typedef uint8_t msg_t[64];
+// Define the message_t type as an array of 60 char
+typedef uint8_t message_t[64];		// typedef uint8_t msg_t[64];
 
 // Main function
 int main()
 {
+	uint32_t	free_heap_size;
+
 	// Configure System Clock
 	SystemClock_Config();
 
@@ -52,18 +58,60 @@ int main()
 	//BSP_NVIC_Init();
 
 	// Start Trace Recording
-	xTraceEnable(TRC_START);		// vTraceEnable(TRC_START);
+	vTraceEnable(TRC_START);		// xTraceEnable(TRC_START);
+
+	// Report Free Heap Size
+	free_heap_size = xPortGetFreeHeapSize();
+	my_printf("\r\nFree Heap Size is %d bytes\r\n", free_heap_size);
+
+
+	// Create Semaphore object (this is not a 'give')
+	my_printf("\r\nNow creating Binary Semaphore...\r\n");
+	xSem = xSemaphoreCreateBinary();
+	vTraceSetSemaphoreName(xSem, "xSEM");
+	free_heap_size = xPortGetFreeHeapSize();
+	my_printf("Free Heap Size is %d bytes\r\n", free_heap_size);
+
+	// Create Queue to hold console messages
+	my_printf("\r\nNow creating Message Queue...\r\n");
+	xConsoleQueue = xQueueCreate(4, sizeof(message_t));
+	vTraceSetQueueName(xConsoleQueue, "Console Queue");
+	free_heap_size = xPortGetFreeHeapSize();
+	my_printf("Free Heap Size is %d bytes\r\n", free_heap_size);
+
+	// Create a Mutex for accessing the console
+	my_printf("\r\nNow creating Mutex...\r\n");
+	xConsoleMutex = xSemaphoreCreateMutex();
+	vTraceSetMutexName(xConsoleMutex, "Console Mutex");
+	free_heap_size = xPortGetFreeHeapSize();
+	my_printf("Free Heap Size is %d bytes\r\n", free_heap_size);
+
+	// Register the Trace User Event Channels
+	my_printf("\r\nNow registering Trace events...\r\n");
+	ue1 = xTraceRegisterString("ticks");
+	ue2 = xTraceRegisterString("msg");
+	ue3 = xTraceRegisterString("HWM");
+	free_heap_size = xPortGetFreeHeapSize();
+	my_printf("Free Heap Size is %d bytes\r\n", free_heap_size);
+
+	// Create Tasks
+	my_printf("\r\nNow creating Tasks...\r\n");
+	xTaskCreate(vTask1,	"Task_1",	128, NULL, 2, &vTask1_handle);
+	xTaskCreate(vTask2,	"Task_2",	128, NULL, 3, &vTask2_handle);
+	xTaskCreate(vTaskHWM,	"Task_HWM",	128, NULL, 1, &vTaskHWM_handle);
+	free_heap_size = xPortGetFreeHeapSize();
+	my_printf("Free Heap Size is %d bytes\r\n", free_heap_size);
 
 	// Create Event Group                   // <-- Create Event Group here
-	myEventGroup = xEventGroupCreate();
+	// myEventGroup = xEventGroupCreate();
 
 	// Create Timer object
-	my_timer = xTimerCreate("my_timer", 200, pdTRUE, NULL, vTaskTimer);
+	// my_timer = xTimerCreate("my_timer", 200, pdTRUE, NULL, vTaskTimer);
 	// Start Timer
-	xTimerStart(my_timer, 0);
-	ticks = xTimerGetExpiryTime(my_timer);
+	// xTimerStart(my_timer, 0);
+	// ticks = xTimerGetExpiryTime(my_timer);
 	// Register the Trace User Event Channels
-	ue1 = xTraceRegisterString("ticks");
+	// ue1 = xTraceRegisterString("ticks");
 
 	// Create Semaphore object
 	//xSem = xSemaphoreCreateBinary();
@@ -72,8 +120,8 @@ int main()
 	//vTraceSetSemaphoreName(xSem, "xSEM");
 
 	// Create Tasks
-	xTaskCreate(vTask1,		"Task_1", 		256, NULL, 1, NULL);
-	xTaskCreate(vTask2,		"Task_2", 		256, NULL, 2, NULL);
+	// xTaskCreate(vTask1,		"Task_1", 		256, NULL, 1, NULL);
+	// xTaskCreate(vTask2,		"Task_2", 		256, NULL, 2, NULL);
 
 	// Register the Trace User Event Channels
 	// ue1 = xTraceRegisterString("count");
@@ -85,7 +133,8 @@ int main()
 	// Give a nice name to the Queue in the trace recorder
 	// vTraceSetQueueName(xConsoleQueue, "Console Queue");
 
-	 // Start the Scheduler
+	// Start the Scheduler
+	my_printf("\r\nNow Starting Scheduler...\r\n");
 	vTaskStartScheduler();
 
 	while(1)
@@ -173,11 +222,11 @@ void vTask1 (void *pvParameters)
 {
 	while(1)
 	{
-		my_printf("-");
-		// Wait for 1s
-		vTaskDelay(1000);
+		// Wait for 100ms
+		vTaskDelay(100);
 	}
 }
+
 /*
  *	Task_2
  */
@@ -185,7 +234,24 @@ void vTask2 (void *pvParameters)
 {
 	while(1)
 	{
-		my_printf("#");
+		// Wait for 100ms
+		vTaskDelay(100);
+	}
+}
+
+/*
+ * vTaskHWM
+ */
+void vTaskHWM (void *pvParameters)
+{
+	uint32_t	free_heap_size;
+
+	while(1)
+	{
+		// Periodically Report Free Heap size after scheduler has started
+		free_heap_size = xPortGetFreeHeapSize();
+		my_printf("Free Heap Size is %d bytes\r", free_heap_size);
+
 		// Wait for 500ms
 		vTaskDelay(500);
 	}
@@ -220,7 +286,6 @@ void vTask3 (void *pvParameters)
 
 /*
  * Timer Callback
- */
 void vTaskTimer (TimerHandle_t xTimer)
 {
 	vTracePrintF(ue1, (char *)"%d", (uint32_t)ticks);
@@ -230,10 +295,10 @@ void vTaskTimer (TimerHandle_t xTimer)
 	ticks = xTimerGetExpiryTime(my_timer);
 	BSP_LED_Toggle();
 }
+ */
 
 /*
  * Task_Console
- */
 void vTaskConsole (void *pvParameters)
 {
 	msg_t *pmsg = NULL;
@@ -247,3 +312,4 @@ void vTaskConsole (void *pvParameters)
 		my_printf((char *)pmsg);
 	}
 }
+ */

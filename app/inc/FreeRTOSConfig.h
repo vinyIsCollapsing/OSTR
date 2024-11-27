@@ -38,7 +38,7 @@ extern uint32_t    SystemCoreClock;
 #define configSUPPORT_STATIC_ALLOCATION             0
 #define configSUPPORT_DYNAMIC_ALLOCATION            1
 #define configKERNEL_PROVIDED_STATIC_MEMORY         0
-#define configTOTAL_HEAP_SIZE                       ( ( size_t ) 6 * 1024 )
+#define configTOTAL_HEAP_SIZE                       ( ( size_t ) ( 7 * 1024 ) )
 #define configAPPLICATION_ALLOCATED_HEAP            0
 #define configSTACK_ALLOCATION_FROM_SEPARATE_HEAP   0
 #define configENABLE_HEAP_PROTECTOR                 0
