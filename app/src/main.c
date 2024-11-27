@@ -36,6 +36,10 @@ traceString ue1, ue2, ue3;
 // Define the message_t type as an array of 60 char
 typedef uint8_t message_t[64];		// typedef uint8_t msg_t[64];
 
+// Prototype functions
+float sum_prod(float x);
+
+
 // Main function
 int main()
 {
@@ -214,20 +218,21 @@ static void SystemClock_Config()
 	// Update SystemCoreClock global variable
 	SystemCoreClockUpdate();
 }
+
 /*
  *	Task_1
  */
 void vTask1 (void *pvParameters)
 {
-	uint8_t	msg[] = "This is task_1 message"; // 22 bytes string
+	uint8_t	msg[] = "This is task_1 message"; 	// 22 bytes string
 
 	while(1)
 	{
 		// Send message to Trace Recorder
 		vTracePrint(ue2, (char *)msg);
 
-		// Wait for 20ms
-		vTaskDelay(20);
+		// Wait for 100ms
+		vTaskDelay(100);
 	}
 }
 
@@ -236,15 +241,34 @@ void vTask1 (void *pvParameters)
  */
 void vTask2 (void *pvParameters)
 {
-	uint8_t	msg[] = "This is a much longer task_2 message"; // 36 bytes string
+	uint8_t		msg[] = "This is a much longer task_2 message"; // 36 bytes string
+	float 		x,y;
 
+	// Initialize the user Push-Button
+	BSP_PB_Init();
+
+	// Set maximum priority for EXTI line 4 to 15 interrupts
+	NVIC_SetPriority(EXTI4_15_IRQn, configMAX_API_CALL_INTERRUPT_PRIORITY + 1);
+
+	// Enable EXTI line 4 to 15 (user button on line 13) interrupts
+	NVIC_EnableIRQ(EXTI4_15_IRQn);
+
+	// Take the semaphore once to make sure it is cleared
+	xSemaphoreTake(xSem, 0);
+
+	// Now enter the task loop
 	while(1)
 	{
-		// Send message to trace Recorder
-		vTracePrint(ue2, (char *)msg);
+		// Wait here endlessly until button is pressed
+		xSemaphoreTake(xSem, portMAX_DELAY);
 
-		// Wait for 30ms
-		vTaskDelay(30);
+		// Compute y
+		x = 1.0f;
+		y = sum_prod(x);
+
+		// Send message to trace Recorder
+		vTracePrint (ue2, (char *)msg);
+		vTracePrintF(ue2, (char *)"%d", (uint32_t)y);
 	}
 }
 
@@ -405,5 +429,38 @@ void vApplicationMallocFailedHook()
 {
 	my_printf("Malloc Failed\r\n");
 
+	while(1);
+}
+
+/*
+ * sum_prod function
+ *
+ * Calculate y the sum of (x * coef[n])
+ * x is a floating point number
+ * coef[n] is an array of 120 32-bit integers
+ *
+ * returns y a floating point number
+ */
+float sum_prod(float x)
+{
+	uint32_t 	coef[120];
+	float		y;
+	uint8_t		n;
+
+	// Initialize array
+	for (n=0; n<120; n++) coef[n] = n;
+
+	// Calculate sum of products
+	y = 0;
+	for (n=0; n<120; n++) y += x * coef[n];
+
+	return y;
+}
+
+/*
+ * Stack Overflow Basic Hook
+ */
+void vApplicationStackOverflowHook(TaskHandle_t xTask, char * pcTaskName)
+{
 	while(1);
 }
