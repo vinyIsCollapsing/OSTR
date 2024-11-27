@@ -158,43 +158,51 @@ static void SystemClock_Config()
 
 /*
  *	Task_1
+ *
  *	- Toggles LED every 100ms
  *	- Sends a notification to Task_2 every 1s
  */
 void vTask1 (void *pvParameters)
 {
 	uint16_t	count;
+	uint32_t    time;
 	count = 0;
+	time  = 0;
 	while(1)
 	{
 		BSP_LED_Toggle();
 		count++;
+		time++;
 		// Notify Task_2 every 10 count
 		if (count == 10)
 		{
 			// Direct notification to Task_2
-			xTaskNotifyGive(vTask2_handle);
+			xTaskNotify(vTask2_handle, time, eSetValueWithOverwrite );
 			count = 0;
 		}
 		// Wait
 		vTaskDelay(100);
 	}
 }
+
 /*
  *	Task_2
+ *
  *	- Sends a message to console when a notification is received
+ *
  */
 void vTask2 (void *pvParameters)
 {
 	uint16_t 	count;
+	uint32_t    time;
 	count = 0;
 	while(1)
 	{
 		// Wait here for a notification
-		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		time = ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 		// Reaching this point means that a notification has been received
         // Display console message
-        my_printf("Hello %2d from task2\r\n", count);
+        my_printf("Hello %2d from task2 - Time @task1 = %d\r\n", count, time);
 		count++;
 	}
 }
