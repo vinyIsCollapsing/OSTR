@@ -2,21 +2,27 @@
 #include "bsp.h"
 #include "main.h"
 
+// Define Event Group flags
+#define	BIT0	( (EventBits_t)( 0x01 <<0) )   // This is not mandatory but it provides
+#define BIT1	( (EventBits_t)( 0x01 <<1) )   // friendly alias for individual event
+
 // Static functions
 static void SystemClock_Config (void);
 
 // FreeRTOS tasks
-void vTask1 		(void *pvParameters);
-void vTask2 		(void *pvParameters);
-void vTaskConsole 	(void *pvParameters);
+void vTask1 (void *pvParameters);
+void vTask2 (void *pvParameters);
+void vTask3 (void *pvParameters);
+
 // Kernel objects
 xSemaphoreHandle xSem;
+xSemaphoreHandle xSem;
+xQueueHandle	xConsoleQueue;
+EventGroupHandle_t myEventGroup;
+
 // Trace User Events Channels
 traceString ue1, ue2;
-// Kernel objects
-xSemaphoreHandle xSem;
-// Kernel Objects
-xQueueHandle	xConsoleQueue;
+
 // Define the message_t type as an array of 64 char
 typedef uint8_t msg_t[64];
 
@@ -39,27 +45,34 @@ int main()
 	//BSP_NVIC_Init();
 
 	// Start Trace Recording
-	vTraceEnable(TRC_START);
+	xTraceEnable(TRC_START);		// vTraceEnable(TRC_START);
 
-	// Create Semaphore object
-	xSem = xSemaphoreCreateBinary();
-
-	// Give a nice name to the Semaphore in the trace recorder
-	vTraceSetSemaphoreName(xSem, "xSEM");
-
-	// Create Tasks
-	xTaskCreate(vTask1, 		"Task_1", 		256, NULL, 1, NULL);
-	xTaskCreate(vTask2, 		"Task_2", 		256, NULL, 2, NULL);
+	// Create Event Group                   // <-- Create Event Group here
+	myEventGroup = xEventGroupCreate();
 
 	// Register the Trace User Event Channels
-	ue1 = xTraceRegisterString("count");
-	ue2 = xTraceRegisterString("msg");
+	ue1 = xTraceRegisterString("state");
 
-	 // Create Queue to hold console messages
-	xConsoleQueue = xQueueCreate(4, sizeof(msg_t *));
+	// Create Semaphore object
+	//xSem = xSemaphoreCreateBinary();
+
+	// Give a nice name to the Semaphore in the trace recorder
+	//vTraceSetSemaphoreName(xSem, "xSEM");
+
+	// Create Tasks
+	xTaskCreate(vTask1, "Task_1",  256, NULL, 1, NULL);
+	xTaskCreate(vTask2, "Task_2",  256, NULL, 2, NULL);
+	xTaskCreate(vTask3, "Task_3",  256, NULL, 3, NULL);
+
+	// Register the Trace User Event Channels
+	// ue1 = xTraceRegisterString("count");
+	// ue2 = xTraceRegisterString("msg");
+
+	// Create Queue to hold console messages
+	// xConsoleQueue = xQueueCreate(4, sizeof(msg_t *));
 
 	// Give a nice name to the Queue in the trace recorder
-	vTraceSetQueueName(xConsoleQueue, "Console Queue");
+	// vTraceSetQueueName(xConsoleQueue, "Console Queue");
 
 	 // Start the Scheduler
 	vTaskStartScheduler();
@@ -143,17 +156,60 @@ static void SystemClock_Config()
 }
 
 /*
- *	Task_1
+ *	Task_1 - State machine
  */
 void vTask1 (void *pvParameters)
 {
+	uint8_t state;
+
+	state = 0;
+
 	while(1)
 	{
 		// LED toggle
 		BSP_LED_Toggle();
 
-		// Wait for 200ms
-		vTaskDelay(200);
+		switch(state)
+		{
+			case 0:
+			{
+				vTracePrintF(ue1, "%d", state);
+				xEventGroupClearBits(myEventGroup, BIT0 | BIT1);  // [0 0]
+
+				state = 1;
+				break;
+			}
+
+			case 1:
+			{
+				vTracePrintF(ue1, "%d", state);
+				xEventGroupSetBits(myEventGroup, BIT0);          // [x 1]
+
+				state = 2;
+				break;
+			}
+
+			case 2:
+			{
+				vTracePrintF(ue1, "%d", state);
+				xEventGroupSetBits(myEventGroup, BIT1);          // [1 x]
+
+				state = 3;
+				break;
+			}
+
+			case 3:
+			{
+				vTracePrintF(ue1, "%d", state);
+				xEventGroupSetBits(myEventGroup, BIT0 | BIT1);  // [1 1]
+
+				state = 0;
+				break;
+			}
+		}
+
+		// Wait for 2ms
+		vTaskDelay(2);
 	}
 }
 
@@ -162,35 +218,34 @@ void vTask1 (void *pvParameters)
  */
 void vTask2 (void *pvParameters)
 {
-	portBASE_TYPE	xStatus;
-
-	// Initialize the user Push-Button
-	BSP_PB_Init();
-
-	// Set priority for EXTI line 4 to 15, and enable interrupt
-	NVIC_SetPriority(EXTI4_15_IRQn, configMAX_API_CALL_INTERRUPT_PRIORITY  + 1);
-	NVIC_EnableIRQ(EXTI4_15_IRQn);
-
-	// Now enter the task loop
 	while(1)
 	{
-		// Wait here for Semaphore with 100ms timeout
-		xStatus = xSemaphoreTake(xSem, 100);
+		// Wait for myEventGroup :
+		// - bit #0
+		// - Clear on Exit
+		// - Wait for All bits (AND)
+		xEventGroupWaitBits(myEventGroup, BIT0, pdTRUE, pdTRUE, portMAX_DELAY);
 
-		// Test the result of the take attempt
-		if (xStatus == pdPASS)
-		{
-			// The semaphore was taken as expected
-			// Display console message
-			my_printf("#");
-		}
+		// If the bit is set
+		my_printf("#");
+	}
+}
 
-		else
-		{
-			// The 100ms timeout elapsed without Semaphore being taken
-			// Display another message
-			my_printf(".");
-		}
+/*
+ * Task 3
+ */
+void vTask3 (void *pvParameters)
+{
+	while(1)
+	{
+		// Wait for myEventGroup
+		// - bit #0
+		// - Clear on Exit
+		// - Wait for All bits (AND)
+		xEventGroupWaitBits(myEventGroup, BIT0, pdTRUE, pdTRUE, portMAX_DELAY);
+
+		// If the bit is set
+		my_printf("-");
 	}
 }
 

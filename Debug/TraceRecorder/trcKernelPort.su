@@ -10,9 +10,14 @@
 ../TraceRecorder/trcKernelPort.c:352:10:prvTraceGetQueueNumberHigh16	16	static
 ../TraceRecorder/trcKernelPort.c:357:6:prvTraceSetQueueNumberLow16	16	static
 ../TraceRecorder/trcKernelPort.c:362:6:prvTraceSetQueueNumberHigh16	16	static
+../TraceRecorder/trcKernelPort.c:393:10:prvTraceGetEventGroupNumberLow16	16	static
+../TraceRecorder/trcKernelPort.c:398:10:prvTraceGetEventGroupNumberHigh16	16	static
+../TraceRecorder/trcKernelPort.c:403:6:prvTraceSetEventGroupNumberLow16	16	static
+../TraceRecorder/trcKernelPort.c:408:6:prvTraceSetEventGroupNumberHigh16	16	static
 ../TraceRecorder/trcKernelPort.c:457:6:vTraceSetQueueName	16	static
 ../TraceRecorder/trcKernelPort.c:462:6:vTraceSetSemaphoreName	16	static
 ../TraceRecorder/trcKernelPort.c:467:6:vTraceSetMutexName	16	static
+../TraceRecorder/trcKernelPort.c:474:6:vTraceSetEventGroupName	16	static
 ../TraceRecorder/trcKernelPort.c:497:7:prvTraceGetCurrentTaskHandle	8	static
 ../TraceRecorder/trcKernelPort.c:502:13:xTraceKernelPortInitialize	16	static
 ../TraceRecorder/trcKernelPort.c:509:13:xTraceKernelPortEnable	8	static
