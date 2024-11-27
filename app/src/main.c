@@ -10,11 +10,12 @@
 static void SystemClock_Config (void);
 
 // FreeRTOS tasks
-void vTask1 (void *pvParameters);
-void vTask2 (void *pvParameters);
-void vTask3 (void *pvParameters);
+void vTask1 		(void *pvParameters);
+void vTask2 		(void *pvParameters);
 
 // Kernel objects
+xTaskHandle			vTask1_handle;
+xTaskHandle			vTask2_handle;
 xSemaphoreHandle xSem;
 xSemaphoreHandle xSem;
 xQueueHandle	xConsoleQueue;
@@ -40,6 +41,7 @@ int main()
 
 	// Initialize Debug Console
 	BSP_Console_Init();
+	my_printf("Console Ready!\r\n");
 
 	// Initialize NVIC
 	//BSP_NVIC_Init();
@@ -60,9 +62,8 @@ int main()
 	//vTraceSetSemaphoreName(xSem, "xSEM");
 
 	// Create Tasks
-	xTaskCreate(vTask1, "Task_1",  256, NULL, 1, NULL);
-	xTaskCreate(vTask2, "Task_2",  256, NULL, 2, NULL);
-	xTaskCreate(vTask3, "Task_3",  256, NULL, 3, NULL);
+	xTaskCreate(vTask1,	"Task_1", 128, NULL, 2, &vTask1_handle);
+	xTaskCreate(vTask2,	"Task_2", 128, NULL, 1, &vTask2_handle);
 
 	// Register the Trace User Event Channels
 	// ue1 = xTraceRegisterString("count");
@@ -156,78 +157,45 @@ static void SystemClock_Config()
 }
 
 /*
- *	Task_1 - State machine
+ *	Task_1
+ *	- Toggles LED every 100ms
+ *	- Sends a notification to Task_2 every 1s
  */
 void vTask1 (void *pvParameters)
 {
-	uint8_t state;
-
-	state = 0;
-
+	uint16_t	count;
+	count = 0;
 	while(1)
 	{
-		// LED toggle
 		BSP_LED_Toggle();
-
-		switch(state)
+		count++;
+		// Notify Task_2 every 10 count
+		if (count == 10)
 		{
-			case 0:
-			{
-				vTracePrintF(ue1, "%d", state);
-				xEventGroupClearBits(myEventGroup, BIT0 | BIT1);  // [0 0]
-
-				state = 1;
-				break;
-			}
-
-			case 1:
-			{
-				vTracePrintF(ue1, "%d", state);
-				xEventGroupSetBits(myEventGroup, BIT0);          // [x 1]
-
-				state = 2;
-				break;
-			}
-
-			case 2:
-			{
-				vTracePrintF(ue1, "%d", state);
-				xEventGroupSetBits(myEventGroup, BIT1);          // [1 x]
-
-				state = 3;
-				break;
-			}
-
-			case 3:
-			{
-				vTracePrintF(ue1, "%d", state);
-				xEventGroupSetBits(myEventGroup, BIT0 | BIT1);  // [1 1]
-
-				state = 0;
-				break;
-			}
+			// Direct notification to Task_2
+			xTaskNotifyGive(vTask2_handle);
+			count = 0;
 		}
-
-		// Wait for 2ms
-		vTaskDelay(2);
+		// Wait
+		vTaskDelay(100);
 	}
 }
-
 /*
  *	Task_2
+ *	- Sends a message to console when a notification is received
  */
 void vTask2 (void *pvParameters)
 {
+	uint16_t 	count;
+	count = 0;
 	while(1)
 	{
-		// Wait for myEventGroup :
-		// - bit #0
-		// - Do not Clear on Exit
-		// - Wait for All bits (AND)
-		xEventGroupWaitBits(myEventGroup, BIT0, pdFALSE, pdTRUE, portMAX_DELAY);
-
-		// If the bit is set
-		my_printf("#");
+		// Wait here for a notification
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		// Reaching this point means that a notification has been received
+        // Display console message
+        my_printf("Hello %2d from task2\r\n", count);
+		count++;
 	}
 }
 
