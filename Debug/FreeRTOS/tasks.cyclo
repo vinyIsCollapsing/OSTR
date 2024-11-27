@@ -33,6 +33,7 @@
 ../FreeRTOS/tasks.c:3719:10:vTaskGetInfo	5
 ../FreeRTOS/tasks.c:3822:24:prvListTasksWithinSingleList	5
 ../FreeRTOS/tasks.c:3858:35:prvTaskCheckFreeStackSpace	2
+../FreeRTOS/tasks.c:3918:17:uxTaskGetStackHighWaterMark	2
 ../FreeRTOS/tasks.c:3999:13:prvResetNextTaskUnblockTime	2
 ../FreeRTOS/tasks.c:4022:18:xTaskGetCurrentTaskHandle	1
 ../FreeRTOS/tasks.c:4039:16:xTaskGetSchedulerState	3
