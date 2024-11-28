@@ -1,0 +1,4 @@
+../TraceRecorder/trcCounter.c:17:13:xTraceCounterInitialize	1
+../TraceRecorder/trcCounter.c:30:13:xTraceCounterSetCallback	1
+../TraceRecorder/trcCounter.c:42:13:xTraceCounterCreate	2
+../TraceRecorder/trcCounter.c:69:13:xTraceCounterSet	4

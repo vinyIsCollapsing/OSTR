@@ -43,7 +43,7 @@ float sum_prod(float x);
 // Main function
 int main()
 {
-	uint32_t	free_heap_size;
+	// uint32_t	free_heap_size;
 
 	// Configure System Clock
 	SystemClock_Config();
@@ -61,9 +61,14 @@ int main()
 	// Initialize NVIC
 	//BSP_NVIC_Init();
 
-	// Start Trace Recording
-	vTraceEnable(TRC_START);		// xTraceEnable(TRC_START);
+	// Adjust Systick prescaler before Tracing starts
+	// Not doing this produces wrong time scale in Tracealyzer
+	SysTick_Config(SystemCoreClock/1000);
 
+	// Start Trace Recording
+	xTraceEnable(TRC_START);		// xTraceEnable(TRC_START);
+
+	/*
 	// Report Free Heap Size
 	free_heap_size = xPortGetFreeHeapSize();
 	my_printf("\r\nFree Heap Size is %d bytes\r\n", free_heap_size);
@@ -105,7 +110,7 @@ int main()
 	xTaskCreate(vTaskHWM,	"Task_HWM",	128, NULL, 1, &vTaskHWM_handle);
 	free_heap_size = xPortGetFreeHeapSize();
 	my_printf("Free Heap Size is %d bytes\r\n", free_heap_size);
-
+	*/
 	// Create Event Group                   // <-- Create Event Group here
 	// myEventGroup = xEventGroupCreate();
 
@@ -138,7 +143,12 @@ int main()
 	// vTraceSetQueueName(xConsoleQueue, "Console Queue");
 
 	// Start the Scheduler
-	my_printf("\r\nNow Starting Scheduler...\r\n");
+	// my_printf("\r\nNow Starting Scheduler...\r\n");
+
+	// Create Tasks
+	xTaskCreate(vTask1, "Task_1", 256, NULL, 2, NULL);
+	xTaskCreate(vTask2, "Task_2", 256, NULL, 3, NULL);
+
 	vTaskStartScheduler();
 
 	while(1)
@@ -220,55 +230,29 @@ static void SystemClock_Config()
 }
 
 /*
- *	Task_1
+ *	Task1 toggles LED every 100ms
  */
 void vTask1 (void *pvParameters)
 {
-	uint8_t	msg[] = "This is task_1 message"; 	// 22 bytes string
-
 	while(1)
 	{
-		// Send message to Trace Recorder
-		vTracePrint(ue2, (char *)msg);
-
-		// Wait for 100ms
+		BSP_LED_Toggle();
 		vTaskDelay(100);
 	}
 }
 
 /*
- *	Task_2
+ *	Task2 sends a message to console every 500ms
  */
 void vTask2 (void *pvParameters)
 {
-	uint8_t		msg[] = "This is a much longer task_2 message"; // 36 bytes string
-	float 		x,y;
+	uint32_t free_heap_size;
 
-	// Initialize the user Push-Button
-	BSP_PB_Init();
-
-	// Set maximum priority for EXTI line 4 to 15 interrupts
-	NVIC_SetPriority(EXTI4_15_IRQn, configMAX_API_CALL_INTERRUPT_PRIORITY + 1);
-
-	// Enable EXTI line 4 to 15 (user button on line 13) interrupts
-	NVIC_EnableIRQ(EXTI4_15_IRQn);
-
-	// Take the semaphore once to make sure it is cleared
-	xSemaphoreTake(xSem, 0);
-
-	// Now enter the task loop
 	while(1)
 	{
-		// Wait here endlessly until button is pressed
-		xSemaphoreTake(xSem, portMAX_DELAY);
-
-		// Compute y
-		x = 1.0f;
-		y = sum_prod(x);
-
-		// Send message to trace Recorder
-		vTracePrint (ue2, (char *)msg);
-		vTracePrintF(ue2, (char *)"%d", (uint32_t)y);
+		free_heap_size = xPortGetFreeHeapSize();
+		my_printf("Free Heap = %d bytes\r\n", free_heap_size);
+		vTaskDelay(500);
 	}
 }
 

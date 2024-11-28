@@ -1,0 +1,2 @@
+../TraceRecorder/streamports/Jlink_RTT/trcStreamPort.c:25:13:xTraceStreamPortInitialize	2
+../TraceRecorder/streamports/Jlink_RTT/trcStreamPort.c:43:13:xTraceStreamPortOnEnable	3

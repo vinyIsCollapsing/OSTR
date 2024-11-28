@@ -1,0 +1,4 @@
+../TraceRecorder/trcExtension.c:25:13:xTraceExtensionInitialize	16	static
+../TraceRecorder/trcExtension.c:40:13:xTraceExtensionCreate	56	static
+../TraceRecorder/trcExtension.c:80:13:xTraceExtensionGetBaseEventId	24	static
+../TraceRecorder/trcExtension.c:99:13:xTraceExtensionGetConfigName	16	static

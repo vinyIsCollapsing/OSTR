@@ -1,0 +1,7 @@
+../TraceRecorder/trcError.c:24:13:xTraceErrorInitialize	16	static
+../TraceRecorder/trcError.c:40:13:xTraceWarning	16	static
+../TraceRecorder/trcError.c:60:13:xTraceError	16	static
+../TraceRecorder/trcError.c:89:13:xTraceErrorGetLast	16	static
+../TraceRecorder/trcError.c:103:13:xTraceErrorClear	8	static
+../TraceRecorder/trcError.c:117:20:prvTraceErrorPrint	32	static
+../TraceRecorder/trcError.c:181:20:prvTraceErrorGetDescription	16	static

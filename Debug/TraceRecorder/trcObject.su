@@ -1,0 +1,11 @@
+../TraceRecorder/trcObject.c:22:13:xTraceObjectRegisterInternal	80	static,ignoring_inline_asm
+../TraceRecorder/trcObject.c:107:13:xTraceObjectRegister	40	static
+../TraceRecorder/trcObject.c:113:13:xTraceObjectRegister2	56	static
+../TraceRecorder/trcObject.c:119:13:xTraceObjectUnregister	32	static
+../TraceRecorder/trcObject.c:155:13:xTraceObjectSetName	32	static
+../TraceRecorder/trcObject.c:185:13:xTraceObjectRegisterWithoutHandle	48	static
+../TraceRecorder/trcObject.c:193:13:xTraceObjectRegisterWithoutHandle2	64	static
+../TraceRecorder/trcObject.c:201:13:xTraceObjectUnregisterWithoutHandle	56	static,ignoring_inline_asm
+../TraceRecorder/trcObject.c:225:13:xTraceObjectSetNameWithoutHandle	56	static,ignoring_inline_asm
+../TraceRecorder/trcObject.c:252:13:xTraceObjectSetSpecificStateWithoutHandle	56	static,ignoring_inline_asm
+../TraceRecorder/trcObject.c:275:13:xTraceObjectSetOptionsWithoutHandle	56	static,ignoring_inline_asm

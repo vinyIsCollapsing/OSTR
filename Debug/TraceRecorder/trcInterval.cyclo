@@ -1,0 +1,4 @@
+../TraceRecorder/trcInterval.c:16:13:xTraceIntervalChannelSetCreate	2
+../TraceRecorder/trcInterval.c:38:13:xTraceIntervalChannelCreate	2
+../TraceRecorder/trcInterval.c:62:13:xTraceIntervalStart	1
+../TraceRecorder/trcInterval.c:78:13:xTraceIntervalStop	1

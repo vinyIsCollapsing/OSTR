@@ -1,0 +1,5 @@
+../TraceRecorder/trcStackMonitor.c:21:13:xTraceStackMonitorInitialize	24	static
+../TraceRecorder/trcStackMonitor.c:42:13:xTraceStackMonitorAdd	40	static,ignoring_inline_asm
+../TraceRecorder/trcStackMonitor.c:81:13:xTraceStackMonitorRemove	40	static,ignoring_inline_asm
+../TraceRecorder/trcStackMonitor.c:132:13:xTraceStackMonitorGetAtIndex	24	static
+../TraceRecorder/trcStackMonitor.c:152:13:xTraceStackMonitorReport	24	static

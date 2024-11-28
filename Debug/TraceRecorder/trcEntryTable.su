@@ -1,0 +1,10 @@
+../TraceRecorder/trcEntryTable.c:37:13:xTraceEntryIndexTableInitialize	16	static
+../TraceRecorder/trcEntryTable.c:47:13:xTraceEntryTableInitialize	24	static
+../TraceRecorder/trcEntryTable.c:78:13:xTraceEntryCreate	48	static,ignoring_inline_asm
+../TraceRecorder/trcEntryTable.c:125:13:xTraceEntryDelete	40	static,ignoring_inline_asm
+../TraceRecorder/trcEntryTable.c:166:13:xTraceEntryFind	24	static
+../TraceRecorder/trcEntryTable.c:195:13:xTraceEntrySetSymbol	24	static
+../TraceRecorder/trcEntryTable.c:230:13:xTraceEntryGetCount	16	static
+../TraceRecorder/trcEntryTable.c:243:13:xTraceEntryGetAtIndex	16	static
+../TraceRecorder/trcEntryTable.c:393:20:prvEntryIndexInitialize	16	static
+../TraceRecorder/trcEntryTable.c:407:20:prvEntryIndexTake	24	static
