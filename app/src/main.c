@@ -1,6 +1,7 @@
 #include "stm32f0xx.h"
 #include "bsp.h"
 #include "main.h"
+#include "delay.h"
 
 // Define Event Group flags
 #define	BIT0	( (EventBits_t)( 0x01 <<0) )   // This is not mandatory but it provides
@@ -52,21 +53,21 @@ int main()
 	BSP_LED_Init();
 
 	// Initialize the user Push-Button
-	BSP_PB_Init();
+//	BSP_PB_Init();
 
 	// Initialize Debug Console
-	BSP_Console_Init();
-	my_printf("Console Ready!\r\n");
+//	BSP_Console_Init();
+//	my_printf("Console Ready!\r\n");
 
 	// Initialize NVIC
 	//BSP_NVIC_Init();
 
 	// Adjust Systick prescaler before Tracing starts
 	// Not doing this produces wrong time scale in Tracealyzer
-	SysTick_Config(SystemCoreClock/1000);
+//	SysTick_Config(SystemCoreClock/1000);
 
 	// Start Trace Recording
-	xTraceEnable(TRC_START);		// xTraceEnable(TRC_START);
+//	xTraceEnable(TRC_START);		// xTraceEnable(TRC_START);
 
 	/*
 	// Report Free Heap Size
@@ -146,14 +147,16 @@ int main()
 	// my_printf("\r\nNow Starting Scheduler...\r\n");
 
 	// Create Tasks
-	xTaskCreate(vTask1, "Task_1", 256, NULL, 2, NULL);
-	xTaskCreate(vTask2, "Task_2", 256, NULL, 3, NULL);
+//	xTaskCreate(vTask1, "Task_1", 256, NULL, 2, NULL);
+//	xTaskCreate(vTask2, "Task_2", 256, NULL, 3, NULL);
 
-	vTaskStartScheduler();
+//	vTaskStartScheduler();
 
 	while(1)
 	{
 		// The program should never be here...
+		BSP_LED_Toggle();
+		BSP_DELAY_ms(1000);		// 500 -> 1s	1000 -> 2s	...
 	}
 }
 
