@@ -5,16 +5,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../bsp/src/bsp.c \
-../bsp/src/delay.c 
+../bsp/src/bsp.c 
 
 OBJS += \
-./bsp/src/bsp.o \
-./bsp/src/delay.o 
+./bsp/src/bsp.o 
 
 C_DEPS += \
-./bsp/src/bsp.d \
-./bsp/src/delay.d 
+./bsp/src/bsp.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -24,7 +21,7 @@ bsp/src/%.o bsp/src/%.su bsp/src/%.cyclo: ../bsp/src/%.c bsp/src/subdir.mk
 clean: clean-bsp-2f-src
 
 clean-bsp-2f-src:
-	-$(RM) ./bsp/src/bsp.cyclo ./bsp/src/bsp.d ./bsp/src/bsp.o ./bsp/src/bsp.su ./bsp/src/delay.cyclo ./bsp/src/delay.d ./bsp/src/delay.o ./bsp/src/delay.su
+	-$(RM) ./bsp/src/bsp.cyclo ./bsp/src/bsp.d ./bsp/src/bsp.o ./bsp/src/bsp.su
 
 .PHONY: clean-bsp-2f-src
 

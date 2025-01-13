@@ -40,6 +40,5 @@
 "./app/src/printf-stdarg.o"
 "./app/src/stm32f0xx_it.o"
 "./bsp/src/bsp.o"
-"./bsp/src/delay.o"
 "./cmsis/device/src/startup_stm32f072xb.o"
 "./cmsis/device/src/system_stm32f0xx.o"

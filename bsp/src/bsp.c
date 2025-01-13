@@ -1,8 +1,8 @@
 /*
  * bsp.c
  *
- *  Created on: Nov 19, 2024
- *      Author: vinic
+ *  Created on: 4 nov. 2022
+ *      Author: laure
  */
 
 
@@ -37,6 +37,7 @@ void BSP_LED_Init()
 	GPIOA->BSRR |= GPIO_BSRR_BR_5;
 }
 
+
 /*
  * BSP_LED_On()
  * Turn ON LED on PA5
@@ -66,6 +67,12 @@ void BSP_LED_Toggle()
 {
 	GPIOA->ODR ^= GPIO_ODR_5;
 }
+
+
+/*
+ * BSP_PB_Init()
+ * Initialize Push-Button pin (PC13) as input without Pull-up/Pull-down
+ */
 
 /*
  * BSP_PB_Init()
@@ -107,6 +114,7 @@ void BSP_PB_Init()
 uint8_t BSP_PB_GetState()
 {
 	uint8_t state;
+
 	if ((GPIOC->IDR & GPIO_IDR_13) == GPIO_IDR_13)
 	{
 		state = 0;
@@ -115,8 +123,18 @@ uint8_t BSP_PB_GetState()
 	{
 		state = 1;
 	}
+
 	return state;
 }
+
+
+/*
+ * BSP_Console_Init()
+ * USART2 @ 115200 Full Duplex
+ * 1 start - 8-bit - 1 stop
+ * TX -> PA2 (AF1)
+ * RX -> PA3 (AF1)
+ */
 
 void BSP_Console_Init()
 {
@@ -150,6 +168,7 @@ void BSP_Console_Init()
 	//
 	// With OVER8=1 and Fck=48MHz, USARTDIV = 2*48E6/115200 = 833.3333
 	// BRR = 833 -> Baud Rate = 115246.0984 -> 0.04% error (better)
+
 	USART2->CR1 |= USART_CR1_OVER8;
 	USART2->BRR = 833;
 
@@ -158,5 +177,45 @@ void BSP_Console_Init()
 
 	// Enable USART2
 	USART2->CR1 |= USART_CR1_UE;
+}
+
+/*
+ * BSP_NVIC_Init()
+ * Setup NVIC controller for desired interrupts
+ */
+void BSP_NVIC_Init()
+{
+    // Configura linha 13 (botao 1)
+    SYSCFG->EXTICR[3] &= ~SYSCFG_EXTICR4_EXTI13_Msk; // Configura a porta do EXTI13
+    EXTI->IMR |= EXTI_IMR_MR13;                     // Habilita a interrupcao para a linha 13
+    EXTI->RTSR |= EXTI_RTSR_TR13;                   // Habilita trigger na borda de subida
+
+    // Configura linha 14 (botao 2)
+    SYSCFG->EXTICR[3] &= ~SYSCFG_EXTICR4_EXTI14_Msk; // Configura a porta do EXTI14
+    EXTI->IMR |= EXTI_IMR_MR14;                     // Habilita a interrupcao para a linha 14
+    EXTI->RTSR |= EXTI_RTSR_TR14;                   // Habilita trigger na borda de subida
+
+
+	// Set maximum priority for EXTI line 4 to 15 interrupts
+	NVIC_SetPriority(EXTI4_15_IRQn,
+			configMAX_API_CALL_INTERRUPT_PRIORITY + 1);
+
+	// Enable EXTI line 4 to 15 (user button on line 13) interrupts
+	NVIC_EnableIRQ(EXTI4_15_IRQn);
+}
+
+/*
+ *  Basic delay functions
+ */
+void BSP_DELAY_ms(uint32_t delay)
+{
+	uint32_t	i;
+	for(i=0; i<(delay*2500); i++);		// Tuned for ms at 48MHz
+}
+
+void BSP_DELAY_us(uint32_t delay)
+{
+	uint32_t	i;
+	for(i=0; i<(delay*3); i++);		// Tuned for µs at 48MHz
 }
 

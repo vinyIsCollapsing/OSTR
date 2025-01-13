@@ -1,29 +1,50 @@
 /*
  * bsp.h
  *
- *  Created on: Nov 19, 2024
- *      Author: vinic
+ *  Created on: 4 nov. 2022
+ *      Author: laure
  */
 
-#ifndef BSP_INC_BSP_H_
-#define BSP_INC_BSP_H_
+#ifndef INC_BSP_H_
+#define INC_BSP_H_
 
 #include "stm32f0xx.h"
+#include "FreeRTOSConfig.h"
+
 
 /*
  * LED driver functions
  */
 
 void	BSP_LED_Init	(void);
-void	BSP_LED_On	(void);
-void	BSP_LED_Off	(void);
+void	BSP_LED_On		(void);
+void	BSP_LED_Off		(void);
 void	BSP_LED_Toggle	(void);
+
+/*
+ * Push-Button driver functions
+ */
 
 void       BSP_PB_Init		(void);
 uint8_t    BSP_PB_GetState	(void);
 
+/*
+ * Debug Console init
+ */
+
 void	BSP_Console_Init	(void);
 
+/*
+ * NVIC functions
+ */
 
+void BSP_NVIC_Init(void);
 
-#endif /* BSP_INC_BSP_H_ */
+/*
+ * Software counting delays
+ */
+
+void BSP_DELAY_ms	(uint32_t delay);
+void BSP_DELAY_us	(uint32_t delay);
+
+#endif /* INC_BSP_H_ */
