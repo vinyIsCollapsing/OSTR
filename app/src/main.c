@@ -36,14 +36,14 @@ int main()
 	my_printf("Console Ready!\r\n");
 
 	// Initialize NVIC
-	BSP_NVIC_Init();
+	// BSP_NVIC_Init();
 
 	// Adjust Systick prescaler before Tracing starts
 	// Not doing this produces wrong time scale in Tracealyzer
 	// SysTick_Config(SystemCoreClock/1000);
 
 	// Start Trace Recording
-	vTraceEnable(TRC_START);		// xTraceEnable(TRC_START);
+	xTraceEnable(TRC_START);		// xTraceEnable(TRC_START);
 
 	// Create Semaphore
 	my_printf("\r\nNow creating Binary Semaphore...\r\n");
@@ -68,7 +68,6 @@ int main()
 	// Start the Scheduler
 	my_printf("Now Starting Scheduler...\r\n");
 	vTaskStartScheduler();
-
 	while(1)
 	{
 		// The program should never be here...
@@ -193,13 +192,13 @@ void vAssertCalled( char *file, int line )
 
 /*
  * Malloc failed Basic Hook
- */
 void vApplicationMallocFailedHook()
 {
 	my_printf("Malloc Failed\r\n");
 
 	while(1);
 }
+ */
 
 /*
  * Stack Overflow Basic Hook

@@ -1,7 +1,6 @@
 ../app/src/main.c:21:5:main	1
-../app/src/main.c:85:13:SystemClock_Config	7
-../app/src/main.c:153:6:vTask1	1
-../app/src/main.c:169:6:vTask2	1
-../app/src/main.c:183:6:vAssertCalled	1
-../app/src/main.c:197:6:vApplicationMallocFailedHook	1
-../app/src/main.c:207:6:vApplicationStackOverflowHook	1
+../app/src/main.c:84:13:SystemClock_Config	7
+../app/src/main.c:152:6:vTask1	1
+../app/src/main.c:168:6:vTask2	1
+../app/src/main.c:182:6:vAssertCalled	1
+../app/src/main.c:206:6:vApplicationStackOverflowHook	1
