@@ -19384,9 +19384,9 @@ void BSP_Console_Init()
  8006cce:	af00      	add	r7, sp, #0
 	// Enable GPIOA clock
 	RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
- 8006cd0:	4b2b      	ldr	r3, [pc, #172]	@ (8006d80 <BSP_Console_Init+0xb4>)
+ 8006cd0:	4b2a      	ldr	r3, [pc, #168]	@ (8006d7c <BSP_Console_Init+0xb0>)
  8006cd2:	695a      	ldr	r2, [r3, #20]
- 8006cd4:	4b2a      	ldr	r3, [pc, #168]	@ (8006d80 <BSP_Console_Init+0xb4>)
+ 8006cd4:	4b29      	ldr	r3, [pc, #164]	@ (8006d7c <BSP_Console_Init+0xb0>)
  8006cd6:	2180      	movs	r1, #128	@ 0x80
  8006cd8:	0289      	lsls	r1, r1, #10
  8006cda:	430a      	orrs	r2, r1
@@ -19419,7 +19419,7 @@ void BSP_Console_Init()
  8006d02:	6a1a      	ldr	r2, [r3, #32]
  8006d04:	2390      	movs	r3, #144	@ 0x90
  8006d06:	05db      	lsls	r3, r3, #23
- 8006d08:	491e      	ldr	r1, [pc, #120]	@ (8006d84 <BSP_Console_Init+0xb8>)
+ 8006d08:	491d      	ldr	r1, [pc, #116]	@ (8006d80 <BSP_Console_Init+0xb4>)
  8006d0a:	400a      	ands	r2, r1
  8006d0c:	621a      	str	r2, [r3, #32]
 	GPIOA->AFR[0] |=  (0x00001100);
@@ -19435,9 +19435,9 @@ void BSP_Console_Init()
 
 	// Enable USART2 clock
 	RCC -> APB1ENR |= RCC_APB1ENR_USART2EN;
- 8006d20:	4b17      	ldr	r3, [pc, #92]	@ (8006d80 <BSP_Console_Init+0xb4>)
+ 8006d20:	4b16      	ldr	r3, [pc, #88]	@ (8006d7c <BSP_Console_Init+0xb0>)
  8006d22:	69da      	ldr	r2, [r3, #28]
- 8006d24:	4b16      	ldr	r3, [pc, #88]	@ (8006d80 <BSP_Console_Init+0xb4>)
+ 8006d24:	4b15      	ldr	r3, [pc, #84]	@ (8006d7c <BSP_Console_Init+0xb0>)
  8006d26:	2180      	movs	r1, #128	@ 0x80
  8006d28:	0289      	lsls	r1, r1, #10
  8006d2a:	430a      	orrs	r2, r1
@@ -19446,72 +19446,71 @@ void BSP_Console_Init()
 	// Clear USART2 configuration (reset state)
 	// 8-bit, 1 start, 1 stop, CTS/RTS disabled
 	USART2->CR1 = 0x00000000;
- 8006d2e:	4b16      	ldr	r3, [pc, #88]	@ (8006d88 <BSP_Console_Init+0xbc>)
+ 8006d2e:	4b15      	ldr	r3, [pc, #84]	@ (8006d84 <BSP_Console_Init+0xb8>)
  8006d30:	2200      	movs	r2, #0
  8006d32:	601a      	str	r2, [r3, #0]
 	USART2->CR2 = 0x00000000;
- 8006d34:	4b14      	ldr	r3, [pc, #80]	@ (8006d88 <BSP_Console_Init+0xbc>)
+ 8006d34:	4b13      	ldr	r3, [pc, #76]	@ (8006d84 <BSP_Console_Init+0xb8>)
  8006d36:	2200      	movs	r2, #0
  8006d38:	605a      	str	r2, [r3, #4]
 	USART2->CR3 = 0x00000000;
- 8006d3a:	4b13      	ldr	r3, [pc, #76]	@ (8006d88 <BSP_Console_Init+0xbc>)
+ 8006d3a:	4b12      	ldr	r3, [pc, #72]	@ (8006d84 <BSP_Console_Init+0xb8>)
  8006d3c:	2200      	movs	r2, #0
  8006d3e:	609a      	str	r2, [r3, #8]
 
 	// Select PCLK (APB1) as clock source
 	// PCLK -> 48 MHz
 	RCC->CFGR3 &= ~RCC_CFGR3_USART2SW_Msk;
- 8006d40:	4b0f      	ldr	r3, [pc, #60]	@ (8006d80 <BSP_Console_Init+0xb4>)
+ 8006d40:	4b0e      	ldr	r3, [pc, #56]	@ (8006d7c <BSP_Console_Init+0xb0>)
  8006d42:	6b1a      	ldr	r2, [r3, #48]	@ 0x30
- 8006d44:	4b0e      	ldr	r3, [pc, #56]	@ (8006d80 <BSP_Console_Init+0xb4>)
- 8006d46:	4911      	ldr	r1, [pc, #68]	@ (8006d8c <BSP_Console_Init+0xc0>)
+ 8006d44:	4b0d      	ldr	r3, [pc, #52]	@ (8006d7c <BSP_Console_Init+0xb0>)
+ 8006d46:	4910      	ldr	r1, [pc, #64]	@ (8006d88 <BSP_Console_Init+0xbc>)
  8006d48:	400a      	ands	r2, r1
  8006d4a:	631a      	str	r2, [r3, #48]	@ 0x30
-	// BRR = 417 -> Baud Rate = 115107.9137 -> 0.08% error
-	//
-	// With OVER8=1 and Fck=48MHz, USARTDIV = 2*48E6/115200 = 833.3333
-	// BRR = 833 -> Baud Rate = 115246.0984 -> 0.04% error (better)
+	// USART2->BRR = 833;
 
-	USART2->CR1 |= USART_CR1_OVER8;
- 8006d4c:	4b0e      	ldr	r3, [pc, #56]	@ (8006d88 <BSP_Console_Init+0xbc>)
+	// Baud Rate = 9600
+	// With OVER8=0 and Fck=48MHz, USARTDIV = 48E6/9600 = 5000
+	// BRR = 5000
+	USART2->CR1 &= ~USART_CR1_OVER8;
+ 8006d4c:	4b0d      	ldr	r3, [pc, #52]	@ (8006d84 <BSP_Console_Init+0xb8>)
  8006d4e:	681a      	ldr	r2, [r3, #0]
- 8006d50:	4b0d      	ldr	r3, [pc, #52]	@ (8006d88 <BSP_Console_Init+0xbc>)
- 8006d52:	2180      	movs	r1, #128	@ 0x80
- 8006d54:	0209      	lsls	r1, r1, #8
- 8006d56:	430a      	orrs	r2, r1
- 8006d58:	601a      	str	r2, [r3, #0]
-	USART2->BRR = 833;
- 8006d5a:	4b0b      	ldr	r3, [pc, #44]	@ (8006d88 <BSP_Console_Init+0xbc>)
- 8006d5c:	4a0c      	ldr	r2, [pc, #48]	@ (8006d90 <BSP_Console_Init+0xc4>)
- 8006d5e:	60da      	str	r2, [r3, #12]
+ 8006d50:	4b0c      	ldr	r3, [pc, #48]	@ (8006d84 <BSP_Console_Init+0xb8>)
+ 8006d52:	490e      	ldr	r1, [pc, #56]	@ (8006d8c <BSP_Console_Init+0xc0>)
+ 8006d54:	400a      	ands	r2, r1
+ 8006d56:	601a      	str	r2, [r3, #0]
+	USART2->BRR = 5000;
+ 8006d58:	4b0a      	ldr	r3, [pc, #40]	@ (8006d84 <BSP_Console_Init+0xb8>)
+ 8006d5a:	4a0d      	ldr	r2, [pc, #52]	@ (8006d90 <BSP_Console_Init+0xc4>)
+ 8006d5c:	60da      	str	r2, [r3, #12]
 
 	// Enable both Transmitter and Receiver
 	USART2->CR1 |= USART_CR1_TE | USART_CR1_RE;
- 8006d60:	4b09      	ldr	r3, [pc, #36]	@ (8006d88 <BSP_Console_Init+0xbc>)
- 8006d62:	681a      	ldr	r2, [r3, #0]
- 8006d64:	4b08      	ldr	r3, [pc, #32]	@ (8006d88 <BSP_Console_Init+0xbc>)
- 8006d66:	210c      	movs	r1, #12
- 8006d68:	430a      	orrs	r2, r1
- 8006d6a:	601a      	str	r2, [r3, #0]
+ 8006d5e:	4b09      	ldr	r3, [pc, #36]	@ (8006d84 <BSP_Console_Init+0xb8>)
+ 8006d60:	681a      	ldr	r2, [r3, #0]
+ 8006d62:	4b08      	ldr	r3, [pc, #32]	@ (8006d84 <BSP_Console_Init+0xb8>)
+ 8006d64:	210c      	movs	r1, #12
+ 8006d66:	430a      	orrs	r2, r1
+ 8006d68:	601a      	str	r2, [r3, #0]
 
 	// Enable USART2
 	USART2->CR1 |= USART_CR1_UE;
- 8006d6c:	4b06      	ldr	r3, [pc, #24]	@ (8006d88 <BSP_Console_Init+0xbc>)
- 8006d6e:	681a      	ldr	r2, [r3, #0]
- 8006d70:	4b05      	ldr	r3, [pc, #20]	@ (8006d88 <BSP_Console_Init+0xbc>)
- 8006d72:	2101      	movs	r1, #1
- 8006d74:	430a      	orrs	r2, r1
- 8006d76:	601a      	str	r2, [r3, #0]
+ 8006d6a:	4b06      	ldr	r3, [pc, #24]	@ (8006d84 <BSP_Console_Init+0xb8>)
+ 8006d6c:	681a      	ldr	r2, [r3, #0]
+ 8006d6e:	4b05      	ldr	r3, [pc, #20]	@ (8006d84 <BSP_Console_Init+0xb8>)
+ 8006d70:	2101      	movs	r1, #1
+ 8006d72:	430a      	orrs	r2, r1
+ 8006d74:	601a      	str	r2, [r3, #0]
 }
- 8006d78:	46c0      	nop			@ (mov r8, r8)
- 8006d7a:	46bd      	mov	sp, r7
- 8006d7c:	bd80      	pop	{r7, pc}
- 8006d7e:	46c0      	nop			@ (mov r8, r8)
- 8006d80:	40021000 	.word	0x40021000
- 8006d84:	ffff00ff 	.word	0xffff00ff
- 8006d88:	40004400 	.word	0x40004400
- 8006d8c:	fffcffff 	.word	0xfffcffff
- 8006d90:	00000341 	.word	0x00000341
+ 8006d76:	46c0      	nop			@ (mov r8, r8)
+ 8006d78:	46bd      	mov	sp, r7
+ 8006d7a:	bd80      	pop	{r7, pc}
+ 8006d7c:	40021000 	.word	0x40021000
+ 8006d80:	ffff00ff 	.word	0xffff00ff
+ 8006d84:	40004400 	.word	0x40004400
+ 8006d88:	fffcffff 	.word	0xfffcffff
+ 8006d8c:	ffff7fff 	.word	0xffff7fff
+ 8006d90:	00001388 	.word	0x00001388
 
 08006d94 <BSP_NVIC_Init>:
 /*

@@ -7,6 +7,6 @@ C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/cmsis/core/core_cm0.h:730:22
 ../bsp/src/bsp.c:82:6:BSP_PB_Init	8	static
 ../bsp/src/bsp.c:114:9:BSP_PB_GetState	16	static
 ../bsp/src/bsp.c:139:6:BSP_Console_Init	8	static
-../bsp/src/bsp.c:186:6:BSP_NVIC_Init	8	static
-../bsp/src/bsp.c:210:6:BSP_DELAY_ms	24	static
-../bsp/src/bsp.c:216:6:BSP_DELAY_us	24	static
+../bsp/src/bsp.c:192:6:BSP_NVIC_Init	8	static
+../bsp/src/bsp.c:216:6:BSP_DELAY_ms	24	static
+../bsp/src/bsp.c:222:6:BSP_DELAY_us	24	static
