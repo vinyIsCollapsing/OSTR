@@ -686,10 +686,8 @@ Discarded input sections
                 0x00000000       0x38 ./FreeRTOS/queue.o
  .text.xQueueGenericSendFromISR
                 0x00000000      0x1c0 ./FreeRTOS/queue.o
- .text.xQueueGiveFromISR
-                0x00000000       0x20 ./FreeRTOS/queue.o
- .text.MyWrapper_xQueueGiveFromISR
-                0x00000000      0x1a4 ./FreeRTOS/queue.o
+ .text.xQueueSemaphoreTake
+                0x00000000      0x338 ./FreeRTOS/queue.o
  .text.xQueuePeek
                 0x00000000      0x2c0 ./FreeRTOS/queue.o
  .text.xQueueReceiveFromISR
@@ -710,6 +708,8 @@ Discarded input sections
                 0x00000000       0x18 ./FreeRTOS/queue.o
  .text.ucQueueGetQueueType
                 0x00000000       0x16 ./FreeRTOS/queue.o
+ .text.prvGetDisinheritPriorityAfterTimeout
+                0x00000000       0x2c ./FreeRTOS/queue.o
  .text.xQueueIsQueueEmptyFromISR
                 0x00000000       0x44 ./FreeRTOS/queue.o
  .text.xQueueIsQueueFullFromISR
@@ -1120,8 +1120,6 @@ Discarded input sections
                 0x00000000       0x1c ./FreeRTOS/tasks.o
  .text.xTaskGetTickCountFromISR
                 0x00000000       0x20 ./FreeRTOS/tasks.o
- .text.uxTaskGetNumberOfTasks
-                0x00000000       0x14 ./FreeRTOS/tasks.o
  .text.pcTaskGetName
                 0x00000000       0x44 ./FreeRTOS/tasks.o
  .text.uxTaskGetSystemState
@@ -1144,8 +1142,14 @@ Discarded input sections
                 0x00000000       0xa6 ./FreeRTOS/tasks.o
  .text.xTaskGetCurrentTaskHandle
                 0x00000000       0x1c ./FreeRTOS/tasks.o
+ .text.xTaskPriorityInherit
+                0x00000000      0x138 ./FreeRTOS/tasks.o
+ .text.vTaskPriorityDisinheritAfterTimeout
+                0x00000000      0x160 ./FreeRTOS/tasks.o
  .text.uxTaskResetEventItemValue
                 0x00000000       0x2c ./FreeRTOS/tasks.o
+ .text.pvTaskIncrementMutexHeldCount
+                0x00000000       0x24 ./FreeRTOS/tasks.o
  .text.ulTaskGenericNotifyTake
                 0x00000000      0x10c ./FreeRTOS/tasks.o
  .text.xTaskGenericNotifyWait
@@ -6644,6 +6648,8 @@ Discarded input sections
  .text          0x00000000        0x0 ./app/src/main.o
  .data          0x00000000        0x0 ./app/src/main.o
  .bss           0x00000000        0x0 ./app/src/main.o
+ .bss.sensor_states
+                0x00000000        0x2 ./app/src/main.o
  .text.vApplicationStackOverflowHook
                 0x00000000        0xe ./app/src/main.o
  .debug_macro   0x00000000      0xa7e ./app/src/main.o
@@ -6764,6 +6770,89 @@ Discarded input sections
  .debug_macro   0x00000000      0x391 ./app/src/printf-stdarg.o
  .debug_macro   0x00000000     0xfe73 ./app/src/printf-stdarg.o
  .debug_macro   0x00000000       0x66 ./app/src/printf-stdarg.o
+ .group         0x00000000        0xc ./app/src/readTask.o
+ .text          0x00000000        0x0 ./app/src/readTask.o
+ .data          0x00000000        0x0 ./app/src/readTask.o
+ .bss           0x00000000        0x0 ./app/src/readTask.o
+ .debug_info    0x00000000       0x22 ./app/src/readTask.o
+ .debug_abbrev  0x00000000       0x12 ./app/src/readTask.o
+ .debug_aranges
+                0x00000000       0x18 ./app/src/readTask.o
+ .debug_macro   0x00000000       0x11 ./app/src/readTask.o
+ .debug_macro   0x00000000      0xa7e ./app/src/readTask.o
+ .debug_line    0x00000000       0x36 ./app/src/readTask.o
+ .debug_str     0x00000000     0x2ceb ./app/src/readTask.o
+ .comment       0x00000000       0x44 ./app/src/readTask.o
+ .ARM.attributes
+                0x00000000       0x2c ./app/src/readTask.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
  .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
  .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
  .group         0x00000000        0xc ./app/src/stm32f0xx_it.o
@@ -6782,11 +6871,6 @@ Discarded input sections
  .text          0x00000000        0x0 ./app/src/stm32f0xx_it.o
  .data          0x00000000        0x0 ./app/src/stm32f0xx_it.o
  .bss           0x00000000        0x0 ./app/src/stm32f0xx_it.o
- .debug_info    0x00000000       0x69 ./app/src/stm32f0xx_it.o
- .debug_abbrev  0x00000000       0x28 ./app/src/stm32f0xx_it.o
- .debug_aranges
-                0x00000000       0x18 ./app/src/stm32f0xx_it.o
- .debug_macro   0x00000000       0xc0 ./app/src/stm32f0xx_it.o
  .debug_macro   0x00000000      0xa7e ./app/src/stm32f0xx_it.o
  .debug_macro   0x00000000       0x2e ./app/src/stm32f0xx_it.o
  .debug_macro   0x00000000       0x22 ./app/src/stm32f0xx_it.o
@@ -6802,11 +6886,89 @@ Discarded input sections
  .debug_macro   0x00000000      0x391 ./app/src/stm32f0xx_it.o
  .debug_macro   0x00000000     0xfe73 ./app/src/stm32f0xx_it.o
  .debug_macro   0x00000000       0x66 ./app/src/stm32f0xx_it.o
- .debug_line    0x00000000      0x4ff ./app/src/stm32f0xx_it.o
- .debug_str     0x00000000    0x5a65a ./app/src/stm32f0xx_it.o
- .comment       0x00000000       0x44 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000      0x190 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x10 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000      0x31d ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x7c ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x34 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x56 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x10 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x16 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x34 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000      0x189 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000      0x15a ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0xb8 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x22 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x1f ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x12 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000      0x49a ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000      0x12a ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x48 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000      0x8ed ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x10 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x16 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x1e ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x42 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0xaa ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x5b ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x49 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x35 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x24 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x61 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x43 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x34 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x16 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x35 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x16 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x43 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x34 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x10 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x58 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x8e ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x1c ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000      0x177 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000      0x369 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x16 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x29 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x58 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000      0x131 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x69 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x34 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x67 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x24 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x4d ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x22 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x52 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x41 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x10 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x34 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x28 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x22 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x3a ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x16 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x49 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0xba ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0xc3 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000      0x120 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x91 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x86 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x62 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x00000000       0x18 ./app/src/stm32f0xx_it.o
+ .group         0x00000000        0xc ./app/src/writeTask.o
+ .text          0x00000000        0x0 ./app/src/writeTask.o
+ .data          0x00000000        0x0 ./app/src/writeTask.o
+ .bss           0x00000000        0x0 ./app/src/writeTask.o
+ .debug_info    0x00000000       0x22 ./app/src/writeTask.o
+ .debug_abbrev  0x00000000       0x12 ./app/src/writeTask.o
+ .debug_aranges
+                0x00000000       0x18 ./app/src/writeTask.o
+ .debug_macro   0x00000000       0x11 ./app/src/writeTask.o
+ .debug_macro   0x00000000      0xa7e ./app/src/writeTask.o
+ .debug_line    0x00000000       0x37 ./app/src/writeTask.o
+ .debug_str     0x00000000     0x2cec ./app/src/writeTask.o
+ .comment       0x00000000       0x44 ./app/src/writeTask.o
  .ARM.attributes
-                0x00000000       0x2c ./app/src/stm32f0xx_it.o
+                0x00000000       0x2c ./app/src/writeTask.o
  .group         0x00000000        0xc ./bsp/src/bsp.o
  .group         0x00000000        0xc ./bsp/src/bsp.o
  .group         0x00000000        0xc ./bsp/src/bsp.o
@@ -6887,8 +7049,14 @@ Discarded input sections
  .text          0x00000000        0x0 ./bsp/src/bsp.o
  .data          0x00000000        0x0 ./bsp/src/bsp.o
  .bss           0x00000000        0x0 ./bsp/src/bsp.o
+ .text.BSP_LED_On
+                0x00000000       0x12 ./bsp/src/bsp.o
+ .text.BSP_LED_Off
+                0x00000000       0x14 ./bsp/src/bsp.o
  .text.BSP_PB_GetState
                 0x00000000       0x38 ./bsp/src/bsp.o
+ .text.BSP_DELAY_ms
+                0x00000000       0x30 ./bsp/src/bsp.o
  .text.BSP_DELAY_us
                 0x00000000       0x2c ./bsp/src/bsp.o
  .debug_macro   0x00000000      0xa7e ./bsp/src/bsp.o
@@ -7287,7 +7455,9 @@ LOAD ./TraceRecorder/trcTask.o
 LOAD ./TraceRecorder/trcTimestamp.o
 LOAD ./app/src/main.o
 LOAD ./app/src/printf-stdarg.o
+LOAD ./app/src/readTask.o
 LOAD ./app/src/stm32f0xx_it.o
+LOAD ./app/src/writeTask.o
 LOAD ./bsp/src/bsp.o
 LOAD ./cmsis/device/src/startup_stm32f072xb.o
 LOAD ./cmsis/device/src/system_stm32f0xx.o
@@ -7308,7 +7478,7 @@ LOAD C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                 0x08000000                g_pfnVectors
                 0x080000c0                        . = ALIGN (0x4)
 
-.text           0x080000c0     0x6f64
+.text           0x080000c0     0x67b4
                 0x080000c0                        . = ALIGN (0x4)
  *(.text)
  .text          0x080000c0       0x48 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crtbegin.o
@@ -7344,640 +7514,635 @@ LOAD C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .text.xQueueGenericSend
                 0x0800061c      0x314 ./FreeRTOS/queue.o
                 0x0800061c                xQueueGenericSend
+ .text.xQueueGiveFromISR
+                0x08000930       0x20 ./FreeRTOS/queue.o
+                0x08000930                xQueueGiveFromISR
+ .text.MyWrapper_xQueueGiveFromISR
+                0x08000950      0x1a4 ./FreeRTOS/queue.o
+                0x08000950                MyWrapper_xQueueGiveFromISR
  .text.xQueueReceive
-                0x08000930      0x2f8 ./FreeRTOS/queue.o
-                0x08000930                xQueueReceive
- .text.xQueueSemaphoreTake
-                0x08000c28      0x338 ./FreeRTOS/queue.o
-                0x08000c28                xQueueSemaphoreTake
- .text.prvGetDisinheritPriorityAfterTimeout
-                0x08000f60       0x2c ./FreeRTOS/queue.o
+                0x08000af4      0x2f8 ./FreeRTOS/queue.o
+                0x08000af4                xQueueReceive
  .text.prvCopyDataToQueue
-                0x08000f8c       0xd6 ./FreeRTOS/queue.o
+                0x08000dec       0xd6 ./FreeRTOS/queue.o
  .text.prvCopyDataFromQueue
-                0x08001062       0x4c ./FreeRTOS/queue.o
+                0x08000ec2       0x4c ./FreeRTOS/queue.o
  .text.prvUnlockQueue
-                0x080010ae       0xbc ./FreeRTOS/queue.o
+                0x08000f0e       0xbc ./FreeRTOS/queue.o
  .text.prvIsQueueEmpty
-                0x0800116a       0x2c ./FreeRTOS/queue.o
+                0x08000fca       0x2c ./FreeRTOS/queue.o
  .text.prvIsQueueFull
-                0x08001196       0x30 ./FreeRTOS/queue.o
- *fill*         0x080011c6        0x2 
+                0x08000ff6       0x30 ./FreeRTOS/queue.o
+ *fill*         0x08001026        0x2 
  .text.vQueueAddToRegistry
-                0x080011c8       0xa4 ./FreeRTOS/queue.o
-                0x080011c8                vQueueAddToRegistry
+                0x08001028       0xa4 ./FreeRTOS/queue.o
+                0x08001028                vQueueAddToRegistry
  .text.vQueueWaitForMessageRestricted
-                0x0800126c       0x66 ./FreeRTOS/queue.o
-                0x0800126c                vQueueWaitForMessageRestricted
+                0x080010cc       0x66 ./FreeRTOS/queue.o
+                0x080010cc                vQueueWaitForMessageRestricted
  .text.xTaskCreate
-                0x080012d2       0x9c ./FreeRTOS/tasks.o
-                0x080012d2                xTaskCreate
- *fill*         0x0800136e        0x2 
+                0x08001132       0x9c ./FreeRTOS/tasks.o
+                0x08001132                xTaskCreate
+ *fill*         0x080011ce        0x2 
  .text.prvInitialiseNewTask
-                0x08001370      0x11c ./FreeRTOS/tasks.o
+                0x080011d0      0x11c ./FreeRTOS/tasks.o
  .text.prvAddNewTaskToReadyList
-                0x0800148c      0x150 ./FreeRTOS/tasks.o
+                0x080012ec      0x150 ./FreeRTOS/tasks.o
  .text.xTaskDelayUntil
-                0x080015dc       0xec ./FreeRTOS/tasks.o
-                0x080015dc                xTaskDelayUntil
+                0x0800143c       0xec ./FreeRTOS/tasks.o
+                0x0800143c                xTaskDelayUntil
  .text.vTaskDelay
-                0x080016c8       0x64 ./FreeRTOS/tasks.o
-                0x080016c8                vTaskDelay
+                0x08001528       0x64 ./FreeRTOS/tasks.o
+                0x08001528                vTaskDelay
  .text.vTaskStartScheduler
-                0x0800172c       0xa8 ./FreeRTOS/tasks.o
-                0x0800172c                vTaskStartScheduler
+                0x0800158c       0xa8 ./FreeRTOS/tasks.o
+                0x0800158c                vTaskStartScheduler
  .text.vTaskSuspendAll
-                0x080017d4       0x18 ./FreeRTOS/tasks.o
-                0x080017d4                vTaskSuspendAll
+                0x08001634       0x18 ./FreeRTOS/tasks.o
+                0x08001634                vTaskSuspendAll
  .text.xTaskResumeAll
-                0x080017ec      0x1ec ./FreeRTOS/tasks.o
-                0x080017ec                xTaskResumeAll
+                0x0800164c      0x1ec ./FreeRTOS/tasks.o
+                0x0800164c                xTaskResumeAll
  .text.xTaskGetTickCount
-                0x080019d8       0x1c ./FreeRTOS/tasks.o
-                0x080019d8                xTaskGetTickCount
+                0x08001838       0x1c ./FreeRTOS/tasks.o
+                0x08001838                xTaskGetTickCount
+ .text.uxTaskGetNumberOfTasks
+                0x08001854       0x14 ./FreeRTOS/tasks.o
+                0x08001854                uxTaskGetNumberOfTasks
  .text.xTaskIncrementTick
-                0x080019f4      0x238 ./FreeRTOS/tasks.o
-                0x080019f4                xTaskIncrementTick
+                0x08001868      0x238 ./FreeRTOS/tasks.o
+                0x08001868                xTaskIncrementTick
  .text.vTaskSwitchContext
-                0x08001c2c       0xc4 ./FreeRTOS/tasks.o
-                0x08001c2c                vTaskSwitchContext
+                0x08001aa0       0xc4 ./FreeRTOS/tasks.o
+                0x08001aa0                vTaskSwitchContext
  .text.vTaskPlaceOnEventList
-                0x08001cf0       0x4c ./FreeRTOS/tasks.o
-                0x08001cf0                vTaskPlaceOnEventList
+                0x08001b64       0x4c ./FreeRTOS/tasks.o
+                0x08001b64                vTaskPlaceOnEventList
  .text.vTaskPlaceOnEventListRestricted
-                0x08001d3c       0xa0 ./FreeRTOS/tasks.o
-                0x08001d3c                vTaskPlaceOnEventListRestricted
+                0x08001bb0       0xa0 ./FreeRTOS/tasks.o
+                0x08001bb0                vTaskPlaceOnEventListRestricted
  .text.xTaskRemoveFromEventList
-                0x08001ddc      0x1b0 ./FreeRTOS/tasks.o
-                0x08001ddc                xTaskRemoveFromEventList
+                0x08001c50      0x1b0 ./FreeRTOS/tasks.o
+                0x08001c50                xTaskRemoveFromEventList
  .text.vTaskInternalSetTimeOutState
-                0x08001f8c       0x28 ./FreeRTOS/tasks.o
-                0x08001f8c                vTaskInternalSetTimeOutState
+                0x08001e00       0x28 ./FreeRTOS/tasks.o
+                0x08001e00                vTaskInternalSetTimeOutState
  .text.xTaskCheckForTimeOut
-                0x08001fb4       0xb4 ./FreeRTOS/tasks.o
-                0x08001fb4                xTaskCheckForTimeOut
+                0x08001e28       0xb4 ./FreeRTOS/tasks.o
+                0x08001e28                xTaskCheckForTimeOut
  .text.vTaskMissedYield
-                0x08002068       0x14 ./FreeRTOS/tasks.o
-                0x08002068                vTaskMissedYield
+                0x08001edc       0x14 ./FreeRTOS/tasks.o
+                0x08001edc                vTaskMissedYield
  .text.prvIdleTask
-                0x0800207c       0x20 ./FreeRTOS/tasks.o
+                0x08001ef0       0x20 ./FreeRTOS/tasks.o
  .text.prvInitialiseTaskLists
-                0x0800209c       0x70 ./FreeRTOS/tasks.o
+                0x08001f10       0x70 ./FreeRTOS/tasks.o
  .text.prvCheckTasksWaitingTermination
-                0x0800210c        0xa ./FreeRTOS/tasks.o
+                0x08001f80        0xa ./FreeRTOS/tasks.o
  .text.prvTaskCheckFreeStackSpace
-                0x08002116       0x34 ./FreeRTOS/tasks.o
- *fill*         0x0800214a        0x2 
+                0x08001f8a       0x34 ./FreeRTOS/tasks.o
+ *fill*         0x08001fbe        0x2 
  .text.uxTaskGetStackHighWaterMark
-                0x0800214c       0x38 ./FreeRTOS/tasks.o
-                0x0800214c                uxTaskGetStackHighWaterMark
+                0x08001fc0       0x38 ./FreeRTOS/tasks.o
+                0x08001fc0                uxTaskGetStackHighWaterMark
  .text.prvResetNextTaskUnblockTime
-                0x08002184       0x34 ./FreeRTOS/tasks.o
+                0x08001ff8       0x34 ./FreeRTOS/tasks.o
  .text.xTaskGetSchedulerState
-                0x080021b8       0x38 ./FreeRTOS/tasks.o
-                0x080021b8                xTaskGetSchedulerState
- .text.xTaskPriorityInherit
-                0x080021f0      0x138 ./FreeRTOS/tasks.o
-                0x080021f0                xTaskPriorityInherit
+                0x0800202c       0x38 ./FreeRTOS/tasks.o
+                0x0800202c                xTaskGetSchedulerState
  .text.xTaskPriorityDisinherit
-                0x08002328      0x138 ./FreeRTOS/tasks.o
-                0x08002328                xTaskPriorityDisinherit
- .text.vTaskPriorityDisinheritAfterTimeout
-                0x08002460      0x160 ./FreeRTOS/tasks.o
-                0x08002460                vTaskPriorityDisinheritAfterTimeout
- .text.pvTaskIncrementMutexHeldCount
-                0x080025c0       0x24 ./FreeRTOS/tasks.o
-                0x080025c0                pvTaskIncrementMutexHeldCount
+                0x08002064      0x138 ./FreeRTOS/tasks.o
+                0x08002064                xTaskPriorityDisinherit
  .text.prvAddCurrentTaskToDelayedList
-                0x080025e4       0x88 ./FreeRTOS/tasks.o
+                0x0800219c       0x88 ./FreeRTOS/tasks.o
  .text.xTimerCreateTimerTask
-                0x0800266c       0x64 ./FreeRTOS/timers.o
-                0x0800266c                xTimerCreateTimerTask
+                0x08002224       0x64 ./FreeRTOS/timers.o
+                0x08002224                xTimerCreateTimerTask
  .text.prvReloadTimer
-                0x080026d0       0x50 ./FreeRTOS/timers.o
+                0x08002288       0x50 ./FreeRTOS/timers.o
  .text.prvProcessExpiredTimer
-                0x08002720       0x70 ./FreeRTOS/timers.o
+                0x080022d8       0x70 ./FreeRTOS/timers.o
  .text.prvTimerTask
-                0x08002790       0x2a ./FreeRTOS/timers.o
- *fill*         0x080027ba        0x2 
+                0x08002348       0x2a ./FreeRTOS/timers.o
+ *fill*         0x08002372        0x2 
  .text.prvProcessTimerOrBlockTask
-                0x080027bc       0x90 ./FreeRTOS/timers.o
+                0x08002374       0x90 ./FreeRTOS/timers.o
  .text.prvGetNextExpireTime
-                0x0800284c       0x44 ./FreeRTOS/timers.o
+                0x08002404       0x44 ./FreeRTOS/timers.o
  .text.prvSampleTimeNow
-                0x08002890       0x40 ./FreeRTOS/timers.o
+                0x08002448       0x40 ./FreeRTOS/timers.o
  .text.prvInsertTimerInActiveList
-                0x080028d0       0x84 ./FreeRTOS/timers.o
+                0x08002488       0x84 ./FreeRTOS/timers.o
  .text.prvProcessReceivedCommands
-                0x08002954      0x17c ./FreeRTOS/timers.o
+                0x0800250c      0x17c ./FreeRTOS/timers.o
  .text.prvSwitchTimerLists
-                0x08002ad0       0x50 ./FreeRTOS/timers.o
+                0x08002688       0x50 ./FreeRTOS/timers.o
  .text.prvCheckForValidListAndQueue
-                0x08002b20       0x74 ./FreeRTOS/timers.o
+                0x080026d8       0x74 ./FreeRTOS/timers.o
  .text.pxPortInitialiseStack
-                0x08002b94       0x54 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
-                0x08002b94                pxPortInitialiseStack
+                0x0800274c       0x54 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
+                0x0800274c                pxPortInitialiseStack
  .text.prvTaskExitError
-                0x08002be8       0x38 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
+                0x080027a0       0x38 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
  .text.SVC_Handler
-                0x08002c20        0xa ./FreeRTOS/portable/GCC/ARM_CM0/port.o
-                0x08002c20                SVC_Handler
- *fill*         0x08002c2a        0x6 
+                0x080027d8        0xa ./FreeRTOS/portable/GCC/ARM_CM0/port.o
+                0x080027d8                SVC_Handler
+ *fill*         0x080027e2        0xe 
  .text.vPortStartFirstTask
-                0x08002c30       0x38 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
+                0x080027f0       0x38 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
  .text.xPortStartScheduler
-                0x08002c68       0x48 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
-                0x08002c68                xPortStartScheduler
+                0x08002828       0x48 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
+                0x08002828                xPortStartScheduler
  .text.vPortYield
-                0x08002cb0       0x20 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
-                0x08002cb0                vPortYield
+                0x08002870       0x20 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
+                0x08002870                vPortYield
  .text.vPortEnterCritical
-                0x08002cd0       0x24 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
-                0x08002cd0                vPortEnterCritical
+                0x08002890       0x24 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
+                0x08002890                vPortEnterCritical
  .text.vPortExitCritical
-                0x08002cf4       0x40 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
-                0x08002cf4                vPortExitCritical
+                0x080028b4       0x40 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
+                0x080028b4                vPortExitCritical
  .text.ulSetInterruptMaskFromISR
-                0x08002d34        0xc ./FreeRTOS/portable/GCC/ARM_CM0/port.o
-                0x08002d34                ulSetInterruptMaskFromISR
+                0x080028f4        0xc ./FreeRTOS/portable/GCC/ARM_CM0/port.o
+                0x080028f4                ulSetInterruptMaskFromISR
  .text.vClearInterruptMaskFromISR
-                0x08002d40        0x8 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
-                0x08002d40                vClearInterruptMaskFromISR
- *fill*         0x08002d48        0x8 
+                0x08002900        0x8 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
+                0x08002900                vClearInterruptMaskFromISR
+ *fill*         0x08002908        0x8 
  .text.PendSV_Handler
-                0x08002d50       0x48 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
-                0x08002d50                PendSV_Handler
+                0x08002910       0x48 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
+                0x08002910                PendSV_Handler
  .text.SysTick_Handler
-                0x08002d98       0x34 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
-                0x08002d98                SysTick_Handler
+                0x08002958       0x34 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
+                0x08002958                SysTick_Handler
  .text.vPortSetupTimerInterrupt
-                0x08002dcc       0x44 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
-                0x08002dcc                vPortSetupTimerInterrupt
+                0x0800298c       0x44 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
+                0x0800298c                vPortSetupTimerInterrupt
  .text.pvPortMalloc
-                0x08002e10       0xd0 ./FreeRTOS/portable/MemMang/heap_1.o
-                0x08002e10                pvPortMalloc
+                0x080029d0       0xd0 ./FreeRTOS/portable/MemMang/heap_1.o
+                0x080029d0                pvPortMalloc
  .text.vPortFree
-                0x08002ee0       0x24 ./FreeRTOS/portable/MemMang/heap_1.o
-                0x08002ee0                vPortFree
+                0x08002aa0       0x24 ./FreeRTOS/portable/MemMang/heap_1.o
+                0x08002aa0                vPortFree
  .text.xPortGetFreeHeapSize
-                0x08002f04       0x1c ./FreeRTOS/portable/MemMang/heap_1.o
-                0x08002f04                xPortGetFreeHeapSize
- .text._DoInit  0x08002f20       0xb0 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
+                0x08002ac4       0x1c ./FreeRTOS/portable/MemMang/heap_1.o
+                0x08002ac4                xPortGetFreeHeapSize
+ .text._DoInit  0x08002ae0       0xb0 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
  .text._WriteBlocking
-                0x08002fd0       0xb8 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
+                0x08002b90       0xb8 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
  .text._WriteNoCheck
-                0x08003088       0x8c ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
+                0x08002c48       0x8c ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
  .text._GetAvailWriteSpace
-                0x08003114       0x42 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
- *fill*         0x08003156        0x2 
+                0x08002cd4       0x42 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
+ *fill*         0x08002d16        0x2 
  .text.SEGGER_RTT_ReadNoLock
-                0x08003158      0x114 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
-                0x08003158                SEGGER_RTT_ReadNoLock
+                0x08002d18      0x114 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
+                0x08002d18                SEGGER_RTT_ReadNoLock
  .text.SEGGER_RTT_Read
-                0x0800326c       0x38 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
-                0x0800326c                SEGGER_RTT_Read
+                0x08002e2c       0x38 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
+                0x08002e2c                SEGGER_RTT_Read
  .text.SEGGER_RTT_WriteNoLock
-                0x080032a4       0xb0 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
-                0x080032a4                SEGGER_RTT_WriteNoLock
+                0x08002e64       0xb0 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
+                0x08002e64                SEGGER_RTT_WriteNoLock
  .text.SEGGER_RTT_Write
-                0x08003354       0x50 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
-                0x08003354                SEGGER_RTT_Write
+                0x08002f14       0x50 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
+                0x08002f14                SEGGER_RTT_Write
  .text.SEGGER_RTT_ConfigUpBuffer
-                0x080033a4       0x94 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
-                0x080033a4                SEGGER_RTT_ConfigUpBuffer
+                0x08002f64       0x94 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
+                0x08002f64                SEGGER_RTT_ConfigUpBuffer
  .text.SEGGER_RTT_ConfigDownBuffer
-                0x08003438       0x94 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
-                0x08003438                SEGGER_RTT_ConfigDownBuffer
+                0x08002ff8       0x94 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
+                0x08002ff8                SEGGER_RTT_ConfigDownBuffer
  .text.xTraceStreamPortInitialize
-                0x080034cc       0x28 ./TraceRecorder/streamports/Jlink_RTT/trcStreamPort.o
-                0x080034cc                xTraceStreamPortInitialize
+                0x0800308c       0x28 ./TraceRecorder/streamports/Jlink_RTT/trcStreamPort.o
+                0x0800308c                xTraceStreamPortInitialize
  .text.xTraceStreamPortOnEnable
-                0x080034f4       0x60 ./TraceRecorder/streamports/Jlink_RTT/trcStreamPort.o
-                0x080034f4                xTraceStreamPortOnEnable
+                0x080030b4       0x60 ./TraceRecorder/streamports/Jlink_RTT/trcStreamPort.o
+                0x080030b4                xTraceStreamPortOnEnable
  .text.xTraceCounterInitialize
-                0x08003554       0x38 ./TraceRecorder/trcCounter.o
-                0x08003554                xTraceCounterInitialize
+                0x08003114       0x38 ./TraceRecorder/trcCounter.o
+                0x08003114                xTraceCounterInitialize
  .text.xTraceDiagnosticsInitialize
-                0x0800358c       0x4c ./TraceRecorder/trcDiagnostics.o
-                0x0800358c                xTraceDiagnosticsInitialize
+                0x0800314c       0x4c ./TraceRecorder/trcDiagnostics.o
+                0x0800314c                xTraceDiagnosticsInitialize
  .text.xTraceDiagnosticsAdd
-                0x080035d8       0x38 ./TraceRecorder/trcDiagnostics.o
-                0x080035d8                xTraceDiagnosticsAdd
+                0x08003198       0x38 ./TraceRecorder/trcDiagnostics.o
+                0x08003198                xTraceDiagnosticsAdd
  .text.xTraceDiagnosticsIncrease
-                0x08003610       0x22 ./TraceRecorder/trcDiagnostics.o
-                0x08003610                xTraceDiagnosticsIncrease
- *fill*         0x08003632        0x2 
+                0x080031d0       0x22 ./TraceRecorder/trcDiagnostics.o
+                0x080031d0                xTraceDiagnosticsIncrease
+ *fill*         0x080031f2        0x2 
  .text.xTraceDiagnosticsSetIfHigher
-                0x08003634       0x3c ./TraceRecorder/trcDiagnostics.o
-                0x08003634                xTraceDiagnosticsSetIfHigher
+                0x080031f4       0x3c ./TraceRecorder/trcDiagnostics.o
+                0x080031f4                xTraceDiagnosticsSetIfHigher
  .text.xTraceDiagnosticsCheckStatus
-                0x08003670       0x84 ./TraceRecorder/trcDiagnostics.o
-                0x08003670                xTraceDiagnosticsCheckStatus
+                0x08003230       0x84 ./TraceRecorder/trcDiagnostics.o
+                0x08003230                xTraceDiagnosticsCheckStatus
  .text.xTraceEntryIndexTableInitialize
-                0x080036f4       0x20 ./TraceRecorder/trcEntryTable.o
-                0x080036f4                xTraceEntryIndexTableInitialize
+                0x080032b4       0x20 ./TraceRecorder/trcEntryTable.o
+                0x080032b4                xTraceEntryIndexTableInitialize
  .text.xTraceEntryTableInitialize
-                0x08003714       0xb4 ./TraceRecorder/trcEntryTable.o
-                0x08003714                xTraceEntryTableInitialize
+                0x080032d4       0xb4 ./TraceRecorder/trcEntryTable.o
+                0x080032d4                xTraceEntryTableInitialize
  .text.xTraceEntryCreate
-                0x080037c8       0xc4 ./TraceRecorder/trcEntryTable.o
-                0x080037c8                xTraceEntryCreate
+                0x08003388       0xc4 ./TraceRecorder/trcEntryTable.o
+                0x08003388                xTraceEntryCreate
  .text.xTraceEntryFind
-                0x0800388c       0x54 ./TraceRecorder/trcEntryTable.o
-                0x0800388c                xTraceEntryFind
+                0x0800344c       0x54 ./TraceRecorder/trcEntryTable.o
+                0x0800344c                xTraceEntryFind
  .text.xTraceEntrySetSymbol
-                0x080038e0       0x54 ./TraceRecorder/trcEntryTable.o
-                0x080038e0                xTraceEntrySetSymbol
+                0x080034a0       0x54 ./TraceRecorder/trcEntryTable.o
+                0x080034a0                xTraceEntrySetSymbol
  .text.xTraceEntryGetCount
-                0x08003934       0x24 ./TraceRecorder/trcEntryTable.o
-                0x08003934                xTraceEntryGetCount
+                0x080034f4       0x24 ./TraceRecorder/trcEntryTable.o
+                0x080034f4                xTraceEntryGetCount
  .text.xTraceEntryGetAtIndex
-                0x08003958       0x30 ./TraceRecorder/trcEntryTable.o
-                0x08003958                xTraceEntryGetAtIndex
+                0x08003518       0x30 ./TraceRecorder/trcEntryTable.o
+                0x08003518                xTraceEntryGetAtIndex
  .text.prvEntryIndexInitialize
-                0x08003988       0x40 ./TraceRecorder/trcEntryTable.o
+                0x08003548       0x40 ./TraceRecorder/trcEntryTable.o
  .text.prvEntryIndexTake
-                0x080039c8       0x64 ./TraceRecorder/trcEntryTable.o
+                0x08003588       0x64 ./TraceRecorder/trcEntryTable.o
  .text.xTraceErrorInitialize
-                0x08003a2c       0x44 ./TraceRecorder/trcError.o
-                0x08003a2c                xTraceErrorInitialize
+                0x080035ec       0x44 ./TraceRecorder/trcError.o
+                0x080035ec                xTraceErrorInitialize
  .text.xTraceWarning
-                0x08003a70       0x5c ./TraceRecorder/trcError.o
-                0x08003a70                xTraceWarning
+                0x08003630       0x5c ./TraceRecorder/trcError.o
+                0x08003630                xTraceWarning
  .text.xTraceError
-                0x08003acc       0x80 ./TraceRecorder/trcError.o
-                0x08003acc                xTraceError
+                0x0800368c       0x80 ./TraceRecorder/trcError.o
+                0x0800368c                xTraceError
  .text.prvTraceErrorPrint
-                0x08003b4c       0x90 ./TraceRecorder/trcError.o
+                0x0800370c       0x90 ./TraceRecorder/trcError.o
  .text.prvTraceErrorGetDescription
-                0x08003bdc       0xe0 ./TraceRecorder/trcError.o
+                0x0800379c       0xe0 ./TraceRecorder/trcError.o
  .text.xTraceEventInitialize
-                0x08003cbc       0x4c ./TraceRecorder/trcEvent.o
-                0x08003cbc                xTraceEventInitialize
+                0x0800387c       0x4c ./TraceRecorder/trcEvent.o
+                0x0800387c                xTraceEventInitialize
  .text.xTraceEventCreate1
-                0x08003d08       0xf0 ./TraceRecorder/trcEvent.o
-                0x08003d08                xTraceEventCreate1
+                0x080038c8       0xf0 ./TraceRecorder/trcEvent.o
+                0x080038c8                xTraceEventCreate1
  .text.xTraceEventCreate2
-                0x08003df8       0xf8 ./TraceRecorder/trcEvent.o
-                0x08003df8                xTraceEventCreate2
+                0x080039b8       0xf8 ./TraceRecorder/trcEvent.o
+                0x080039b8                xTraceEventCreate2
  .text.xTraceEventCreate3
-                0x08003ef0      0x100 ./TraceRecorder/trcEvent.o
-                0x08003ef0                xTraceEventCreate3
+                0x08003ab0      0x100 ./TraceRecorder/trcEvent.o
+                0x08003ab0                xTraceEventCreate3
  .text.xTraceEventCreate4
-                0x08003ff0      0x108 ./TraceRecorder/trcEvent.o
-                0x08003ff0                xTraceEventCreate4
+                0x08003bb0      0x108 ./TraceRecorder/trcEvent.o
+                0x08003bb0                xTraceEventCreate4
  .text.xTraceEventCreateRawBlocking
-                0x080040f8       0x98 ./TraceRecorder/trcEvent.o
-                0x080040f8                xTraceEventCreateRawBlocking
+                0x08003cb8       0x98 ./TraceRecorder/trcEvent.o
+                0x08003cb8                xTraceEventCreateRawBlocking
  .text.xTraceEventCreateDataOffline0
-                0x08004190       0xfc ./TraceRecorder/trcEvent.o
-                0x08004190                xTraceEventCreateDataOffline0
+                0x08003d50       0xfc ./TraceRecorder/trcEvent.o
+                0x08003d50                xTraceEventCreateDataOffline0
  .text.xTraceEventCreateData1
-                0x0800428c      0x124 ./TraceRecorder/trcEvent.o
-                0x0800428c                xTraceEventCreateData1
+                0x08003e4c      0x124 ./TraceRecorder/trcEvent.o
+                0x08003e4c                xTraceEventCreateData1
  .text.xTraceEventCreateData2
-                0x080043b0      0x12c ./TraceRecorder/trcEvent.o
-                0x080043b0                xTraceEventCreateData2
+                0x08003f70      0x12c ./TraceRecorder/trcEvent.o
+                0x08003f70                xTraceEventCreateData2
  .text.xTraceEventCreateData3
-                0x080044dc      0x130 ./TraceRecorder/trcEvent.o
-                0x080044dc                xTraceEventCreateData3
+                0x0800409c      0x130 ./TraceRecorder/trcEvent.o
+                0x0800409c                xTraceEventCreateData3
  .text.xTraceEventCreateData4
-                0x0800460c      0x138 ./TraceRecorder/trcEvent.o
-                0x0800460c                xTraceEventCreateData4
+                0x080041cc      0x138 ./TraceRecorder/trcEvent.o
+                0x080041cc                xTraceEventCreateData4
  .text.xTraceEventCreateData5
-                0x08004744      0x13c ./TraceRecorder/trcEvent.o
-                0x08004744                xTraceEventCreateData5
+                0x08004304      0x13c ./TraceRecorder/trcEvent.o
+                0x08004304                xTraceEventCreateData5
  .text.xTraceEventCreateData6
-                0x08004880      0x144 ./TraceRecorder/trcEvent.o
-                0x08004880                xTraceEventCreateData6
+                0x08004440      0x144 ./TraceRecorder/trcEvent.o
+                0x08004440                xTraceEventCreateData6
  .text.xTraceExtensionInitialize
-                0x080049c4       0x38 ./TraceRecorder/trcExtension.o
-                0x080049c4                xTraceExtensionInitialize
+                0x08004584       0x38 ./TraceRecorder/trcExtension.o
+                0x08004584                xTraceExtensionInitialize
  .text.xTraceHeapCreate
-                0x080049fc       0x46 ./TraceRecorder/trcHeap.o
-                0x080049fc                xTraceHeapCreate
+                0x080045bc       0x46 ./TraceRecorder/trcHeap.o
+                0x080045bc                xTraceHeapCreate
  .text.xTraceHeapAlloc
-                0x08004a42       0x68 ./TraceRecorder/trcHeap.o
-                0x08004a42                xTraceHeapAlloc
- *fill*         0x08004aaa        0x2 
+                0x08004602       0x68 ./TraceRecorder/trcHeap.o
+                0x08004602                xTraceHeapAlloc
+ *fill*         0x0800466a        0x2 
  .text.xTraceISRInitialize
-                0x08004aac       0x7c ./TraceRecorder/trcISR.o
-                0x08004aac                xTraceISRInitialize
+                0x0800466c       0x7c ./TraceRecorder/trcISR.o
+                0x0800466c                xTraceISRInitialize
  .text.xTraceKernelPortGetUnusedStack
-                0x08004b28       0x22 ./TraceRecorder/trcKernelPort.o
-                0x08004b28                xTraceKernelPortGetUnusedStack
- *fill*         0x08004b4a        0x2 
+                0x080046e8       0x22 ./TraceRecorder/trcKernelPort.o
+                0x080046e8                xTraceKernelPortGetUnusedStack
+ *fill*         0x0800470a        0x2 
  .text.xTraceKernelPortInitialize
-                0x08004b4c       0x38 ./TraceRecorder/trcKernelPort.o
-                0x08004b4c                xTraceKernelPortInitialize
+                0x0800470c       0x38 ./TraceRecorder/trcKernelPort.o
+                0x0800470c                xTraceKernelPortInitialize
  .text.xTraceKernelPortEnable
-                0x08004b84       0x74 ./TraceRecorder/trcKernelPort.o
-                0x08004b84                xTraceKernelPortEnable
- .text.TzCtrl   0x08004bf8       0x16 ./TraceRecorder/trcKernelPort.o
+                0x08004744       0x74 ./TraceRecorder/trcKernelPort.o
+                0x08004744                xTraceKernelPortEnable
+ .text.TzCtrl   0x080047b8       0x16 ./TraceRecorder/trcKernelPort.o
  .text.vTraceSetSemaphoreName
-                0x08004c0e       0x1e ./TraceRecorder/trcKernelPort.o
-                0x08004c0e                vTraceSetSemaphoreName
+                0x080047ce       0x1e ./TraceRecorder/trcKernelPort.o
+                0x080047ce                vTraceSetSemaphoreName
  .text.xTraceKernelPortGetSystemHeapHandle
-                0x08004c2c       0x14 ./TraceRecorder/trcKernelPort.o
-                0x08004c2c                xTraceKernelPortGetSystemHeapHandle
+                0x080047ec       0x14 ./TraceRecorder/trcKernelPort.o
+                0x080047ec                xTraceKernelPortGetSystemHeapHandle
  .text.xTraceObjectRegisterInternal
-                0x08004c40      0x174 ./TraceRecorder/trcObject.o
-                0x08004c40                xTraceObjectRegisterInternal
+                0x08004800      0x174 ./TraceRecorder/trcObject.o
+                0x08004800                xTraceObjectRegisterInternal
  .text.xTraceObjectSetName
-                0x08004db4       0x6c ./TraceRecorder/trcObject.o
-                0x08004db4                xTraceObjectSetName
+                0x08004974       0x6c ./TraceRecorder/trcObject.o
+                0x08004974                xTraceObjectSetName
  .text.xTraceObjectRegisterWithoutHandle
-                0x08004e20       0x32 ./TraceRecorder/trcObject.o
-                0x08004e20                xTraceObjectRegisterWithoutHandle
+                0x080049e0       0x32 ./TraceRecorder/trcObject.o
+                0x080049e0                xTraceObjectRegisterWithoutHandle
  .text.xTraceObjectSetNameWithoutHandle
-                0x08004e52       0x86 ./TraceRecorder/trcObject.o
-                0x08004e52                xTraceObjectSetNameWithoutHandle
+                0x08004a12       0x86 ./TraceRecorder/trcObject.o
+                0x08004a12                xTraceObjectSetNameWithoutHandle
  .text.xTracePrintInitialize
-                0x08004ed8       0x40 ./TraceRecorder/trcPrint.o
-                0x08004ed8                xTracePrintInitialize
+                0x08004a98       0x40 ./TraceRecorder/trcPrint.o
+                0x08004a98                xTracePrintInitialize
  .text.xTracePrint
-                0x08004f18       0x6c ./TraceRecorder/trcPrint.o
-                0x08004f18                xTracePrint
+                0x08004ad8       0x6c ./TraceRecorder/trcPrint.o
+                0x08004ad8                xTracePrint
  .text.xTracePrintF
-                0x08004f84       0x48 ./TraceRecorder/trcPrint.o
-                0x08004f84                xTracePrintF
+                0x08004b44       0x48 ./TraceRecorder/trcPrint.o
+                0x08004b44                xTracePrintF
  .text.xTraceVPrintF
-                0x08004fcc       0xac ./TraceRecorder/trcPrint.o
-                0x08004fcc                xTraceVPrintF
+                0x08004b8c       0xac ./TraceRecorder/trcPrint.o
+                0x08004b8c                xTraceVPrintF
  .text.prvTraceVPrintF
-                0x08005078      0x1fc ./TraceRecorder/trcPrint.o
+                0x08004c38      0x1fc ./TraceRecorder/trcPrint.o
  .text.xTraceStackMonitorInitialize
-                0x08005274       0x54 ./TraceRecorder/trcStackMonitor.o
-                0x08005274                xTraceStackMonitorInitialize
+                0x08004e34       0x54 ./TraceRecorder/trcStackMonitor.o
+                0x08004e34                xTraceStackMonitorInitialize
  .text.xTraceStackMonitorAdd
-                0x080052c8       0xa8 ./TraceRecorder/trcStackMonitor.o
-                0x080052c8                xTraceStackMonitorAdd
+                0x08004e88       0xa8 ./TraceRecorder/trcStackMonitor.o
+                0x08004e88                xTraceStackMonitorAdd
  .text.xTraceStackMonitorReport
-                0x08005370       0xb0 ./TraceRecorder/trcStackMonitor.o
-                0x08005370                xTraceStackMonitorReport
+                0x08004f30       0xb0 ./TraceRecorder/trcStackMonitor.o
+                0x08004f30                xTraceStackMonitorReport
  .text.xTraceStaticBufferInitialize
-                0x08005420       0x30 ./TraceRecorder/trcStaticBuffer.o
-                0x08005420                xTraceStaticBufferInitialize
+                0x08004fe0       0x30 ./TraceRecorder/trcStaticBuffer.o
+                0x08004fe0                xTraceStaticBufferInitialize
  .text.xTraceInitialize
-                0x08005450      0x234 ./TraceRecorder/trcStreamingRecorder.o
-                0x08005450                xTraceInitialize
+                0x08005010      0x234 ./TraceRecorder/trcStreamingRecorder.o
+                0x08005010                xTraceInitialize
  .text.xTraceHeaderInitialize
-                0x08005684      0x120 ./TraceRecorder/trcStreamingRecorder.o
-                0x08005684                xTraceHeaderInitialize
+                0x08005244      0x120 ./TraceRecorder/trcStreamingRecorder.o
+                0x08005244                xTraceHeaderInitialize
  .text.xTraceEnable
-                0x080057a4       0xe4 ./TraceRecorder/trcStreamingRecorder.o
-                0x080057a4                xTraceEnable
+                0x08005364       0xe4 ./TraceRecorder/trcStreamingRecorder.o
+                0x08005364                xTraceEnable
  .text.xTraceDisable
-                0x08005888       0x10 ./TraceRecorder/trcStreamingRecorder.o
-                0x08005888                xTraceDisable
+                0x08005448       0x10 ./TraceRecorder/trcStreamingRecorder.o
+                0x08005448                xTraceDisable
  .text.xTraceTzCtrl
-                0x08005898       0xa4 ./TraceRecorder/trcStreamingRecorder.o
-                0x08005898                xTraceTzCtrl
+                0x08005458       0xa4 ./TraceRecorder/trcStreamingRecorder.o
+                0x08005458                xTraceTzCtrl
  .text.prvIs64bit
-                0x0800593c        0xc ./TraceRecorder/trcStreamingRecorder.o
+                0x080054fc        0xc ./TraceRecorder/trcStreamingRecorder.o
  .text.prvSetRecorderEnabled
-                0x08005948       0xa8 ./TraceRecorder/trcStreamingRecorder.o
+                0x08005508       0xa8 ./TraceRecorder/trcStreamingRecorder.o
  .text.prvSetRecorderDisabled
-                0x080059f0       0x48 ./TraceRecorder/trcStreamingRecorder.o
+                0x080055b0       0x48 ./TraceRecorder/trcStreamingRecorder.o
  .text.prvTraceStoreHeader
-                0x08005a38       0x1c ./TraceRecorder/trcStreamingRecorder.o
+                0x080055f8       0x1c ./TraceRecorder/trcStreamingRecorder.o
  .text.prvTraceStoreTimestampInfo
-                0x08005a54       0x24 ./TraceRecorder/trcStreamingRecorder.o
+                0x08005614       0x24 ./TraceRecorder/trcStreamingRecorder.o
  .text.prvTraceStoreEntryTable
-                0x08005a78       0x72 ./TraceRecorder/trcStreamingRecorder.o
- *fill*         0x08005aea        0x2 
+                0x08005638       0x72 ./TraceRecorder/trcStreamingRecorder.o
+ *fill*         0x080056aa        0x2 
  .text.prvTraceStoreStartEvent
-                0x08005aec       0x54 ./TraceRecorder/trcStreamingRecorder.o
+                0x080056ac       0x54 ./TraceRecorder/trcStreamingRecorder.o
  .text.prvIsValidCommand
-                0x08005b40       0x7e ./TraceRecorder/trcStreamingRecorder.o
+                0x08005700       0x7e ./TraceRecorder/trcStreamingRecorder.o
  .text.prvProcessCommand
-                0x08005bbe       0x2e ./TraceRecorder/trcStreamingRecorder.o
+                0x0800577e       0x2e ./TraceRecorder/trcStreamingRecorder.o
  .text.prvVerifySizeAlignment
-                0x08005bec       0x1c ./TraceRecorder/trcStreamingRecorder.o
+                0x080057ac       0x1c ./TraceRecorder/trcStreamingRecorder.o
  .text.xTraceStringRegister
-                0x08005c08       0x70 ./TraceRecorder/trcString.o
-                0x08005c08                xTraceStringRegister
+                0x080057c8       0x70 ./TraceRecorder/trcString.o
+                0x080057c8                xTraceStringRegister
  .text.xTraceTaskInitialize
-                0x08005c78       0x4c ./TraceRecorder/trcTask.o
-                0x08005c78                xTraceTaskInitialize
+                0x08005838       0x4c ./TraceRecorder/trcTask.o
+                0x08005838                xTraceTaskInitialize
  .text.xTraceTaskSwitch
-                0x08005cc4       0x9c ./TraceRecorder/trcTask.o
-                0x08005cc4                xTraceTaskSwitch
+                0x08005884       0x9c ./TraceRecorder/trcTask.o
+                0x08005884                xTraceTaskSwitch
  .text.xTraceTimestampInitialize
-                0x08005d60       0x6c ./TraceRecorder/trcTimestamp.o
-                0x08005d60                xTraceTimestampInitialize
- .text.main     0x08005dcc      0x150 ./app/src/main.o
-                0x08005dcc                main
- .text.vTask1   0x08005f1c      0x128 ./app/src/main.o
-                0x08005f1c                vTask1
- .text.vTask2   0x08006044      0x140 ./app/src/main.o
-                0x08006044                vTask2
+                0x08005920       0x6c ./TraceRecorder/trcTimestamp.o
+                0x08005920                xTraceTimestampInitialize
+ .text.main     0x0800598c      0x12c ./app/src/main.o
+                0x0800598c                main
+ .text.vTask1   0x08005ab8       0x20 ./app/src/main.o
+                0x08005ab8                vTask1
+ .text.vTask2   0x08005ad8       0x20 ./app/src/main.o
+                0x08005ad8                vTask2
  .text.vTask_Pub
-                0x08006184      0x240 ./app/src/main.o
-                0x08006184                vTask_Pub
+                0x08005af8       0xbc ./app/src/main.o
+                0x08005af8                vTask_Pub
+ .text.subscribe
+                0x08005bb4       0x54 ./app/src/main.o
+                0x08005bb4                subscribe
  .text.updateSubs
-                0x080063c4       0xd0 ./app/src/main.o
+                0x08005c08       0xdc ./app/src/main.o
  .text.print_subscription_table
-                0x08006494       0x64 ./app/src/main.o
+                0x08005ce4       0x64 ./app/src/main.o
  .text.vAssertCalled
-                0x080064f8       0x3c ./app/src/main.o
-                0x080064f8                vAssertCalled
+                0x08005d48       0x3c ./app/src/main.o
+                0x08005d48                vAssertCalled
  .text.SystemClock_Config
-                0x08006534      0x134 ./app/src/main.o
+                0x08005d84      0x134 ./app/src/main.o
  .text.printchar
-                0x08006668       0x48 ./app/src/printf-stdarg.o
- .text.prints   0x080066b0       0xb8 ./app/src/printf-stdarg.o
- .text.printi   0x08006768       0xec ./app/src/printf-stdarg.o
- .text.print    0x08006854      0x1c8 ./app/src/printf-stdarg.o
+                0x08005eb8       0x48 ./app/src/printf-stdarg.o
+ .text.prints   0x08005f00       0xb8 ./app/src/printf-stdarg.o
+ .text.printi   0x08005fb8       0xec ./app/src/printf-stdarg.o
+ .text.print    0x080060a4      0x1c8 ./app/src/printf-stdarg.o
  .text.my_printf
-                0x08006a1c       0x2a ./app/src/printf-stdarg.o
-                0x08006a1c                my_printf
- *fill*         0x08006a46        0x2 
+                0x0800626c       0x2a ./app/src/printf-stdarg.o
+                0x0800626c                my_printf
+ .text.NMI_Handler
+                0x08006296        0xa ./app/src/stm32f0xx_it.o
+                0x08006296                NMI_Handler
+ .text.HardFault_Handler
+                0x080062a0        0x8 ./app/src/stm32f0xx_it.o
+                0x080062a0                HardFault_Handler
+ .text.EXTI4_15_IRQHandler
+                0x080062a8       0x44 ./app/src/stm32f0xx_it.o
+                0x080062a8                EXTI4_15_IRQHandler
  .text.__NVIC_EnableIRQ
-                0x08006a48       0x34 ./bsp/src/bsp.o
+                0x080062ec       0x34 ./bsp/src/bsp.o
  .text.__NVIC_SetPriority
-                0x08006a7c       0xdc ./bsp/src/bsp.o
+                0x08006320       0xdc ./bsp/src/bsp.o
  .text.BSP_LED_Init
-                0x08006b58       0x98 ./bsp/src/bsp.o
-                0x08006b58                BSP_LED_Init
- .text.BSP_LED_On
-                0x08006bf0       0x12 ./bsp/src/bsp.o
-                0x08006bf0                BSP_LED_On
- .text.BSP_LED_Off
-                0x08006c02       0x14 ./bsp/src/bsp.o
-                0x08006c02                BSP_LED_Off
+                0x080063fc       0x98 ./bsp/src/bsp.o
+                0x080063fc                BSP_LED_Init
  .text.BSP_LED_Toggle
-                0x08006c16       0x1a ./bsp/src/bsp.o
-                0x08006c16                BSP_LED_Toggle
+                0x08006494       0x1a ./bsp/src/bsp.o
+                0x08006494                BSP_LED_Toggle
+ *fill*         0x080064ae        0x2 
  .text.BSP_PB_Init
-                0x08006c30       0x9c ./bsp/src/bsp.o
-                0x08006c30                BSP_PB_Init
+                0x080064b0       0x9c ./bsp/src/bsp.o
+                0x080064b0                BSP_PB_Init
  .text.BSP_Console_Init
-                0x08006ccc       0xc8 ./bsp/src/bsp.o
-                0x08006ccc                BSP_Console_Init
+                0x0800654c       0xc8 ./bsp/src/bsp.o
+                0x0800654c                BSP_Console_Init
  .text.BSP_NVIC_Init
-                0x08006d94       0x74 ./bsp/src/bsp.o
-                0x08006d94                BSP_NVIC_Init
- .text.BSP_DELAY_ms
-                0x08006e08       0x30 ./bsp/src/bsp.o
-                0x08006e08                BSP_DELAY_ms
+                0x08006614       0x74 ./bsp/src/bsp.o
+                0x08006614                BSP_NVIC_Init
  .text.Reset_Handler
-                0x08006e38       0x50 ./cmsis/device/src/startup_stm32f072xb.o
-                0x08006e38                Reset_Handler
+                0x08006688       0x50 ./cmsis/device/src/startup_stm32f072xb.o
+                0x08006688                Reset_Handler
  .text.Default_Handler
-                0x08006e88        0x2 ./cmsis/device/src/startup_stm32f072xb.o
-                0x08006e88                TIM1_CC_IRQHandler
-                0x08006e88                TSC_IRQHandler
-                0x08006e88                HardFault_Handler
-                0x08006e88                ADC1_COMP_IRQHandler
-                0x08006e88                NMI_Handler
-                0x08006e88                I2C1_IRQHandler
-                0x08006e88                RCC_CRS_IRQHandler
-                0x08006e88                SPI1_IRQHandler
-                0x08006e88                TIM6_DAC_IRQHandler
-                0x08006e88                USART3_4_IRQHandler
-                0x08006e88                EXTI2_3_IRQHandler
-                0x08006e88                I2C2_IRQHandler
-                0x08006e88                TIM17_IRQHandler
-                0x08006e88                CEC_CAN_IRQHandler
-                0x08006e88                RTC_IRQHandler
-                0x08006e88                PVD_VDDIO2_IRQHandler
-                0x08006e88                DMA1_Channel4_5_6_7_IRQHandler
-                0x08006e88                TIM16_IRQHandler
-                0x08006e88                TIM3_IRQHandler
-                0x08006e88                EXTI4_15_IRQHandler
-                0x08006e88                DMA1_Channel1_IRQHandler
-                0x08006e88                Default_Handler
-                0x08006e88                TIM14_IRQHandler
-                0x08006e88                TIM7_IRQHandler
-                0x08006e88                TIM15_IRQHandler
-                0x08006e88                EXTI0_1_IRQHandler
-                0x08006e88                USB_IRQHandler
-                0x08006e88                SPI2_IRQHandler
-                0x08006e88                WWDG_IRQHandler
-                0x08006e88                TIM2_IRQHandler
-                0x08006e88                DMA1_Channel2_3_IRQHandler
-                0x08006e88                USART2_IRQHandler
-                0x08006e88                FLASH_IRQHandler
-                0x08006e88                USART1_IRQHandler
-                0x08006e88                TIM1_BRK_UP_TRG_COM_IRQHandler
+                0x080066d8        0x2 ./cmsis/device/src/startup_stm32f072xb.o
+                0x080066d8                TIM1_CC_IRQHandler
+                0x080066d8                TSC_IRQHandler
+                0x080066d8                ADC1_COMP_IRQHandler
+                0x080066d8                I2C1_IRQHandler
+                0x080066d8                RCC_CRS_IRQHandler
+                0x080066d8                SPI1_IRQHandler
+                0x080066d8                TIM6_DAC_IRQHandler
+                0x080066d8                USART3_4_IRQHandler
+                0x080066d8                EXTI2_3_IRQHandler
+                0x080066d8                I2C2_IRQHandler
+                0x080066d8                TIM17_IRQHandler
+                0x080066d8                CEC_CAN_IRQHandler
+                0x080066d8                RTC_IRQHandler
+                0x080066d8                PVD_VDDIO2_IRQHandler
+                0x080066d8                DMA1_Channel4_5_6_7_IRQHandler
+                0x080066d8                TIM16_IRQHandler
+                0x080066d8                TIM3_IRQHandler
+                0x080066d8                DMA1_Channel1_IRQHandler
+                0x080066d8                Default_Handler
+                0x080066d8                TIM14_IRQHandler
+                0x080066d8                TIM7_IRQHandler
+                0x080066d8                TIM15_IRQHandler
+                0x080066d8                EXTI0_1_IRQHandler
+                0x080066d8                USB_IRQHandler
+                0x080066d8                SPI2_IRQHandler
+                0x080066d8                WWDG_IRQHandler
+                0x080066d8                TIM2_IRQHandler
+                0x080066d8                DMA1_Channel2_3_IRQHandler
+                0x080066d8                USART2_IRQHandler
+                0x080066d8                FLASH_IRQHandler
+                0x080066d8                USART1_IRQHandler
+                0x080066d8                TIM1_BRK_UP_TRG_COM_IRQHandler
  .text.SystemInit
-                0x08006e8a        0xa ./cmsis/device/src/system_stm32f0xx.o
-                0x08006e8a                SystemInit
+                0x080066da        0xa ./cmsis/device/src/system_stm32f0xx.o
+                0x080066da                SystemInit
  .text.SystemCoreClockUpdate
-                0x08006e94      0x10c ./cmsis/device/src/system_stm32f0xx.o
-                0x08006e94                SystemCoreClockUpdate
- .text.memset   0x08006fa0       0x10 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-memset.o)
-                0x08006fa0                memset
+                0x080066e4      0x10c ./cmsis/device/src/system_stm32f0xx.o
+                0x080066e4                SystemCoreClockUpdate
+ .text.memset   0x080067f0       0x10 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-memset.o)
+                0x080067f0                memset
  .text.__libc_init_array
-                0x08006fb0       0x48 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-init.o)
-                0x08006fb0                __libc_init_array
- .text.memcpy   0x08006ff8       0x12 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-memcpy-stub.o)
-                0x08006ff8                memcpy
+                0x08006800       0x48 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-init.o)
+                0x08006800                __libc_init_array
+ .text.memcpy   0x08006848       0x12 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-memcpy-stub.o)
+                0x08006848                memcpy
  *(.glue_7)
- .glue_7        0x0800700a        0x0 linker stubs
+ .glue_7        0x0800685a        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x0800700a        0x0 linker stubs
+ .glue_7t       0x0800685a        0x0 linker stubs
  *(.eh_frame)
- *fill*         0x0800700a        0x2 
- .eh_frame      0x0800700c        0x0 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crtbegin.o
+ *fill*         0x0800685a        0x2 
+ .eh_frame      0x0800685c        0x0 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crtbegin.o
  *(.init)
- .init          0x0800700c        0x4 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crti.o
-                0x0800700c                _init
- .init          0x08007010        0x8 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crtn.o
+ .init          0x0800685c        0x4 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crti.o
+                0x0800685c                _init
+ .init          0x08006860        0x8 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crtn.o
  *(.fini)
- .fini          0x08007018        0x4 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crti.o
-                0x08007018                _fini
- .fini          0x0800701c        0x8 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crtn.o
-                0x08007024                        . = ALIGN (0x4)
-                0x08007024                        _etext = .
+ .fini          0x08006868        0x4 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crti.o
+                0x08006868                _fini
+ .fini          0x0800686c        0x8 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crtn.o
+                0x08006874                        . = ALIGN (0x4)
+                0x08006874                        _etext = .
 
-.vfp11_veneer   0x08007024        0x0
- .vfp11_veneer  0x08007024        0x0 linker stubs
+.vfp11_veneer   0x08006874        0x0
+ .vfp11_veneer  0x08006874        0x0 linker stubs
 
-.v4_bx          0x08007024        0x0
- .v4_bx         0x08007024        0x0 linker stubs
+.v4_bx          0x08006874        0x0
+ .v4_bx         0x08006874        0x0 linker stubs
 
-.iplt           0x08007024        0x0
- .iplt          0x08007024        0x0 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crtbegin.o
+.iplt           0x08006874        0x0
+ .iplt          0x08006874        0x0 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crtbegin.o
 
-.rodata         0x08007024      0x74c
-                0x08007024                        . = ALIGN (0x4)
+.rodata         0x08006874      0x4f0
+                0x08006874                        . = ALIGN (0x4)
  *(.rodata)
- .rodata        0x08007024       0x15 ./FreeRTOS/queue.o
- *fill*         0x08007039        0x3 
- .rodata        0x0800703c       0x19 ./FreeRTOS/tasks.o
- *fill*         0x08007055        0x3 
- .rodata        0x08007058       0x25 ./FreeRTOS/timers.o
- *fill*         0x0800707d        0x3 
- .rodata        0x08007080       0x28 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
- .rodata        0x080070a8       0x26 ./FreeRTOS/portable/MemMang/heap_1.o
- *fill*         0x080070ce        0x2 
- .rodata        0x080070d0        0x9 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
- *fill*         0x080070d9        0x3 
- .rodata        0x080070dc        0xf ./TraceRecorder/streamports/Jlink_RTT/trcStreamPort.o
- *fill*         0x080070eb        0x1 
- .rodata        0x080070ec        0x1 ./TraceRecorder/trcEntryTable.o
- *fill*         0x080070ed        0x3 
- .rodata        0x080070f0      0x1c4 ./TraceRecorder/trcError.o
- .rodata        0x080072b4       0x13 ./TraceRecorder/trcKernelPort.o
- *fill*         0x080072c7        0x1 
- .rodata        0x080072c8        0x1 ./TraceRecorder/trcObject.o
- *fill*         0x080072c9        0x3 
- .rodata        0x080072cc       0x1c ./TraceRecorder/trcPrint.o
- .rodata        0x080072e8        0x9 ./TraceRecorder/trcStreamingRecorder.o
- *fill*         0x080072f1        0x3 
- .rodata        0x080072f4      0x3d2 ./app/src/main.o
- *fill*         0x080076c6        0x2 
- .rodata        0x080076c8        0x7 ./app/src/printf-stdarg.o
+ .rodata        0x08006874       0x15 ./FreeRTOS/queue.o
+ *fill*         0x08006889        0x3 
+ .rodata        0x0800688c       0x19 ./FreeRTOS/tasks.o
+ *fill*         0x080068a5        0x3 
+ .rodata        0x080068a8       0x25 ./FreeRTOS/timers.o
+ *fill*         0x080068cd        0x3 
+ .rodata        0x080068d0       0x28 ./FreeRTOS/portable/GCC/ARM_CM0/port.o
+ .rodata        0x080068f8       0x26 ./FreeRTOS/portable/MemMang/heap_1.o
+ *fill*         0x0800691e        0x2 
+ .rodata        0x08006920        0x9 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
+ *fill*         0x08006929        0x3 
+ .rodata        0x0800692c        0xf ./TraceRecorder/streamports/Jlink_RTT/trcStreamPort.o
+ *fill*         0x0800693b        0x1 
+ .rodata        0x0800693c        0x1 ./TraceRecorder/trcEntryTable.o
+ *fill*         0x0800693d        0x3 
+ .rodata        0x08006940      0x1c4 ./TraceRecorder/trcError.o
+ .rodata        0x08006b04       0x13 ./TraceRecorder/trcKernelPort.o
+ *fill*         0x08006b17        0x1 
+ .rodata        0x08006b18        0x1 ./TraceRecorder/trcObject.o
+ *fill*         0x08006b19        0x3 
+ .rodata        0x08006b1c       0x1c ./TraceRecorder/trcPrint.o
+ .rodata        0x08006b38        0x9 ./TraceRecorder/trcStreamingRecorder.o
+ *fill*         0x08006b41        0x3 
+ .rodata        0x08006b44      0x176 ./app/src/main.o
+ *fill*         0x08006cba        0x2 
+ .rodata        0x08006cbc        0x7 ./app/src/printf-stdarg.o
  *(.rodata*)
- *fill*         0x080076cf        0x1 
+ *fill*         0x08006cc3        0x1 
  .rodata.prvProcessReceivedCommands
-                0x080076d0       0x28 ./FreeRTOS/timers.o
+                0x08006cc4       0x28 ./FreeRTOS/timers.o
  .rodata._aInitStr.0
-                0x080076f8       0x11 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
- *fill*         0x08007709        0x3 
+                0x08006cec       0x11 ./TraceRecorder/streamports/Jlink_RTT/SEGGER_RTT.o
+ *fill*         0x08006cfd        0x3 
  .rodata.prvTraceErrorGetDescription
-                0x0800770c       0x3c ./TraceRecorder/trcError.o
+                0x08006d00       0x3c ./TraceRecorder/trcError.o
  .rodata.prvTraceVPrintF
-                0x08007748       0x18 ./TraceRecorder/trcPrint.o
+                0x08006d3c       0x18 ./TraceRecorder/trcPrint.o
  .rodata.AHBPrescTable
-                0x08007760       0x10 ./cmsis/device/src/system_stm32f0xx.o
-                0x08007760                AHBPrescTable
-                0x08007770                        . = ALIGN (0x4)
+                0x08006d54       0x10 ./cmsis/device/src/system_stm32f0xx.o
+                0x08006d54                AHBPrescTable
+                0x08006d64                        . = ALIGN (0x4)
 
-.rel.dyn        0x08007770        0x0
- .rel.iplt      0x08007770        0x0 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crtbegin.o
+.rel.dyn        0x08006d64        0x0
+ .rel.iplt      0x08006d64        0x0 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x08007770        0x0
-                0x08007770                        __exidx_start = .
+.ARM            0x08006d64        0x0
+                0x08006d64                        __exidx_start = .
  *(.ARM.exidx*)
-                0x08007770                        __exidx_end = .
+                0x08006d64                        __exidx_end = .
 
-.preinit_array  0x08007770        0x0
-                0x08007770                        PROVIDE (__preinit_array_start = .)
+.preinit_array  0x08006d64        0x0
+                0x08006d64                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x08007770                        PROVIDE (__preinit_array_end = .)
+                0x08006d64                        PROVIDE (__preinit_array_end = .)
 
-.init_array     0x08007770        0x4
-                0x08007770                        PROVIDE (__init_array_start = .)
+.init_array     0x08006d64        0x4
+                0x08006d64                        PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x08007770        0x4 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crtbegin.o
-                0x08007774                        PROVIDE (__init_array_end = .)
+ .init_array    0x08006d64        0x4 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crtbegin.o
+                0x08006d68                        PROVIDE (__init_array_end = .)
 
-.fini_array     0x08007774        0x4
+.fini_array     0x08006d68        0x4
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x08007774        0x4 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crtbegin.o
+ .fini_array    0x08006d68        0x4 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x08007778                        _sidata = LOADADDR (.data)
+                0x08006d6c                        _sidata = LOADADDR (.data)
 
-.data           0x20000000        0xc load address 0x08007778
+.data           0x20000000        0xc load address 0x08006d6c
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sdata = .
  *(.data)
@@ -7993,11 +8158,11 @@ LOAD C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                 0x2000000c                        . = ALIGN (0x4)
                 0x2000000c                        _edata = .
 
-.igot.plt       0x2000000c        0x0 load address 0x08007784
+.igot.plt       0x2000000c        0x0 load address 0x08006d78
  .igot.plt      0x2000000c        0x0 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crtbegin.o
                 0x2000000c                        . = ALIGN (0x4)
 
-.bss            0x2000000c     0x307c load address 0x08007784
+.bss            0x2000000c     0x3074 load address 0x08006d78
                 0x2000000c                        _sbss = .
                 0x2000000c                        __bss_start__ = _sbss
  *(.bss)
@@ -8124,32 +8289,26 @@ LOAD C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .bss.vTaskPub_handle
                 0x20003074        0x4 ./app/src/main.o
                 0x20003074                vTaskPub_handle
- .bss.xSem1     0x20003078        0x4 ./app/src/main.o
-                0x20003078                xSem1
- .bss.xSem2     0x2000307c        0x4 ./app/src/main.o
-                0x2000307c                xSem2
+ .bss.xSem      0x20003078        0x4 ./app/src/main.o
+                0x20003078                xSem
  .bss.xSubscribeQueue
-                0x20003080        0x4 ./app/src/main.o
-                0x20003080                xSubscribeQueue
- .bss.sensor_states
-                0x20003084        0x2 ./app/src/main.o
-                0x20003084                sensor_states
+                0x2000307c        0x4 ./app/src/main.o
+                0x2000307c                xSubscribeQueue
  *(COMMON)
-                0x20003088                        . = ALIGN (0x4)
- *fill*         0x20003086        0x2 
-                0x20003088                        _ebss = .
-                0x20003088                        __bss_end__ = _ebss
+                0x20003080                        . = ALIGN (0x4)
+                0x20003080                        _ebss = .
+                0x20003080                        __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x20003088      0x600 load address 0x08007784
-                0x20003088                        . = ALIGN (0x8)
+                0x20003080      0x600 load address 0x08006d78
+                0x20003080                        . = ALIGN (0x8)
                 [!provide]                        PROVIDE (end = .)
                 [!provide]                        PROVIDE (_end = .)
-                0x20003288                        . = (. + _Min_Heap_Size)
- *fill*         0x20003088      0x200 
-                0x20003688                        . = (. + _Min_Stack_Size)
- *fill*         0x20003288      0x400 
-                0x20003688                        . = ALIGN (0x8)
+                0x20003280                        . = (. + _Min_Heap_Size)
+ *fill*         0x20003080      0x200 
+                0x20003680                        . = (. + _Min_Stack_Size)
+ *fill*         0x20003280      0x400 
+                0x20003680                        . = ALIGN (0x8)
 
 /DISCARD/
  libc.a(*)
@@ -8218,30 +8377,32 @@ LOAD C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .ARM.attributes
                 0x000004c2       0x2c ./app/src/printf-stdarg.o
  .ARM.attributes
-                0x000004ee       0x2c ./bsp/src/bsp.o
+                0x000004ee       0x2c ./app/src/stm32f0xx_it.o
  .ARM.attributes
-                0x0000051a       0x21 ./cmsis/device/src/startup_stm32f072xb.o
+                0x0000051a       0x2c ./bsp/src/bsp.o
  .ARM.attributes
-                0x0000053b       0x2c ./cmsis/device/src/system_stm32f0xx.o
+                0x00000546       0x21 ./cmsis/device/src/startup_stm32f072xb.o
  .ARM.attributes
-                0x00000567       0x2c C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-memset.o)
+                0x00000567       0x2c ./cmsis/device/src/system_stm32f0xx.o
  .ARM.attributes
-                0x00000593       0x2c C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-init.o)
+                0x00000593       0x2c C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-memset.o)
  .ARM.attributes
-                0x000005bf       0x2c C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-memcpy-stub.o)
+                0x000005bf       0x2c C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-init.o)
  .ARM.attributes
-                0x000005eb       0x1e C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crtn.o
+                0x000005eb       0x2c C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-memcpy-stub.o)
  .ARM.attributes
-                0x00000609       0x1e C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp\libgcc.a(_udivsi3.o)
+                0x00000617       0x1e C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp/crtn.o
  .ARM.attributes
-                0x00000627       0x1e C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp\libgcc.a(_dvmd_tls.o)
+                0x00000635       0x1e C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp\libgcc.a(_udivsi3.o)
+ .ARM.attributes
+                0x00000653       0x1e C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp\libgcc.a(_dvmd_tls.o)
 OUTPUT(blink3.elf elf32-littlearm)
 LOAD linker stubs
 LOAD C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a
 LOAD C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libm.a
 LOAD C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp\libgcc.a
 
-.debug_info     0x00000000     0xe854
+.debug_info     0x00000000     0xe881
  .debug_info    0x00000000      0x2af ./FreeRTOS/list.o
  .debug_info    0x000002af     0x12d8 ./FreeRTOS/queue.o
  .debug_info    0x00001587     0x1b4e ./FreeRTOS/tasks.o
@@ -8267,13 +8428,14 @@ LOAD C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_info    0x0000c31b      0x202 ./TraceRecorder/trcString.o
  .debug_info    0x0000c51d      0xa38 ./TraceRecorder/trcTask.o
  .debug_info    0x0000cf55      0x17c ./TraceRecorder/trcTimestamp.o
- .debug_info    0x0000d0d1      0x8dd ./app/src/main.o
- .debug_info    0x0000d9ae      0x459 ./app/src/printf-stdarg.o
- .debug_info    0x0000de07      0x7e2 ./bsp/src/bsp.o
- .debug_info    0x0000e5e9       0x30 ./cmsis/device/src/startup_stm32f072xb.o
- .debug_info    0x0000e619      0x23b ./cmsis/device/src/system_stm32f0xx.o
+ .debug_info    0x0000d0d1      0x769 ./app/src/main.o
+ .debug_info    0x0000d83a      0x459 ./app/src/printf-stdarg.o
+ .debug_info    0x0000dc93      0x1a1 ./app/src/stm32f0xx_it.o
+ .debug_info    0x0000de34      0x7e2 ./bsp/src/bsp.o
+ .debug_info    0x0000e616       0x30 ./cmsis/device/src/startup_stm32f072xb.o
+ .debug_info    0x0000e646      0x23b ./cmsis/device/src/system_stm32f0xx.o
 
-.debug_abbrev   0x00000000     0x3585
+.debug_abbrev   0x00000000     0x366e
  .debug_abbrev  0x00000000       0xf5 ./FreeRTOS/list.o
  .debug_abbrev  0x000000f5      0x2c2 ./FreeRTOS/queue.o
  .debug_abbrev  0x000003b7      0x32f ./FreeRTOS/tasks.o
@@ -8299,13 +8461,14 @@ LOAD C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_abbrev  0x00002a2e       0xdd ./TraceRecorder/trcString.o
  .debug_abbrev  0x00002b0b      0x248 ./TraceRecorder/trcTask.o
  .debug_abbrev  0x00002d53       0xc8 ./TraceRecorder/trcTimestamp.o
- .debug_abbrev  0x00002e1b      0x2bd ./app/src/main.o
- .debug_abbrev  0x000030d8      0x192 ./app/src/printf-stdarg.o
- .debug_abbrev  0x0000326a      0x1db ./bsp/src/bsp.o
- .debug_abbrev  0x00003445       0x24 ./cmsis/device/src/startup_stm32f072xb.o
- .debug_abbrev  0x00003469      0x11c ./cmsis/device/src/system_stm32f0xx.o
+ .debug_abbrev  0x00002e1b      0x290 ./app/src/main.o
+ .debug_abbrev  0x000030ab      0x192 ./app/src/printf-stdarg.o
+ .debug_abbrev  0x0000323d      0x116 ./app/src/stm32f0xx_it.o
+ .debug_abbrev  0x00003353      0x1db ./bsp/src/bsp.o
+ .debug_abbrev  0x0000352e       0x24 ./cmsis/device/src/startup_stm32f072xb.o
+ .debug_abbrev  0x00003552      0x11c ./cmsis/device/src/system_stm32f0xx.o
 
-.debug_aranges  0x00000000      0xcf0
+.debug_aranges  0x00000000      0xd28
  .debug_aranges
                 0x00000000       0x40 ./FreeRTOS/list.o
  .debug_aranges
@@ -8357,18 +8520,20 @@ LOAD C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_aranges
                 0x00000b60       0x20 ./TraceRecorder/trcTimestamp.o
  .debug_aranges
-                0x00000b80       0x60 ./app/src/main.o
+                0x00000b80       0x68 ./app/src/main.o
  .debug_aranges
-                0x00000be0       0x48 ./app/src/printf-stdarg.o
+                0x00000be8       0x48 ./app/src/printf-stdarg.o
  .debug_aranges
-                0x00000c28       0x78 ./bsp/src/bsp.o
+                0x00000c30       0x30 ./app/src/stm32f0xx_it.o
  .debug_aranges
-                0x00000ca0       0x28 ./cmsis/device/src/startup_stm32f072xb.o
+                0x00000c60       0x78 ./bsp/src/bsp.o
  .debug_aranges
-                0x00000cc8       0x28 ./cmsis/device/src/system_stm32f0xx.o
+                0x00000cd8       0x28 ./cmsis/device/src/startup_stm32f072xb.o
+ .debug_aranges
+                0x00000d00       0x28 ./cmsis/device/src/system_stm32f0xx.o
 
 .debug_rnglists
-                0x00000000      0x995
+                0x00000000      0x9b8
  .debug_rnglists
                 0x00000000       0x2b ./FreeRTOS/list.o
  .debug_rnglists
@@ -8420,17 +8585,19 @@ LOAD C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_rnglists
                 0x00000879       0x13 ./TraceRecorder/trcTimestamp.o
  .debug_rnglists
-                0x0000088c       0x49 ./app/src/main.o
+                0x0000088c       0x4d ./app/src/main.o
  .debug_rnglists
-                0x000008d5       0x34 ./app/src/printf-stdarg.o
+                0x000008d9       0x34 ./app/src/printf-stdarg.o
  .debug_rnglists
-                0x00000909       0x59 ./bsp/src/bsp.o
+                0x0000090d       0x1f ./app/src/stm32f0xx_it.o
  .debug_rnglists
-                0x00000962       0x19 ./cmsis/device/src/startup_stm32f072xb.o
+                0x0000092c       0x59 ./bsp/src/bsp.o
  .debug_rnglists
-                0x0000097b       0x1a ./cmsis/device/src/system_stm32f0xx.o
+                0x00000985       0x19 ./cmsis/device/src/startup_stm32f072xb.o
+ .debug_rnglists
+                0x0000099e       0x1a ./cmsis/device/src/system_stm32f0xx.o
 
-.debug_macro    0x00000000     0x70de
+.debug_macro    0x00000000     0x7543
  .debug_macro   0x00000000      0x3be ./FreeRTOS/list.o
  .debug_macro   0x000003be      0x455 ./FreeRTOS/queue.o
  .debug_macro   0x00000813       0x16 ./FreeRTOS/queue.o
@@ -8464,14 +8631,15 @@ LOAD C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_macro   0x00005b5e      0x3ac ./TraceRecorder/trcString.o
  .debug_macro   0x00005f0a      0x3b8 ./TraceRecorder/trcTask.o
  .debug_macro   0x000062c2      0x3ac ./TraceRecorder/trcTimestamp.o
- .debug_macro   0x0000666e      0x433 ./app/src/main.o
- .debug_macro   0x00006aa1       0x86 ./app/src/main.o
- .debug_macro   0x00006b27       0x62 ./app/src/main.o
- .debug_macro   0x00006b89       0xd5 ./app/src/printf-stdarg.o
- .debug_macro   0x00006c5e      0x3b4 ./bsp/src/bsp.o
- .debug_macro   0x00007012       0xcc ./cmsis/device/src/system_stm32f0xx.o
+ .debug_macro   0x0000666e      0x453 ./app/src/main.o
+ .debug_macro   0x00006ac1       0x86 ./app/src/main.o
+ .debug_macro   0x00006b47       0x62 ./app/src/main.o
+ .debug_macro   0x00006ba9       0xd5 ./app/src/printf-stdarg.o
+ .debug_macro   0x00006c7e      0x445 ./app/src/stm32f0xx_it.o
+ .debug_macro   0x000070c3      0x3b4 ./bsp/src/bsp.o
+ .debug_macro   0x00007477       0xcc ./cmsis/device/src/system_stm32f0xx.o
 
-.debug_line     0x00000000    0x1aa3b
+.debug_line     0x00000000    0x1b669
  .debug_line    0x00000000      0xcfe ./FreeRTOS/list.o
  .debug_line    0x00000cfe     0x1aed ./FreeRTOS/queue.o
  .debug_line    0x000027eb     0x1d31 ./FreeRTOS/tasks.o
@@ -8497,13 +8665,14 @@ LOAD C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_line    0x000156f4      0xc52 ./TraceRecorder/trcString.o
  .debug_line    0x00016346      0xce8 ./TraceRecorder/trcTask.o
  .debug_line    0x0001702e      0xc31 ./TraceRecorder/trcTimestamp.o
- .debug_line    0x00017c5f     0x1096 ./app/src/main.o
- .debug_line    0x00018cf5      0x82a ./app/src/printf-stdarg.o
- .debug_line    0x0001951f      0xeea ./bsp/src/bsp.o
- .debug_line    0x0001a409       0x7b ./cmsis/device/src/startup_stm32f072xb.o
- .debug_line    0x0001a484      0x5b7 ./cmsis/device/src/system_stm32f0xx.o
+ .debug_line    0x00017c5f      0xfb7 ./app/src/main.o
+ .debug_line    0x00018c16      0x82a ./app/src/printf-stdarg.o
+ .debug_line    0x00019440      0xd0d ./app/src/stm32f0xx_it.o
+ .debug_line    0x0001a14d      0xeea ./bsp/src/bsp.o
+ .debug_line    0x0001b037       0x7b ./cmsis/device/src/startup_stm32f072xb.o
+ .debug_line    0x0001b0b2      0x5b7 ./cmsis/device/src/system_stm32f0xx.o
 
-.debug_str      0x00000000    0x7958e
+.debug_str      0x00000000    0x795e4
  .debug_str     0x00000000    0x6fdad ./FreeRTOS/list.o
                               0x7005c (size before relaxing)
  .debug_str     0x0006fdad     0x26a5 ./FreeRTOS/queue.o
@@ -8554,15 +8723,17 @@ LOAD C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                               0x7073d (size before relaxing)
  .debug_str     0x0007869e       0x20 ./TraceRecorder/trcTimestamp.o
                               0x6fec3 (size before relaxing)
- .debug_str     0x000786be      0xabe ./app/src/main.o
-                              0x736cb (size before relaxing)
- .debug_str     0x0007917c       0x9a ./app/src/printf-stdarg.o
+ .debug_str     0x000786be      0xa66 ./app/src/main.o
+                              0x73674 (size before relaxing)
+ .debug_str     0x00079124       0xc6 ./app/src/printf-stdarg.o
                               0x5a882 (size before relaxing)
- .debug_str     0x00079216      0x268 ./bsp/src/bsp.o
+ .debug_str     0x000791ea       0x7b ./app/src/stm32f0xx_it.o
+                              0x732e9 (size before relaxing)
+ .debug_str     0x00079265      0x26f ./bsp/src/bsp.o
                               0x70220 (size before relaxing)
- .debug_str     0x0007947e       0x46 ./cmsis/device/src/startup_stm32f072xb.o
+ .debug_str     0x000794d4       0x46 ./cmsis/device/src/startup_stm32f072xb.o
                                  0x80 (size before relaxing)
- .debug_str     0x000794c4       0xca ./cmsis/device/src/system_stm32f0xx.o
+ .debug_str     0x0007951a       0xca ./cmsis/device/src/system_stm32f0xx.o
                               0x5a799 (size before relaxing)
 
 .comment        0x00000000       0x43
@@ -8594,10 +8765,11 @@ LOAD C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .comment       0x00000043       0x44 ./TraceRecorder/trcTimestamp.o
  .comment       0x00000043       0x44 ./app/src/main.o
  .comment       0x00000043       0x44 ./app/src/printf-stdarg.o
+ .comment       0x00000043       0x44 ./app/src/stm32f0xx_it.o
  .comment       0x00000043       0x44 ./bsp/src/bsp.o
  .comment       0x00000043       0x44 ./cmsis/device/src/system_stm32f0xx.o
 
-.debug_frame    0x00000000     0x2a04
+.debug_frame    0x00000000     0x2a88
  .debug_frame   0x00000000       0xb0 ./FreeRTOS/list.o
  .debug_frame   0x000000b0      0x438 ./FreeRTOS/queue.o
  .debug_frame   0x000004e8      0x674 ./FreeRTOS/tasks.o
@@ -8623,14 +8795,15 @@ LOAD C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_frame   0x00002480       0x50 ./TraceRecorder/trcString.o
  .debug_frame   0x000024d0       0x90 ./TraceRecorder/trcTask.o
  .debug_frame   0x00002560       0x30 ./TraceRecorder/trcTimestamp.o
- .debug_frame   0x00002590      0x138 ./app/src/main.o
- .debug_frame   0x000026c8       0xe8 ./app/src/printf-stdarg.o
- .debug_frame   0x000027b0      0x174 ./bsp/src/bsp.o
- .debug_frame   0x00002924       0x4c ./cmsis/device/src/system_stm32f0xx.o
- .debug_frame   0x00002970       0x20 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-memset.o)
- .debug_frame   0x00002990       0x2c C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-init.o)
- .debug_frame   0x000029bc       0x28 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-memcpy-stub.o)
- .debug_frame   0x000029e4       0x20 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp\libgcc.a(_udivsi3.o)
+ .debug_frame   0x00002590      0x154 ./app/src/main.o
+ .debug_frame   0x000026e4       0xe8 ./app/src/printf-stdarg.o
+ .debug_frame   0x000027cc       0x68 ./app/src/stm32f0xx_it.o
+ .debug_frame   0x00002834      0x174 ./bsp/src/bsp.o
+ .debug_frame   0x000029a8       0x4c ./cmsis/device/src/system_stm32f0xx.o
+ .debug_frame   0x000029f4       0x20 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-memset.o)
+ .debug_frame   0x00002a14       0x2c C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-init.o)
+ .debug_frame   0x00002a40       0x28 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc_nano.a(libc_a-memcpy-stub.o)
+ .debug_frame   0x00002a68       0x20 C:/ST/STM32CubeIDE_1.15.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v6-m/nofp\libgcc.a(_udivsi3.o)
 
 .debug_line_str
                 0x00000000       0x64

@@ -7,17 +7,23 @@
 C_SRCS += \
 ../app/src/main.c \
 ../app/src/printf-stdarg.c \
-../app/src/stm32f0xx_it.c 
+../app/src/readTask.c \
+../app/src/stm32f0xx_it.c \
+../app/src/writeTask.c 
 
 OBJS += \
 ./app/src/main.o \
 ./app/src/printf-stdarg.o \
-./app/src/stm32f0xx_it.o 
+./app/src/readTask.o \
+./app/src/stm32f0xx_it.o \
+./app/src/writeTask.o 
 
 C_DEPS += \
 ./app/src/main.d \
 ./app/src/printf-stdarg.d \
-./app/src/stm32f0xx_it.d 
+./app/src/readTask.d \
+./app/src/stm32f0xx_it.d \
+./app/src/writeTask.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -27,7 +33,7 @@ app/src/%.o app/src/%.su app/src/%.cyclo: ../app/src/%.c app/src/subdir.mk
 clean: clean-app-2f-src
 
 clean-app-2f-src:
-	-$(RM) ./app/src/main.cyclo ./app/src/main.d ./app/src/main.o ./app/src/main.su ./app/src/printf-stdarg.cyclo ./app/src/printf-stdarg.d ./app/src/printf-stdarg.o ./app/src/printf-stdarg.su ./app/src/stm32f0xx_it.cyclo ./app/src/stm32f0xx_it.d ./app/src/stm32f0xx_it.o ./app/src/stm32f0xx_it.su
+	-$(RM) ./app/src/main.cyclo ./app/src/main.d ./app/src/main.o ./app/src/main.su ./app/src/printf-stdarg.cyclo ./app/src/printf-stdarg.d ./app/src/printf-stdarg.o ./app/src/printf-stdarg.su ./app/src/readTask.cyclo ./app/src/readTask.d ./app/src/readTask.o ./app/src/readTask.su ./app/src/stm32f0xx_it.cyclo ./app/src/stm32f0xx_it.d ./app/src/stm32f0xx_it.o ./app/src/stm32f0xx_it.su ./app/src/writeTask.cyclo ./app/src/writeTask.d ./app/src/writeTask.o ./app/src/writeTask.su
 
 .PHONY: clean-app-2f-src
 

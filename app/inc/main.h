@@ -22,6 +22,9 @@
 #include "event_groups.h"
 #include "stream_buffer.h"
 
+#include "readTask.h"
+#include "writeTask.h"
+
 /*
  * printf() and sprintf() from printf-stdarg.c
  */
