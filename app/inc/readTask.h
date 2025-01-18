@@ -4,13 +4,13 @@
  *  Created on: Jan 13, 2025
  *      Author: vinic
  */
-/*
+
 #ifndef INC_READTASK_H_
 #define INC_READTASK_H_
 
 #define MAX_SUBSCRIBERS 4
-#define SENSOR_TABLE_SIZE 2
 #define QUEUE_LENGTH 10
+#define SENSOR_TABLE_SIZE 2
 #define MAX_SEMAPHORE 10
 
 #include <stddef.h>
@@ -28,6 +28,8 @@
 #include "queue.h"
 #include "event_groups.h"
 
+void vTask1_Pub();
+void vTask2_Pub();
 void vTask_Pub(void *pvParameters);
 
 typedef struct {
@@ -36,11 +38,9 @@ typedef struct {
     uint8_t sensor_state;  // Awaited sensor state
 } subscribe_message_t;
 
-void vTask_Pub(void *pvParameters);
 BaseType_t subscribe(uint8_t sem_id, uint8_t sensor_id, uint8_t sensor_state);
 BaseType_t vTaskPubInit();
 
 extern xSemaphoreHandle sems[MAX_SEMAPHORE];
 
 #endif
-*/
