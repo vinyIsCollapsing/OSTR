@@ -110,11 +110,11 @@ extern xSemaphoreHandle xSem/*, xSem2*/;
 void EXTI4_15_IRQHandler() {
     portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
 
-    //if ((EXTI->PR & EXTI_PR_PR13_Msk) != 0) {
+    if ((EXTI->PR & EXTI_PR_PR13_Msk) != 0) {
         EXTI->PR = EXTI_PR_PR13;
         xSemaphoreGiveFromISR(xSem, &xHigherPriorityTaskWoken);
         portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
-    //}
+    }
     /*
      *
     if ((EXTI->PR & EXTI_PR_PR14_Msk) != 0) {

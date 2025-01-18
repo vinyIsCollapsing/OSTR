@@ -1,4 +1,5 @@
 app/src/main.o: ../app/src/main.c \
+ C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/app/inc/main.h \
  C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/cmsis/device/inc/stm32f0xx.h \
  C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/cmsis/device/inc/stm32f072xb.h \
  C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/cmsis/core/core_cm0.h \
@@ -54,7 +55,6 @@ app/src/main.o: ../app/src/main.c \
  C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/TraceRecorder/include/trcInterval.h \
  C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/TraceRecorder/include/trcStateMachine.h \
  C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/TraceRecorder/include/trcCounter.h \
- C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/app/inc/main.h \
  C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/app/inc/FreeRTOSConfig.h \
  C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/task.h \
  C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/list.h \
@@ -65,9 +65,8 @@ app/src/main.o: ../app/src/main.c \
  C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/queue.h \
  C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/event_groups.h \
  C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/timers.h \
- C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/stream_buffer.h \
- C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/app/inc/readTask.h \
- C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/app/inc/writeTask.h
+ C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/stream_buffer.h
+C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/app/inc/main.h:
 C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/cmsis/device/inc/stm32f0xx.h:
 C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/cmsis/device/inc/stm32f072xb.h:
 C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/cmsis/core/core_cm0.h:
@@ -123,7 +122,6 @@ C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/TraceRecorder/include/trcThr
 C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/TraceRecorder/include/trcInterval.h:
 C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/TraceRecorder/include/trcStateMachine.h:
 C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/TraceRecorder/include/trcCounter.h:
-C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/app/inc/main.h:
 C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/app/inc/FreeRTOSConfig.h:
 C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/task.h:
 C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/list.h:
@@ -135,5 +133,3 @@ C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/queue.h:
 C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/event_groups.h:
 C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/timers.h:
 C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/FreeRTOS/include/stream_buffer.h:
-C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/app/inc/readTask.h:
-C:/Users/vinic/STM32CubeIDE/workspace_1.15.0/blink3/app/inc/writeTask.h:

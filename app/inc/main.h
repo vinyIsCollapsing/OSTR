@@ -22,8 +22,8 @@
 #include "event_groups.h"
 #include "stream_buffer.h"
 
-#include "readTask.h"
-#include "writeTask.h"
+//#include "readTask.h"
+//#include "writeTask.h"
 
 /*
  * printf() and sprintf() from printf-stdarg.c
@@ -33,3 +33,5 @@ int my_printf	(const char *format, ...);
 int my_sprintf	(char *out, const char *format, ...);
 
 #endif /* APP_INC_MAIN_H_ */
+
+
