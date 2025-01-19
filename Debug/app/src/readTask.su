@@ -1,9 +1,9 @@
 ../app/src/readTask.c:21:12:vTaskPubInit	24	static
-../app/src/readTask.c:37:6:vTask1_Pub	8	static
-../app/src/readTask.c:60:6:vTask2_Pub	8	static
-../app/src/readTask.c:84:6:vTask_Pub	56	static
-../app/src/readTask.c:121:12:subscribe	32	static
-../app/src/readTask.c:133:13:updateSubs	24	static
-../app/src/readTask.c:161:13:print_subscription_table	40	static
-../app/src/readTask.c:167:13:uartSensor	24	static
-../app/src/readTask.c:186:13:publish	24	static
+../app/src/readTask.c:40:6:vTask1_Pub	8	static
+../app/src/readTask.c:63:6:vTask2_Pub	8	static
+../app/src/readTask.c:87:6:vTask_Pub	56	static
+../app/src/readTask.c:124:12:subscribe	32	static
+../app/src/readTask.c:136:13:updateSubs	24	static
+../app/src/readTask.c:164:13:print_subscription_table	40	static
+../app/src/readTask.c:170:13:uartSensor	24	static
+../app/src/readTask.c:189:13:publish	24	static

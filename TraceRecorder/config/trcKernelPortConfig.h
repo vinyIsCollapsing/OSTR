@@ -76,7 +76,7 @@ extern "C" {
  *
  * Default value is 0 (excluded) since dependent on event_groups.c
  */
-#define TRC_CFG_INCLUDE_EVENT_GROUP_EVENTS 1
+#define TRC_CFG_INCLUDE_EVENT_GROUP_EVENTS 0
 
 /**
  * @def TRC_CFG_INCLUDE_TIMER_EVENTS
@@ -86,7 +86,7 @@ extern "C" {
  *
  * Default value is 0 since dependent on timers.c
  */
-#define TRC_CFG_INCLUDE_TIMER_EVENTS 1
+#define TRC_CFG_INCLUDE_TIMER_EVENTS 0
 
 /**
  * @def TRC_CFG_INCLUDE_PEND_FUNC_CALL_EVENTS

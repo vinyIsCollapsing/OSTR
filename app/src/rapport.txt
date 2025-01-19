@@ -1,0 +1,5 @@
+3.1. Scénario #1 (Polling UART)
+task1: 		0.004%
+task2: 		0.003%
+taskWrite: 	70.08%
+taskIdle:	29.90%

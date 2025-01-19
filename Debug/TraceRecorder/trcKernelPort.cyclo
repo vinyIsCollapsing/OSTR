@@ -1,4 +1,3 @@
-../TraceRecorder/trcKernelPort.c:134:13:xTraceKernelPortGetUnusedStack	1
 ../TraceRecorder/trcKernelPort.c:143:13:xTraceKernelPortDelay	1
 ../TraceRecorder/trcKernelPort.c:150:15:xTraceKernelPortIsSchedulerSuspended	1
 ../TraceRecorder/trcKernelPort.c:171:13:xTraceKernelPortInitialize	2
@@ -7,5 +6,4 @@
 ../TraceRecorder/trcKernelPort.c:249:6:vTraceSetQueueName	1
 ../TraceRecorder/trcKernelPort.c:254:6:vTraceSetSemaphoreName	1
 ../TraceRecorder/trcKernelPort.c:259:6:vTraceSetMutexName	1
-../TraceRecorder/trcKernelPort.c:266:6:vTraceSetEventGroupName	1
 ../TraceRecorder/trcKernelPort.c:289:19:xTraceKernelPortGetSystemHeapHandle	1

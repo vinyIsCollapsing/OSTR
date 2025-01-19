@@ -1,4 +1,4 @@
-../TraceRecorder/trcStreamingRecorder.c:142:13:xTraceInitialize	19
+../TraceRecorder/trcStreamingRecorder.c:142:13:xTraceInitialize	18
 ../TraceRecorder/trcStreamingRecorder.c:274:13:xTraceHeaderInitialize	8
 ../TraceRecorder/trcStreamingRecorder.c:346:13:xTraceEnable	12
 ../TraceRecorder/trcStreamingRecorder.c:408:13:xTraceDisable	1

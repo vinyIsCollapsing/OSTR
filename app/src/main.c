@@ -15,9 +15,6 @@ xTaskHandle vTask2_handle;
 // Kernel objects
 xSemaphoreHandle xSem;
 
-typedef uint8_t command_message_t[60];				// Define the command_message_t type as an array of xx char
-
-
 // Main function
 int main()
 {
@@ -35,6 +32,7 @@ int main()
 	// Initialize Debug Console
 	BSP_Console_Init();
 	my_printf("Console Ready!\r\n");
+
 
 	// Start Trace Recording
 	xTraceEnable(TRC_START);		// xTraceEnable(TRC_START);
@@ -57,7 +55,8 @@ int main()
 	my_printf("Creating Tasks...");
     xTaskCreate(vTask1, "Task_1", 128, NULL, 1, &vTask1_handle);
     xTaskCreate(vTask2, "Task_2", 128, NULL, 1, &vTask2_handle);
-    vTaskPubInit();
+    //vTaskPubInit();
+    writeTaskInit();
 	my_printf("OK\r\n");
 
 	// Report Free Heap Size
@@ -84,8 +83,14 @@ int main()
  * Task_1
  */
 void vTask1(void *pvParameters) {
+	command_message_t msgTask1;
+
     while (1) {
-    	vTask1_Pub();
+    	// vTask1_Pub();
+
+    	my_sprintf((char *) msgTask1, "Arthour ! Pas changer assiette pour fromage !");
+    	sendMessage(&msgTask1);
+		vTaskDelay(100 / portTICK_PERIOD_MS);
     }
 }
 
@@ -93,8 +98,14 @@ void vTask1(void *pvParameters) {
  * Task_2
  */
 void vTask2(void *pvParameters) {
+	command_message_t msgTask2;
+
     while(1){
-    	vTask2_Pub();
+    	// vTask2_Pub();
+
+    	my_sprintf((char *) msgTask2, "Arthour ! Couhillere !");
+    	sendMessage(&msgTask2);
+    	vTaskDelay(100 / portTICK_PERIOD_MS);
     }
 }
 

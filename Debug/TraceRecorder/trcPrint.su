@@ -1,7 +1,0 @@
-../TraceRecorder/trcPrint.c:21:13:xTracePrintInitialize	16	static
-../TraceRecorder/trcPrint.c:37:13:xTracePrint	32	static
-../TraceRecorder/trcPrint.c:61:13:xTraceConsoleChannelPrintF	16	static
-../TraceRecorder/trcPrint.c:88:13:xTracePrintCompactF	68	static
-../TraceRecorder/trcPrint.c:166:13:xTracePrintF	28	static
-../TraceRecorder/trcPrint.c:185:13:xTraceVPrintF	56	static
-../TraceRecorder/trcPrint.c:229:20:prvTraceVPrintF	88	static

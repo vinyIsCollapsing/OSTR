@@ -77,12 +77,12 @@ extern "C" {
  *
  * Default value is 1.
  */
-#define TRC_CFG_INCLUDE_USER_EVENTS			1
+#define TRC_CFG_INCLUDE_USER_EVENTS			0
 #define TRC_CFG_INCLUDE_ISR_TRACING         0
 #define TRC_CFG_INCLUDE_READY_EVENTS        1
 #define TRC_CFG_INCLUDE_OSTICK_EVENTS       0
 
-#define TRC_CFG_ENABLE_STACK_MONITOR        1
+#define TRC_CFG_ENABLE_STACK_MONITOR        0
 #define TRC_CFG_STACK_MONITOR_MAX_TASKS     10
 #define TRC_CFG_STACK_MONITOR_MAX_REPORTS   1
 
