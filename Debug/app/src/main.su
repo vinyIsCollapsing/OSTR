@@ -1,7 +1,7 @@
 ../app/src/main.c:19:5:main	24	static
-../app/src/main.c:85:6:vTask1	48	static
-../app/src/main.c:100:6:vTask2	48	static
-../app/src/main.c:115:6:vApplicationMallocFailedHook	8	static
-../app/src/main.c:122:6:vAssertCalled	16	static,ignoring_inline_asm
-../app/src/main.c:146:6:vApplicationStackOverflowHook	16	static
-../app/src/main.c:151:13:SystemClock_Config	24	static
+../app/src/main.c:88:6:vTask1	48	static
+../app/src/main.c:103:6:vTask2	48	static
+../app/src/main.c:118:6:vApplicationMallocFailedHook	8	static
+../app/src/main.c:125:6:vAssertCalled	16	static,ignoring_inline_asm
+../app/src/main.c:149:6:vApplicationStackOverflowHook	16	static
+../app/src/main.c:154:13:SystemClock_Config	24	static

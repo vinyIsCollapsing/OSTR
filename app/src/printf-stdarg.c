@@ -27,21 +27,36 @@
 #define putchar(c) outbyte(c)
 */
 
-#include <stdarg.h>
-#include "stm32f0xx.h"
+#include "printf-stdarg.h"
 
-static void printchar(char **str, int c)
-{
+xSemaphoreHandle xSem_UART_TC;
+
+BaseType_t myPrintfInit(){
+	 xSem_UART_TC = xSemaphoreCreateBinary();
+	 if (xSem_UART_TC == NULL) {
+		 return pdFAIL;
+	 }
+	 return pdPASS;
+}
+
+
+static void printchar(char **str, int c){
+	portBASE_TYPE xStatus;
+
 	if (str) {
 		**str = c;
 		++(*str);
-	}
-	else
-	{
-		while ( (USART2->ISR & USART_ISR_TC) != USART_ISR_TC);
-		USART2->TDR = c;
+	} else {
+		xStatus = xSemaphoreTake(xSem_UART_TC, 100);
+		if (xStatus == pdPASS){
+			USART2->TDR = c;
+		} else {
+			while ( (USART2->ISR & USART_ISR_TC) != USART_ISR_TC);
+			USART2->TDR = c;
+		}
 	}
 }
+
 
 #define PAD_RIGHT 1
 #define PAD_ZERO 2

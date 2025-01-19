@@ -26,6 +26,8 @@
 #include "queue.h"
 #include "event_groups.h"
 
+#include "printf-stdarg.h"
+
 // #define SUBS_LEN 10
 #define COMMAND_MESSAGE_LENGTH 23
 #define WRITE_QUEUE_LENGTH 5

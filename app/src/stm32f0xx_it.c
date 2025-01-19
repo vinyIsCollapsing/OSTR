@@ -127,6 +127,21 @@ void EXTI4_15_IRQHandler() {
 
 }
 
+extern xSemaphoreHandle xSem_UART_TC;
+
+void USART2_IRQHandler(){
+	portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
+	// Test for TC pending interrupt
+	if ( USART2->ISR & USART_ISR_TC ) {
+		// Clear pending bit by writing a '1'
+		// USART2->CR1 = USART_ISR_TCIE;
+		USART2->ICR |= USART_ICR_TCCF;
+		// Release the semaphore
+		xSemaphoreGiveFromISR(xSem_UART_TC, &xHigherPriorityTaskWoken);
+		// Perform a context switch to the waiting task
+		portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
+	}
+}
 
 /**
   * @brief  This function handles PPP interrupt request.

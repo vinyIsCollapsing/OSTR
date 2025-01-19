@@ -3,3 +3,9 @@ task1: 		0.004%
 task2: 		0.003%
 taskWrite: 	70.08%
 taskIdle:	29.90%
+
+3.2. Scénario #2 : Interruption UART et sémaphore
+task1: 		0.224%
+task2: 		0.194%
+taskWrite: 	14.08%
+taskIdle:	84.70%

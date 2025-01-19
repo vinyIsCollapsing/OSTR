@@ -8,8 +8,6 @@
 
 #include "writeTask.h"
 
-extern int my_printf(const char *format, ...);
-
 static void vTaskWrite(void *pvParameters);
 
 static xTaskHandle vTaskWrite_handle;
@@ -21,7 +19,7 @@ void writeTaskInit(void *pvParameters){
 
     xTaskCreate(vTaskWrite, "vTask_Write", 128, NULL, 1, &vTaskWrite_handle);
 
-    my_printf("WRITE TASK DEFINED\r\n");
+    // my_printf("WRITE TASK DEFINED\r\n");
 }
 
 BaseType_t sendMessage(command_message_t *message){

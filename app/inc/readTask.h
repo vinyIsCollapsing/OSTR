@@ -28,6 +28,8 @@
 #include "queue.h"
 #include "event_groups.h"
 
+#include "printf-stdarg.h"
+
 void vTask1_Pub();
 void vTask2_Pub();
 void vTask_Pub(void *pvParameters);

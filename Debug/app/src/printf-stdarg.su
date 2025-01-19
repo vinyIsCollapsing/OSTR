@@ -1,6 +1,7 @@
-../app/src/printf-stdarg.c:33:13:printchar	16	static
-../app/src/printf-stdarg.c:49:12:prints	40	static
-../app/src/printf-stdarg.c:82:12:printi	64	static
-../app/src/printf-stdarg.c:125:12:print	64	static
-../app/src/printf-stdarg.c:189:5:my_printf	16	static
-../app/src/printf-stdarg.c:196:5:my_sprintf	28	static
+../app/src/printf-stdarg.c:34:12:myPrintfInit	8	static
+../app/src/printf-stdarg.c:43:13:printchar	24	static
+../app/src/printf-stdarg.c:64:12:prints	40	static
+../app/src/printf-stdarg.c:97:12:printi	64	static
+../app/src/printf-stdarg.c:140:12:print	64	static
+../app/src/printf-stdarg.c:204:5:my_printf	16	static
+../app/src/printf-stdarg.c:211:5:my_sprintf	28	static

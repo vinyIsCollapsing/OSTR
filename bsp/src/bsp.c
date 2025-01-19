@@ -179,6 +179,9 @@ void BSP_Console_Init()
 	// Enable both Transmitter and Receiver
 	USART2->CR1 |= USART_CR1_TE | USART_CR1_RE;
 
+	// Enable TX (TC) interrupt
+	USART2->CR1 |= USART_CR1_TCIE;
+
 	// Enable USART2
 	USART2->CR1 |= USART_CR1_UE;
 }
@@ -189,6 +192,7 @@ void BSP_Console_Init()
  */
 void BSP_NVIC_Init()
 {
+	/*
     // Configura linha 13 (botao 1)
     SYSCFG->EXTICR[3] &= ~SYSCFG_EXTICR4_EXTI13_Msk; // Configura a porta do EXTI13
     EXTI->IMR |= EXTI_IMR_MR13;                     // Habilita a interrupcao para a linha 13
@@ -199,13 +203,15 @@ void BSP_NVIC_Init()
     EXTI->IMR |= EXTI_IMR_MR14;                     // Habilita a interrupcao para a linha 14
     EXTI->RTSR |= EXTI_RTSR_TR14;                   // Habilita trigger na borda de subida
 
-
+	*/
 	// Set maximum priority for EXTI line 4 to 15 interrupts
-	NVIC_SetPriority(EXTI4_15_IRQn,
-			configMAX_API_CALL_INTERRUPT_PRIORITY + 1);
+	NVIC_SetPriority(EXTI4_15_IRQn,configMAX_API_CALL_INTERRUPT_PRIORITY + 1);
 
 	// Enable EXTI line 4 to 15 (user button on line 13) interrupts
 	NVIC_EnableIRQ(EXTI4_15_IRQn);
+
+	NVIC_SetPriority(USART2_IRQn, configMAX_API_CALL_INTERRUPT_PRIORITY + 1);
+	NVIC_EnableIRQ(USART2_IRQn);
 }
 
 /*
