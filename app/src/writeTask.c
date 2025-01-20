@@ -13,6 +13,8 @@ static void vTaskWrite(void *pvParameters);
 static xTaskHandle vTaskWrite_handle;
 static xQueueHandle xWriteQueue;
 
+extern xSemaphoreHandle xSem_DMA_TC;
+
 void writeTaskInit(void *pvParameters){
     // Create the subscription queue
     xWriteQueue = xQueueCreate(WRITE_QUEUE_LENGTH, sizeof(command_message_t));
@@ -26,11 +28,26 @@ BaseType_t sendMessage(command_message_t *message){
 	return xQueueSendToBack(xWriteQueue, &message, 0);
 }
 
-void vTaskWrite(void *pvParameters){
+static void vTaskWrite(void *pvParameters){
 	command_message_t *msgQueue;
+	char *str;
+	size_t i;
+
 	while(1){
 		xQueueReceive((xWriteQueue), &msgQueue, portMAX_DELAY);
 
-		my_printf("%s\r\n", msgQueue);
+		str = (char *) msgQueue;
+		for(i = 0; str[i] != '\0'; i++) {
+			tx_dma_buffer[i] = str[i];
+		}
+
+		DMA1_Channel4->CNDTR = i;
+		DMA1_Channel4->CCR |= DMA_CCR_EN;
+
+		xSemaphoreTake(xSem_DMA_TC, portMAX_DELAY);
+
+		DMA1_Channel4->CCR &= ~DMA_CCR_EN;
+
+		// my_printf("%s\r\n", msgQueue);
 	}
 }

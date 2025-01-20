@@ -91,7 +91,7 @@ void vTask1(void *pvParameters) {
     while (1) {
     	// vTask1_Pub();
 
-    	my_sprintf((char *) msgTask1, "Arthour ! Pas changer assiette pour fromage !");
+    	my_sprintf((char *) msgTask1, "Arthour ! Pas changer assiette pour fromage !\r\n");
     	sendMessage(&msgTask1);
 		vTaskDelay(100 / portTICK_PERIOD_MS);
     }
@@ -106,7 +106,7 @@ void vTask2(void *pvParameters) {
     while(1){
     	// vTask2_Pub();
 
-    	my_sprintf((char *) msgTask2, "Arthour ! Couhillere !");
+    	my_sprintf((char *) msgTask2, "Arthour ! Couhillere !\r\n");
     	sendMessage(&msgTask2);
     	vTaskDelay(100 / portTICK_PERIOD_MS);
     }

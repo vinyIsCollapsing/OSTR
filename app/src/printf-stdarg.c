@@ -30,12 +30,19 @@
 #include "printf-stdarg.h"
 
 xSemaphoreHandle xSem_UART_TC;
+xSemaphoreHandle xSem_DMA_TC;
 
 BaseType_t myPrintfInit(){
 	 xSem_UART_TC = xSemaphoreCreateBinary();
+	 xSem_DMA_TC = xSemaphoreCreateBinary();
+
 	 if (xSem_UART_TC == NULL) {
 		 return pdFAIL;
 	 }
+	 if (xSem_DMA_TC == NULL) {
+		 return pdFAIL;
+	 }
+
 	 return pdPASS;
 }
 

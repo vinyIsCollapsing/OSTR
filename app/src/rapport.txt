@@ -9,3 +9,9 @@ task1: 		0.224%
 task2: 		0.194%
 taskWrite: 	14.08%
 taskIdle:	84.70%
+
+3.3. Etape #3 : UART et DMA ?
+task1: 		0.292%
+task2: 		0.183%
+taskWrite: 	4.58%
+taskIdle:	94.70%

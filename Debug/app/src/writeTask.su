@@ -1,3 +1,3 @@
-../app/src/writeTask.c:16:6:writeTaskInit	24	static
-../app/src/writeTask.c:25:12:sendMessage	16	static
-../app/src/writeTask.c:29:6:vTaskWrite	24	static
+../app/src/writeTask.c:18:6:writeTaskInit	24	static
+../app/src/writeTask.c:27:12:sendMessage	16	static
+../app/src/writeTask.c:31:13:vTaskWrite	32	static
