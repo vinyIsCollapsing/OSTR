@@ -41,8 +41,6 @@ int main()
 	// Start Trace Recording
 	xTraceEnable(TRC_START);		// xTraceEnable(TRC_START);
 
-
-
 	// Create Semaphore
 	// my_printf("\r\nNow creating Binary Semaphore...\r\n");
     xSem = xSemaphoreCreateBinary();
@@ -58,7 +56,7 @@ int main()
 	// my_printf("Creating Tasks...");
     xTaskCreate(vTask1, "Task_1", 128, NULL, 1, &vTask1_handle);
     xTaskCreate(vTask2, "Task_2", 128, NULL, 1, &vTask2_handle);
-    //vTaskPubInit();
+    vTaskPubInit();
     writeTaskInit();
 	// my_printf("OK\r\n");
 
@@ -90,10 +88,39 @@ void vTask1(void *pvParameters) {
 
     while (1) {
     	// vTask1_Pub();
-
+    	/*
     	my_sprintf((char *) msgTask1, "Arthour ! Pas changer assiette pour fromage !\r\n");
     	sendMessage(&msgTask1);
 		vTaskDelay(100 / portTICK_PERIOD_MS);
+		*/
+    	subscribe(1,1,1);
+    	xSemaphoreTake(sems[1], portMAX_DELAY);
+    	my_sprintf((char *) msgTask1, "Task_1 (1, 1, 0)\r\n");
+    	sendMessage(&msgTask1);
+
+    	/*
+    	xSemaphoreTake(ledMutex, portMAX_DELAY);
+    	BSP_LED_On();
+    	vTaskDelay(100 / portTICK_PERIOD_MS);
+    	BSP_LED_Off();
+    	xSemaphoreGive(ledMutex);
+    	 */
+    	subscribe(1, 1, 0);
+    	xSemaphoreTake(sems[1], portMAX_DELAY);
+    	my_sprintf((char *) msgTask1, "Task_1 (1, 1, 1)\r\n");
+    	sendMessage(&msgTask1);
+
+    	/*
+    	xSemaphoreTake(ledMutex, portMAX_DELAY);
+    	BSP_LED_On();
+    	vTaskDelay(100 / portTICK_PERIOD_MS);
+    	BSP_LED_Off();
+    	vTaskDelay(200 / portTICK_PERIOD_MS);
+    	BSP_LED_On();
+    	vTaskDelay(100 / portTICK_PERIOD_MS);
+    	BSP_LED_Off();
+    	xSemaphoreGive(ledMutex);
+    	*/
     }
 }
 
@@ -105,10 +132,41 @@ void vTask2(void *pvParameters) {
 
     while(1){
     	// vTask2_Pub();
-
+    	/*
     	my_sprintf((char *) msgTask2, "Arthour ! Couhillere !\r\n");
     	sendMessage(&msgTask2);
     	vTaskDelay(100 / portTICK_PERIOD_MS);
+    	*/
+
+    	subscribe(2, 2, 1);
+    	xSemaphoreTake(sems[2], portMAX_DELAY);
+    	my_sprintf((char *) msgTask2, "Task_2 (2, 2, 0)\r\n");
+    	sendMessage(&msgTask2);
+
+    	/*
+    	xSemaphoreTake(ledMutex, portMAX_DELAY);
+    	BSP_LED_On();
+    	vTaskDelay(200 / portTICK_PERIOD_MS);
+    	BSP_LED_Off();
+    	xSemaphoreGive(ledMutex);
+    	*/
+
+    	subscribe(2, 2, 0);
+    	xSemaphoreTake(sems[2], portMAX_DELAY);
+    	my_sprintf((char *) msgTask2, "Task_2 (2, 2, 1)\r\n");
+    	sendMessage(&msgTask2);
+
+    	/*
+    	xSemaphoreTake(ledMutex, portMAX_DELAY);
+    	BSP_LED_On();
+    	vTaskDelay(200 / portTICK_PERIOD_MS);
+    	BSP_LED_Off();
+    	vTaskDelay(400 / portTICK_PERIOD_MS);
+    	BSP_LED_On();
+    	vTaskDelay(200 / portTICK_PERIOD_MS);
+    	BSP_LED_Off();
+    	xSemaphoreGive(ledMutex);
+    	*/
     }
 }
 

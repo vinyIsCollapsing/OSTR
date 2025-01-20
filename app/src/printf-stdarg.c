@@ -31,10 +31,13 @@
 
 xSemaphoreHandle xSem_UART_TC;
 xSemaphoreHandle xSem_DMA_TC;
+xSemaphoreHandle uartMutex;
+
 
 BaseType_t myPrintfInit(){
 	 xSem_UART_TC = xSemaphoreCreateBinary();
 	 xSem_DMA_TC = xSemaphoreCreateBinary();
+	 uartMutex = xSemaphoreCreateMutex();
 
 	 if (xSem_UART_TC == NULL) {
 		 return pdFAIL;
@@ -48,19 +51,18 @@ BaseType_t myPrintfInit(){
 
 
 static void printchar(char **str, int c){
-	portBASE_TYPE xStatus;
+	// portBASE_TYPE xStatus;
 
 	if (str) {
 		**str = c;
 		++(*str);
 	} else {
-		xStatus = xSemaphoreTake(xSem_UART_TC, 100);
-		if (xStatus == pdPASS){
-			USART2->TDR = c;
-		} else {
-			while ( (USART2->ISR & USART_ISR_TC) != USART_ISR_TC);
-			USART2->TDR = c;
-		}
+		xSemaphoreTake(uartMutex, portMAX_DELAY);
+
+		while ( (USART2->ISR & USART_ISR_TC) != USART_ISR_TC);
+		USART2->TDR = c;
+
+		xSemaphoreGive(uartMutex);
 	}
 }
 

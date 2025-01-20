@@ -105,6 +105,7 @@ void vTask_Pub(void *pvParameters){
 	for(i = 0; i < SENSOR_TABLE_SIZE; i++) {
 		sensor_states[i] = 0;
 	}
+	// BSP_LED_Toggle();
 
 	while (1) {
 	  	if(xQueueReceive(xSubscribeQueue, &msg, 0)){

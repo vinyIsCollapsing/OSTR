@@ -14,6 +14,7 @@ static xTaskHandle vTaskWrite_handle;
 static xQueueHandle xWriteQueue;
 
 extern xSemaphoreHandle xSem_DMA_TC;
+extern xSemaphoreHandle uartMutex;
 
 void writeTaskInit(void *pvParameters){
     // Create the subscription queue
@@ -41,12 +42,16 @@ static void vTaskWrite(void *pvParameters){
 			tx_dma_buffer[i] = str[i];
 		}
 
+		xSemaphoreTake(uartMutex, portMAX_DELAY);
+
 		DMA1_Channel4->CNDTR = i;
 		DMA1_Channel4->CCR |= DMA_CCR_EN;
 
 		xSemaphoreTake(xSem_DMA_TC, portMAX_DELAY);
 
 		DMA1_Channel4->CCR &= ~DMA_CCR_EN;
+
+		xSemaphoreGive(uartMutex);
 
 		// my_printf("%s\r\n", msgQueue);
 	}

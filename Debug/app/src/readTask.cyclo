@@ -2,8 +2,8 @@
 ../app/src/readTask.c:40:6:vTask1_Pub	1
 ../app/src/readTask.c:63:6:vTask2_Pub	1
 ../app/src/readTask.c:87:6:vTask_Pub	4
-../app/src/readTask.c:124:12:subscribe	1
-../app/src/readTask.c:136:13:updateSubs	7
-../app/src/readTask.c:164:13:print_subscription_table	2
-../app/src/readTask.c:170:13:uartSensor	9
-../app/src/readTask.c:189:13:publish	4
+../app/src/readTask.c:125:12:subscribe	1
+../app/src/readTask.c:137:13:updateSubs	7
+../app/src/readTask.c:165:13:print_subscription_table	2
+../app/src/readTask.c:171:13:uartSensor	9
+../app/src/readTask.c:190:13:publish	4
